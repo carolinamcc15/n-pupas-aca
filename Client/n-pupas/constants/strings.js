@@ -1,7 +1,7 @@
 export const profilePageName = 'Perfil';
 export const homePageName = 'Inicio';
 export const registerPageName = 'Formulario de Registro';
-export const loginPageName = 'Inicio de Sesión';
+export const loginPageName = 'Inicio de sesión';
 
 export const employeePages = {
   comments: 'Comentarios y reportes',

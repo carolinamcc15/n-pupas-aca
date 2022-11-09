@@ -1,5 +1,8 @@
-import PrimaryButton from 'components/buttons/primary';
+import { LockClosedIcon, UserCircleIcon } from '@heroicons/react/24/solid';
 import { useForm } from 'react-hook-form';
+
+import PrimaryButton from 'components/buttons/primary';
+import Input from './inputs/text-input';
 
 const LoginForm = ({ onSubmitHandler }) => {
   const {
@@ -15,34 +18,35 @@ const LoginForm = ({ onSubmitHandler }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col gap-4'>
-      <div>
-        <input
-          type='text'
-          placeholder='Usuario'
-          className='shadow appearance-none border border-gray-400 rounded w-full py-2 px-3 leading-tight focus:outline-none focus:border-2 focus:border-secondary-500'
-          {...register('username', {
-            required: 'Usuario requerido',
-            maxLength: {
-              value: 80,
-              message: 'El máximo de caracteres es 80',
-            },
-          })}
-        />
-        {errors.username && <p className='mt-1 text-red-700'>{errors.username.message}</p>}
-      </div>
-      <div>
-        <input
-          type='password'
-          placeholder='Contraseña'
-          className='shadow appearance-none border border-gray-400 rounded w-full py-2 px-3 leading-tight focus:outline-none focus:border-2 focus:border-secondary-500'
-          {...register('password', {
+    <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col gap-5 items-center justify-center w-full sm:px-4'>
+      <Input
+        id='username'
+        label='USUARIO'
+        placeholder='Ej. janedoe'
+        icon={<UserCircleIcon className='text-primary-500 w-5' />}
+        error={errors?.username?.message}
+        register={{
+          ...register('username', {
+            required: 'Nombre de usuario requerido',
+          }),
+        }}
+      />
+      <Input
+        id='password'
+        label='CONTRASEÑA'
+        placeholder='Digite su contraseña'
+        icon={<LockClosedIcon className='text-primary-500 w-5' />}
+        error={errors?.password?.message}
+        register={{
+          ...register('password', {
             required: 'Contraseña requerida',
-          })}
-        />
-        {errors.password && <p className='mt-1 text-red-700'>{errors.password.message}</p>}
+          }),
+        }}
+        type='password'
+      />
+      <div className='mt-6 sm:mt-8'>
+        <PrimaryButton text='Ingresar' />
       </div>
-      <PrimaryButton text='Ingresar' />
     </form>
   );
 };
