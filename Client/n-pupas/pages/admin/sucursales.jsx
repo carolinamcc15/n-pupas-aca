@@ -61,7 +61,7 @@ const BranchesPage = ({ allBranches }) => {
       <Head>
         <title>{adminPages.branches}</title>
       </Head>
-      <PageHeading title={adminPages.branches} route={adminRoutes.newBranch} />
+      <PageHeading title={adminPages.branches} route={adminRoutes.newBranch} text='Agregar sucursal' />
       <div className='flex flex-col gap-5 md:grid md:grid-cols-2'>
         {branches.map(branch => {
           return (
