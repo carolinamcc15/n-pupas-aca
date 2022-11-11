@@ -1,7 +1,8 @@
-import { crudActionTypes } from 'constants/strings';
-import CrudButton from 'components/buttons/crud';
-import { adminRoutes } from 'routes/routes';
 import { useRouter } from 'next/router';
+
+import ActionButton from 'components/buttons/actionButton';
+import { adminRoutes } from 'routes/routes';
+import { actionButtons } from 'constants/data';
 
 const BranchCard = ({ branch, onDeleteHandler }) => {
   const router = useRouter();
@@ -20,9 +21,9 @@ const BranchCard = ({ branch, onDeleteHandler }) => {
         <h2 className='font-bold'>{branch.name}</h2>
         <p> {branch.address} </p>
         <p> {`Desde: ${branch.openingDate}`} </p>
-        <div>
-          <CrudButton actionType={crudActionTypes.update} onClickHandler={handleOnModify} />
-          <CrudButton actionType={crudActionTypes.delete} onClickHandler={handleOnDelete} />
+        <div className='flex gap-2'>
+          <ActionButton actionElements={actionButtons.edit} onClickHandler={handleOnModify} />
+          <ActionButton actionElements={actionButtons.delete} onClickHandler={handleOnDelete} />
         </div>
       </div>
     </article>
