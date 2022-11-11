@@ -1,3 +1,5 @@
+import { ChatBubbleBottomCenterIcon, PencilIcon, TrashIcon } from '@heroicons/react/24/solid';
+import { ReportIcon } from 'components/icons/ReportIcon';
 import { employeeRoutes, adminRoutes } from 'routes/routes';
 import { homePageName, profilePageName } from './strings';
 import { employeePages, adminPages } from './strings';
@@ -44,3 +46,26 @@ export const employeeNav = [
     route: `${employeeRoutes.profile}`,
   },
 ];
+
+export const actionButtons = {
+  edit: {
+    icon: <PencilIcon className='w-4 text-white' />,
+    tooltip: 'Editar',
+    color: '#6693D7',
+  },
+  delete: {
+    icon: <TrashIcon className='w-4 text-white' />,
+    tooltip: 'Eliminar',
+    color: '#DB7777',
+  },
+  comment: {
+    icon: <ChatBubbleBottomCenterIcon className='w-4 text-white' />,
+    tooltip: 'Comentario',
+    color: '#EEA96A',
+  },
+  reports: {
+    icon: <ReportIcon />,
+    tooltip: 'Reportes',
+    color: '#92D450',
+  },
+};
