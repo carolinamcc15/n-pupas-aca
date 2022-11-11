@@ -1,8 +1,21 @@
-import SectionTitle from 'components/information/section-title';
-import PrimaryButton from 'components/buttons/primary';
-import { titles } from 'constants/strings';
 import { useForm } from 'react-hook-form';
 import { useRef, useState } from 'react';
+import {
+  HashtagIcon,
+  HomeIcon,
+  IdentificationIcon,
+  LockClosedIcon,
+  PhoneIcon,
+  StarIcon,
+  UserCircleIcon,
+} from '@heroicons/react/24/solid';
+
+import { SolidCalendarIcon } from 'components/icons/SolidCalendarIcon';
+import SectionTitle from 'components/information/section-title';
+import { LocationIcon } from 'components/icons/LocationIcon';
+import PrimaryButton from 'components/buttons/primary';
+import { titles } from 'constants/strings';
+import Input from './inputs/text-input';
 
 const RegisterForm = ({ onSubmitHandler }) => {
   const [sectionIndex, setSectionIndex] = useState(0);
@@ -36,18 +49,20 @@ const RegisterForm = ({ onSubmitHandler }) => {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className='w-full md:max-w-[900px] mx-auto flex flex-col gap-4'
+      className='px-6 sm:px-16 md:px-20 py-10 sm:py-16 w-full max-w-[1000px] bg-white rounded-md shadow-lg flex flex-col gap-4'
     >
       {sectionIndex === 0 && (
-        <section className='flex flex-col gap-4'>
+        <section className='flex flex-col w-full gap-10'>
           <SectionTitle title={titles.personalData} />
-          <div className='flex flex-col gap-5 md:grid md:grid-cols-2 mb-5'>
-            <div>
-              <input
-                type='text'
-                placeholder='Nombre completo'
-                className='shadow appearance-none border border-gray-400 rounded w-full py-2 px-3 leading-tight focus:outline-none focus:border-2 focus:border-secondary-500'
-                {...register('name', {
+          <div className='grid gap-5 md:grid md:grid-cols-2 mb-5 w-full mt-2'>
+            <Input
+              id='name'
+              label='Nombre completo'
+              placeholder='Ej. Luis Mario Gonzáles Castro'
+              icon={<UserCircleIcon className='text-primary-500 w-5' />}
+              error={errors?.name?.message}
+              register={{
+                ...register('name', {
                   required: 'Nombre requerido',
                   minLength: {
                     value: 8,
@@ -57,128 +72,137 @@ const RegisterForm = ({ onSubmitHandler }) => {
                     value: 50,
                     message: 'El máximo de caracteres es 80',
                   },
-                })}
-              />
-              {errors.name && <p className='mt-1 text-red-700'>{errors.name.message}</p>}
-            </div>
-            <div>
-              <input
-                type='text'
-                placeholder='DUI (incluyendo guión)'
-                className='shadow appearance-none border border-gray-400 rounded w-full py-2 px-3 leading-tight focus:outline-none focus:border-2 focus:border-secondary-500'
-                {...register('DUI', {
+                }),
+              }}
+            />
+            <Input
+              id='DUI'
+              label='DUI'
+              placeholder='06210545-9'
+              icon={<IdentificationIcon className='text-primary-500 w-5' />}
+              error={errors?.DUI?.message}
+              register={{
+                ...register('DUI', {
                   required: 'DUI requerido',
                   pattern: {
                     value: /^\d{8}-\d{1}$/,
                     message: 'Formato de DUI inválido',
                   },
-                })}
-              />
-              {errors.DUI && <p className='mt-1 text-red-700'>{errors.DUI.message}</p>}
-            </div>
-            <div>
-              <input
-                type='text'
-                placeholder='NIT (incluyendo guión)'
-                className='shadow appearance-none border border-gray-400 rounded w-full py-2 px-3 leading-tight focus:outline-none focus:border-2 focus:border-secondary-500'
-                {...register('NIT', {
+                }),
+              }}
+            />
+            <Input
+              id='NIT'
+              label='NIT'
+              placeholder='0079-911277-301-5'
+              icon={<HashtagIcon className='text-primary-500 w-5' />}
+              error={errors?.NIT?.message}
+              register={{
+                ...register('NIT', {
                   required: 'NIT requerido',
                   pattern: {
                     value: /^\d{4}-\d{6}-\d{3}-\d{1}$/,
                     message: 'Formato de NIT inválido',
                   },
-                })}
-              />
-              {errors.NIT && <p className='mt-1 text-red-700'>{errors.NIT.message}</p>}
-            </div>
-            <div>
-              <input
-                type='tel'
-                pattern='[0-9]{4}-[0-9]{4}'
-                placeholder='Número de teléfono'
-                className='shadow appearance-none border border-gray-400 rounded w-full py-2 px-3 leading-tight focus:outline-none focus:border-2 focus:border-secondary-500'
-                {...register('phoneNumber', {
+                }),
+              }}
+            />
+            <Input
+              type='tel'
+              id='phoneNumber'
+              label='Número de teléfono'
+              placeholder='78828090'
+              icon={<PhoneIcon className='text-primary-500 w-5' />}
+              error={errors?.phoneNumber?.message}
+              register={{
+                ...register('phoneNumber', {
                   required: 'Número de teléfono requerido',
                   pattern: {
                     value: /^\d{8}$/,
                     message: 'Número de teléfono inválido',
                   },
-                })}
-              />
-              {errors.phoneNumber && <p className='mt-1 text-red-700'>{errors.phoneNumber.message}</p>}
-            </div>
+                }),
+              }}
+            />
           </div>
         </section>
       )}
       {sectionIndex === 1 && (
-        <section className='flex flex-col gap-4'>
+        <section className='flex flex-col w-full gap-10'>
           <SectionTitle title={titles.accountData} />
-          <div className='flex flex-col gap-5 md:grid md:grid-cols-2 mb-5'>
+          <div className='grid gap-5 md:grid md:grid-cols-2 mb-5 w-full'>
             <div className='col-span-2'>
-              <input
-                type='text'
-                placeholder='Nombre de usuario'
-                className='shadow appearance-none border border-gray-400 rounded w-full py-2 px-3 leading-tight focus:outline-none focus:border-2 focus:border-secondary-500'
-                {...register('username', {
-                  required: 'Nombre de usuario requerido',
-                  minLength: {
-                    value: 8,
-                    message: 'El mínimo de caracteres es 10',
-                  },
-                  maxLength: {
-                    value: 20,
-                    message: 'El máximo de caracteres es 20',
-                  },
-                  pattern: {
-                    value: /^[A-Za-z0-9_-]{8,20}$/,
-                    message: 'Algunos caracteres son inválidos',
-                  },
-                })}
+              <Input
+                id='username'
+                label='Nombre de usuario'
+                placeholder='Ej. jmartinez'
+                icon={<UserCircleIcon className='text-primary-500 w-5' />}
+                error={errors?.username?.message}
+                register={{
+                  ...register('username', {
+                    required: 'Nombre de usuario requerido',
+                    minLength: {
+                      value: 8,
+                      message: 'El mínimo de caracteres es 10',
+                    },
+                    maxLength: {
+                      value: 20,
+                      message: 'El máximo de caracteres es 20',
+                    },
+                    pattern: {
+                      value: /^[A-Za-z0-9_-]{8,20}$/,
+                      message: 'Algunos caracteres son inválidos',
+                    },
+                  }),
+                }}
               />
-              {errors.username && <p className='mt-1 text-red-700'>{errors.username.message}</p>}
             </div>
-            <div>
-              <input
-                type='password'
-                placeholder='Contraseña'
-                className='shadow appearance-none border border-gray-400 rounded w-full py-2 px-3 leading-tight focus:outline-none focus:border-2 focus:border-secondary-500'
-                {...register('Password', {
+            <Input
+              type='password'
+              id='Password'
+              label='Contraseña'
+              placeholder='*************'
+              icon={<LockClosedIcon className='text-primary-500 w-5' />}
+              error={errors?.Password?.message}
+              register={{
+                ...register('Password', {
                   required: 'Contraseña requerida',
                   minLength: {
                     value: 6,
                     message: 'La contraseña debe tener un mínimo de 6 caracteres',
                   },
-                })}
-              />
-              {errors.Password && <p className='mt-1 text-red-700'>{errors.Password.message}</p>}
-            </div>
-            <div>
-              <input
-                type='password'
-                placeholder='Repetir contraseña'
-                className='shadow appearance-none border border-gray-400 rounded w-full py-2 px-3 leading-tight focus:outline-none focus:border-2 focus:border-secondary-500'
-                {...register('password_repeat', {
+                }),
+              }}
+            />
+            <Input
+              type='password'
+              id='password_repeat'
+              label='Confirmar contraseña'
+              placeholder='*************'
+              icon={<LockClosedIcon className='text-primary-500 w-5' />}
+              error={errors?.password_repeat?.message}
+              register={{
+                ...register('password_repeat', {
                   validate: value => value === password.current || 'Las contraseñas no coinciden',
-                })}
-              />
-              {errors.password_repeat && (
-                <p className='mt-1 text-red-700'>{errors.password_repeat.message}</p>
-              )}
-            </div>
+                }),
+              }}
+            />
           </div>
         </section>
       )}
       {sectionIndex === 2 && (
-        <div>
-          <section className='flex flex-col gap-4'>
+        <div className='flex flex-col items-center gap-4'>
+          <section className='flex flex-col w-full gap-10'>
             <SectionTitle title={titles.pupuseriaData} />
-            <div className='flex flex-col gap-5 md:grid md:grid-cols-2 mb-5'>
-              <div>
-                <input
-                  type='text'
-                  placeholder='Nombre'
-                  className='shadow appearance-none border border-gray-400 rounded w-full py-2 px-3 leading-tight focus:outline-none focus:border-2 focus:border-secondary-500'
-                  {...register('namePupuseria', {
+            <div className='grid gap-5 md:grid md:grid-cols-2 mb-5 w-full'>
+              <Input
+                id='namePupuseria'
+                label='Nombre de pupusería'
+                placeholder='La Bendición'
+                icon={<StarIcon className='text-primary-500 w-5' />}
+                error={errors?.namePupuseria?.message}
+                register={{
+                  ...register('namePupuseria', {
                     required: 'Nombre requerido',
                     minLength: {
                       value: 8,
@@ -188,18 +212,17 @@ const RegisterForm = ({ onSubmitHandler }) => {
                       value: 80,
                       message: 'El máximo de caracteres es 80',
                     },
-                  })}
-                />
-                {errors.namePupuseria && (
-                  <p className='mt-1 text-red-700'>{errors.namePupuseria.message}</p>
-                )}
-              </div>
-              <div>
-                <input
-                  type='text'
-                  placeholder='Nombre de sucursal principal'
-                  className='shadow appearance-none border border-gray-400 rounded w-full py-2 px-3 leading-tight focus:outline-none focus:border-2 focus:border-secondary-500'
-                  {...register('nameBranch', {
+                  }),
+                }}
+              />
+              <Input
+                id='nameBranch'
+                label='Sucursal principal'
+                placeholder='Los Próceres'
+                icon={<HomeIcon className='text-primary-500 w-5' />}
+                error={errors?.nameBranch?.message}
+                register={{
+                  ...register('nameBranch', {
                     required: 'Nombre requerido',
                     minLength: {
                       value: 8,
@@ -209,18 +232,17 @@ const RegisterForm = ({ onSubmitHandler }) => {
                       value: 80,
                       message: 'El máximo de caracteres es 80',
                     },
-                  })}
-                />
-                {errors.nameBranch && (
-                  <p className='mt-1 text-red-700'>{errors.nameBranch.message}</p>
-                )}
-              </div>
-              <div>
-                <input
-                  type='text'
-                  placeholder='Dirección'
-                  className='shadow appearance-none border border-gray-400 rounded w-full py-2 px-3 leading-tight focus:outline-none focus:border-2 focus:border-secondary-500'
-                  {...register('address', {
+                  }),
+                }}
+              />
+              <Input
+                id='address'
+                label='Dirección'
+                placeholder='Bulevar de Los Próceres San Salvador'
+                icon={<LocationIcon />}
+                error={errors?.address?.message}
+                register={{
+                  ...register('address', {
                     required: 'Dirección requerida',
                     minLength: {
                       value: 6,
@@ -230,20 +252,20 @@ const RegisterForm = ({ onSubmitHandler }) => {
                       value: 80,
                       message: 'El máximo de caracteres es 80',
                     },
-                  })}
-                />
-                {errors.address && <p className='mt-1 text-red-700'>{errors.address.message}</p>}
-              </div>
-              <div>
-                <input
-                  type='text'
-                  placeholder='Fecha de apertura'
-                  onFocus={e => (e.target.type = 'date')}
-                  className='shadow appearance-none border border-gray-400 rounded w-full py-2 px-3 leading-tight focus:outline-none focus:border-2 focus:border-secondary-500'
-                  {...register('openingDate', { required: 'Fecha de apertura requerida' })}
-                />
-                {errors.openingDate && <p className='mt-1 text-red-700'>{errors.openingDate.message}</p>}
-              </div>
+                  }),
+                }}
+              />
+              <Input
+                type='date'
+                id='openingDate'
+                label='Fecha de apertura'
+                placeholder='12/10/2020'
+                icon={<SolidCalendarIcon />}
+                error={errors?.openingDate?.message}
+                register={{
+                  ...register('openingDate', { required: 'Fecha de apertura requerida' }),
+                }}
+              />
             </div>
           </section>
           <PrimaryButton text='Registrarme' />
@@ -254,7 +276,7 @@ const RegisterForm = ({ onSubmitHandler }) => {
           type='button'
           onClick={showPreviousSection}
           disabled={sectionIndex === 0}
-          className='font-bold text-xl bg-primary-500 px-3 rounded-md text-white disabled:bg-gray-400 disabled:opacity-60'
+          className='font-bold text-xl bg-primary-500 px-2 rounded-md text-white disabled:bg-gray-400 disabled:opacity-60'
         >
           &lt;
         </button>
@@ -267,7 +289,7 @@ const RegisterForm = ({ onSubmitHandler }) => {
           type='button'
           onClick={handleSubmit(showNextSection)}
           disabled={sectionIndex === 2}
-          className='font-bold text-xl bg-primary-500 px-3 rounded-md text-white disabled:bg-gray-400 disabled:opacity-60'
+          className='font-bold text-xl bg-primary-500 px-2 rounded-md text-white disabled:bg-gray-400 disabled:opacity-60'
         >
           &gt;
         </button>
