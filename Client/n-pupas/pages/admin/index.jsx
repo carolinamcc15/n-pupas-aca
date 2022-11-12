@@ -24,22 +24,26 @@ const AdminHomePage = ({ pupuseriaName, branches }) => {
   };
 
   return (
-    <main className='p-6 flex flex-col gap-5'>
+    <main className="grid grid-cols-5 grid-rows-2 bg-[url('/waves-bg.svg')] bg-no-repeat bg-cover h-full min-h-5/6 gap-7 p-5 md:p-7 ">
       <Head>
         <title>{homePageName}</title>
       </Head>
-      <div className='w-full md:max-w-[900px] mx-auto flex flex-col gap-4'>
-        <h1 className='font-bold text-2xl sm:text-3xl md:text-center'>{homePageName}</h1>
-        <section className='mb-4'>
-          <h2 className='text-primary-500 font-bold text-lg mb-3 md:text-center'>{`Pupusería: ${pupuseriaName}`}</h2>
-          <p className='mb-1 md:text-center'>Seleccione una sucursal</p>
-          <div className='w-full md:max-w-[500px] m-auto'>
+      <div className='w-full h-48 col-span-2 rounded-md items-center justify-center mx-auto flex flex-col gap-4 bg-gray-100 shadow-sm shadow-black'>
+        <section className='w-full'>
+          <h1 className='text-primary-500 font-bold text-2xl sm:text-3xl mb-3 md:text-center'>{`Pupusería ${pupuseriaName}`}</h1>
+          <p className='px-7 flow-root'>SUCURSAL</p>
+          <div className='px-5 md:px-6 w-full md:max-w-[500px] m-auto'>
             <BranchSelect onChangeHandler={changeBranch} branches={branches} value={branchID} />
           </div>
         </section>
       </div>
 
-      <HomeMenu isAdmin={true} />
+      <HomeMenu isAdmin={true} />   
+
+      <div className='col-span-2 items-center  justify-center mx-auto flex flex-col'>
+          <img src='/menuEmpleado.png' className='w-26 sm:w-56 h-26 sm:h-56' />
+      </div>
+
     </main>
   );
 };
