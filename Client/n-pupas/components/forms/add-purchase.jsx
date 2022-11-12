@@ -1,5 +1,9 @@
-import PrimaryButton from 'components/buttons/primary';
+import { CurrencyDollarIcon, LightBulbIcon } from '@heroicons/react/24/solid';
 import { useForm } from 'react-hook-form';
+
+import { SolidCalendarIcon } from 'components/icons/SolidCalendarIcon';
+import PrimaryButton from 'components/buttons/primary';
+import Input from './inputs/text-input';
 
 const AddPurchaseForm = ({ onSubmitHandler, purchase = false }) => {
   const {
@@ -17,53 +21,57 @@ const AddPurchaseForm = ({ onSubmitHandler, purchase = false }) => {
       onSubmit={handleSubmit(onSubmit)}
       className='w-full md:max-w-[900px] mx-auto flex flex-col gap-4'
     >
-      <div className='flex flex-col gap-5 md:grid md:grid-cols-2 mb-5'>
-        <div className='md:col-span-2'>
-          <input
-            type='text'
-            placeholder='Concepto'
-            defaultValue={purchase ? purchase.concept : ''}
-            className='shadow appearance-none border border-gray-400 rounded w-full py-2 px-3 leading-tight focus:outline-none focus:border-2 focus:border-secondary-500'
-            {...register('concept', {
+      <div className='flex flex-col gap-5 mb-5 px-0 sm:px-4'>
+        <Input
+          id='concept'
+          label='Concepto'
+          defaultValue={purchase ? purchase.concept : ''}
+          placeholder='Ej. Libra de frijoles'
+          icon={<LightBulbIcon className='text-primary-500 w-5' />}
+          error={errors?.concept?.message}
+          register={{
+            ...register('concept', {
               required: 'Concepto requerido',
               maxLength: {
                 value: 80,
                 message: 'El máximo de caracteres es 80',
               },
-            })}
-          />
-          {errors.concept && <p className='mt-1 text-red-700'>{errors.concept.message}</p>}
-        </div>
+            }),
+          }}
+        />
+
         <div>
-          <input
-            type='text'
-            placeholder='Fecha'
+          <Input
+            type='date'
+            id='purchaseDate'
             defaultValue={purchase ? purchase.purchaseDate : ''}
-            onFocus={e => (e.target.type = 'date')}
-            className='shadow appearance-none border border-gray-400 rounded w-full py-2 px-3 leading-tight focus:outline-none focus:border-2 focus:border-secondary-500'
-            {...register('purchaseDate', { required: 'Fecha y hora requeridas' })}
+            label='Fecha de compra'
+            placeholder='12/10/2020'
+            icon={<SolidCalendarIcon />}
+            error={errors?.purchaseDate?.message}
+            register={{ ...register('purchaseDate', { required: 'Fecha y hora requeridas' }) }}
           />
-          {errors.purchaseDate && (
-            <p className='mt-1 text-red-700'>{errors.purchaseDate.message}</p>
-          )}
         </div>
         <div>
-          <input
-            type='number'
-            step={0.01}
-            placeholder='Monto'
+          <Input
+            id='amount'
+            label='Monto ($)'
             defaultValue={purchase ? purchase.amount : ''}
-            className='shadow appearance-none border border-gray-400 rounded w-full py-2 px-3 leading-tight focus:outline-none focus:border-2 focus:border-secondary-500'
-            {...register('amount', {
-              required: 'Monto requerido',
-              min: { value: 0.01, message: 'La cantidad debe ser mayor a $0.01' },
-            })}
+            placeholder='55'
+            icon={<CurrencyDollarIcon className='text-primary-500 w-5' />}
+            error={errors?.amount?.message}
+            register={{
+              ...register('amount', {
+                required: 'Monto requerido',
+                min: { value: 0.01, message: 'La cantidad debe ser mayor a $0.01' },
+              }),
+            }}
           />
-          {errors.amount && <p className='mt-1 text-red-700'>{errors.amount.message}</p>}
         </div>
       </div>
-
-      <PrimaryButton text='Agregar' />
+      <div className='mt-6 sm:mt-8 m-auto'>
+        <PrimaryButton text={purchase ? 'Actualizar compra' : 'Agregar compra'} />
+      </div>
     </form>
   );
 };

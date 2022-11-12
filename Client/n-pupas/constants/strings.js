@@ -15,7 +15,7 @@ export const adminPages = {
   reports: 'Reportes',
   branches: 'Sucursales',
   sales: 'Ventas',
-  newPurchase: 'Registrar compra',
+  newPurchase: 'Registra una compra',
   newProduct: 'Agregar producto',
   newEmployee: 'Agregar empleado',
   newBranch: 'Agregar sucursal',
@@ -25,6 +25,7 @@ export const adminPages = {
   editEmployee: 'Modificar empleado',
   editBranch: 'Modificar sucursal',
   editReport: 'Modificar reporte',
+  editPurchase: 'Modifica una compra',
   editSale: 'Modificar venta',
   reportsEmployee: 'Reportes de empleados',
 };

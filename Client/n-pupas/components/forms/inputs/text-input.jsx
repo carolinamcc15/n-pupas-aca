@@ -1,6 +1,15 @@
 import React from 'react';
 
-const Input = ({ id, label, placeholder, icon, register, error, type = 'text' }) => {
+const Input = ({
+  id,
+  label,
+  placeholder,
+  icon,
+  register,
+  error,
+  type = 'text',
+  defaultValue = '',
+}) => {
   return (
     <div className='w-full'>
       <label for={id} className='mb-5 text-xs text-primary-500 uppercase'>
@@ -12,6 +21,7 @@ const Input = ({ id, label, placeholder, icon, register, error, type = 'text' })
         </div>
         <input
           type={type}
+          defaultValue={defaultValue}
           id={id}
           placeholder={placeholder}
           className='text-primary-500 mt-1 pl-10 bg-primary-100 appearance-none rounded w-full py-3 px-3 leading-tight focus:outline-none focus:border-2 focus:border-primary-300 placeholder:font-light placeholder:text-primary-400'
