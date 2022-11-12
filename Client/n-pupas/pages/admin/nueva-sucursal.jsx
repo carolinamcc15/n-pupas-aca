@@ -43,7 +43,7 @@ export default function NewBranchPage() {
               {adminPages.newBranch}
             </h1>
           </div>
-          <img src='/sales.svg' alt='Realizar compras' className='w-28 sm:w-96' />
+          <img src='/branch.svg' alt='Realizar compras' className='w-28 sm:w-96' />
         </div>
         <div className='p-6 sm:px-6 sm:pb-10 sm:pt-16 flex flex-col justify-between items-center'>
           <AddBranchForm onSubmitHandler={onSubmitForm} />
