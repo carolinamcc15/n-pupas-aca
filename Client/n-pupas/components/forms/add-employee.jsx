@@ -1,8 +1,10 @@
-import SectionTitle from 'components/information/section-title';
-import PrimaryButton from 'components/buttons/primary';
-import { titles } from 'constants/strings';
 import { useForm } from 'react-hook-form';
-import { useRef} from 'react';
+import { useRef } from 'react';
+
+import PrimaryButton from 'components/buttons/primary';
+import Input from './inputs/text-input';
+import { CurrencyDollarIcon, LockClosedIcon, UserCircleIcon } from '@heroicons/react/24/solid';
+import { SolidCalendarIcon } from 'components/icons/SolidCalendarIcon';
 
 const AddEmployeeForm = ({ onSubmitHandler, employee = false }) => {
   const {
@@ -10,9 +12,8 @@ const AddEmployeeForm = ({ onSubmitHandler, employee = false }) => {
     handleSubmit,
     formState: { errors },
     watch,
-    reset,
   } = useForm();
-  
+
   const password = useRef({});
   password.current = watch('Password', '');
 
@@ -20,118 +21,124 @@ const AddEmployeeForm = ({ onSubmitHandler, employee = false }) => {
     onSubmitHandler(data);
   };
 
-
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className='w-full md:max-w-[900px] mx-auto flex flex-col gap-4'
+      className='w-full md:max-w-[900px] mx-auto flex flex-col gap-2'
     >
-      <section className='flex flex-col gap-4'>
-        <SectionTitle title={titles.personalData} />
-        <div className='flex flex-col gap-5 md:grid md:grid-cols-2 mb-5'>
-          <div>
-            <input
-              type='text'
-              placeholder='Nombre'
-              defaultValue={employee ? employee.user.name : ''}
-              className='shadow appearance-none border border-gray-400 rounded w-full py-2 px-3 leading-tight focus:outline-none focus:border-2 focus:border-secondary-500'
-              {...register('name', {
-                required: 'Nombre requerido',
-                minLength: {
-                  value: 8,
-                  message: 'El mínimo de caracteres es 8',
-                },
-                maxLength: {
-                  value: 80,
-                  message: 'El máximo de caracteres es 80',
-                },
-              })}
-            />
-            {errors.name && <p className='mt-1 text-red-700'>{errors.name.message}</p>}
-          </div>
-        
-          <div>
-            <input
-              type='text'
-              placeholder='Nombre de usuario'
-              defaultValue={employee ? employee.user.username : ''}
-              className= 'shadow appearance-none border border-gray-400 rounded w-full py-2 px-3 leading-tight focus:outline-none focus:border-2 focus:border-secondary-500'
-              {...register('userName', {
-                required: 'Nombre de usuario requerido',
-                minLength: {
-                  value: 10,
-                  message: 'El mínimo de caracteres es 10',
-                },
-                pattern: {
-                  value: /^[A-Za-z0-9_-]{10,20}$/,
-                  message: 'Algunos caracteres son inválidos',
-                },
-              })}
-            />
-            {errors.userName && <p className='mt-1 text-red-700'>{errors.userName.message}</p>}
-          </div>
-          <div>
-            <input
-              type='text'
-              placeholder='Fecha de contratación'
-              defaultValue={employee ? employee.hiringDate : ''}
-              onFocus={e => (e.target.type = 'date')}
-              className='shadow appearance-none border border-gray-400 rounded w-full py-2 px-3 leading-tight focus:outline-none focus:border-2 focus:border-secondary-500'
-              {...register('hiringDate', { required: 'Fecha requerida' })}
-            />
-            {errors.hiringDate && <p className='mt-1 text-red-700'>{errors.hiringDate.message}</p>}
-          </div>
-          <div>
-            <input
-              type='number'
-              placeholder='Salario'
-              defaultValue={employee ? employee.salary : ''}
-              className='shadow appearance-none border border-gray-400 rounded w-full py-2 px-3 leading-tight focus:outline-none focus:border-2 focus:border-secondary-500'
-              {...register('salary', { required: 'Salario requerido',
+      <section className='flex flex-col gap-5 mb-5 px-0 sm:px-3'>
+        <Input
+          id='name'
+          label='Nombre completo'
+          defaultValue={employee ? employee.user.name : ''}
+          placeholder='Ej. Luis Mario Gonzáles Castro'
+          icon={<UserCircleIcon className='text-primary-500 w-5' />}
+          error={errors?.name?.message}
+          register={{
+            ...register('name', {
+              required: 'Nombre requerido',
+              minLength: {
+                value: 8,
+                message: 'El mínimo de caracteres es 8',
+              },
+              maxLength: {
+                value: 80,
+                message: 'El máximo de caracteres es 80',
+              },
+            }),
+          }}
+        />
+        <div className='flex flex-col gap-5 md:grid md:grid-cols-2'>
+          <Input
+            type='date'
+            id='hiringDate'
+            defaultValue={employee ? employee.hiringDate : ''}
+            label='Contratación'
+            placeholder='12/10/2020'
+            icon={<SolidCalendarIcon />}
+            error={errors?.hiringDate?.message}
+            register={{ ...register('hiringDate', { required: 'Fecha requerida' }) }}
+          />
+          <Input
+            id='salary'
+            label='Salario'
+            defaultValue={employee ? employee.salary : ''}
+            placeholder='500'
+            icon={<CurrencyDollarIcon className='text-primary-500 w-5' />}
+            error={errors?.salary?.message}
+            register={{
+              ...register('salary', {
+                required: 'Salario requerido',
                 min: { value: 0.01, message: 'La cantidad debe ser mayor a $0.01' },
-              })}
-            />
-            {errors.salary && <p className='mt-1 text-red-700'>{errors.salary.message}</p>}
-          </div>
+              }),
+            }}
+          />
         </div>
       </section>
-      <section className='flex flex-col gap-4'>
-        <SectionTitle title={titles.accountData} />
+      <div className='w-full h-[1px] bg-primary-300 mb-2'></div>
+      <section className='flex flex-col gap-5 mb-5 px-0 sm:px-3'>
+        <Input
+          id='username'
+          label='Nombre de usuario'
+          defaultValue={employee ? employee.user.username : ''}
+          placeholder='Ej. jmartinez'
+          icon={<UserCircleIcon className='text-primary-500 w-5' />}
+          error={errors?.username?.message}
+          register={{
+            ...register('username', {
+              required: 'Nombre de usuario requerido',
+              minLength: {
+                value: 8,
+                message: 'El mínimo de caracteres es 10',
+              },
+              maxLength: {
+                value: 20,
+                message: 'El máximo de caracteres es 20',
+              },
+              pattern: {
+                value: /^[A-Za-z0-9_-]{8,20}$/,
+                message: 'Algunos caracteres son inválidos',
+              },
+            }),
+          }}
+        />
         <div className='flex flex-col gap-5 md:grid md:grid-cols-2 mb-5'>
-        <div>
-              <input
-                type='password'
-                placeholder='Contraseña'
-                className='shadow appearance-none border border-gray-400 rounded w-full py-2 px-3 leading-tight focus:outline-none focus:border-2 focus:border-secondary-500'
-                {...register('Password', {
-                  required: 'Contraseña requerida',
-                  minLength: {
-                    value: 6,
-                    message: 'La contraseña debe tener un mínimo de 6 caracteres',
-                  },
-                })}
-              />
-              {errors.password && <p className='mt-1 text-red-700'>{errors.password.message}</p>}
-            </div>
-            <div>
-              <input
-                type='password'
-                placeholder='Repetir contraseña'
-                className='shadow appearance-none border border-gray-400 rounded w-full py-2 px-3 leading-tight focus:outline-none focus:border-2 focus:border-secondary-500'
-                {...register('password_repeat', {
-                  validate: value => value === password.current || 'Las contraseñas no coinciden',
-                })}
-              />
-              {errors.password_repeat && (
-                <p className='mt-1 text-red-700'>{errors.password_repeat.message}</p>
-              )}
-            </div>
+          <Input
+            type='password'
+            id='Password'
+            label='Contraseña'
+            placeholder='*************'
+            icon={<LockClosedIcon className='text-primary-500 w-5' />}
+            error={errors?.Password?.message}
+            register={{
+              ...register('Password', {
+                required: 'Contraseña requerida',
+                minLength: {
+                  value: 6,
+                  message: 'La contraseña debe tener un mínimo de 6 caracteres',
+                },
+              }),
+            }}
+          />
+          <Input
+            type='password'
+            id='password_repeat'
+            label='Confirmar contraseña'
+            placeholder='*************'
+            icon={<LockClosedIcon className='text-primary-500 w-5' />}
+            error={errors?.password_repeat?.message}
+            register={{
+              ...register('password_repeat', {
+                validate: value => value === password.current || 'Las contraseñas no coinciden',
+              }),
+            }}
+          />
         </div>
       </section>
-      <PrimaryButton text={employee ? 'Guardar' : 'Agregar'} />
+      <div className='m-auto'>
+        <PrimaryButton text={employee ? 'Actualizar empleado' : 'Agregar empleado'} />
+      </div>
     </form>
   );
-
-
 };
 export default AddEmployeeForm;

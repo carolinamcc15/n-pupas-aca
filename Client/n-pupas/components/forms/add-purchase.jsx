@@ -49,7 +49,7 @@ const AddPurchaseForm = ({ onSubmitHandler, purchase = false }) => {
             placeholder='12/10/2020'
             icon={<SolidCalendarIcon />}
             error={errors?.purchaseDate?.message}
-            register={{ ...register('purchaseDate', { required: 'Fecha y hora requeridas' }) }}
+            register={{ ...register('purchaseDate', { required: 'Fecha requerida' }) }}
           />
         </div>
         <div>
