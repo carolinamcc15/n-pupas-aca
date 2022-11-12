@@ -6,7 +6,7 @@ const ReportsButton = ({ id }) => {
     <Link href={`${adminRoutes.reportEmployee}/${id}`} passHref>
       <svg
         xmlns='http://www.w3.org/2000/svg'
-        class='h-8 w-8 font-bold  uppercase rounded-md cursor-pointer text-white text-4xl bg-orange-400  transition  transform hover:scale-[1.02] duration-300'
+        className='h-8 w-8 font-bold  uppercase rounded-md cursor-pointer text-white text-4xl bg-orange-400  transition  transform hover:scale-[1.02] duration-300'
         fill='none'
         viewBox='0 0 24 24'
         stroke='currentColor'

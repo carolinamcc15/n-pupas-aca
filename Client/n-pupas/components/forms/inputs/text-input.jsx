@@ -12,11 +12,11 @@ const Input = ({
 }) => {
   return (
     <div className='w-full'>
-      <label for={id} className='mb-5 text-xs text-primary-500 uppercase'>
+      <label htmlFor={id} className='mb-5 text-xs text-primary-500 uppercase'>
         {label}
       </label>
-      <div class='relative'>
-        <div class='flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none'>
+      <div className='relative'>
+        <div className='flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none'>
           {icon}
         </div>
         <input
