@@ -1,8 +1,9 @@
-import { crudActionTypes } from 'constants/strings';
-import ReportsButton from 'components/buttons/edit';
-import CrudButton from 'components/buttons/crud';
-import { adminRoutes } from 'routes/routes';
 import { useRouter } from 'next/router';
+
+import ActionButton from 'components/buttons/actionButton';
+import ReportsButton from 'components/buttons/edit';
+import { adminRoutes } from 'routes/routes';
+import { actionButtons } from 'constants/data';
 
 const EmployeeCard = ({ employee, onDeleteHandler }) => {
   const router = useRouter();
@@ -19,6 +20,10 @@ const EmployeeCard = ({ employee, onDeleteHandler }) => {
     router.push(`${adminRoutes.newReport}/${employee.id}`);
   };
 
+  const handleOnSeeReports = () => {
+    router.push(`${adminRoutes.reportEmployee}/${employee.id}`);
+  };
+
   return (
     <article className='bg-white shadow-md p-4'>
       <div className='flex mb-2 justify-between'>
@@ -29,10 +34,15 @@ const EmployeeCard = ({ employee, onDeleteHandler }) => {
         </div>
         <ReportsButton id={employee.id} />
       </div>
-      <div>
-        <CrudButton actionType={crudActionTypes.create} onClickHandler={handleOnCreateComment} />
-        <CrudButton actionType={crudActionTypes.update} onClickHandler={handleOnModify} />
-        <CrudButton actionType={crudActionTypes.delete} onClickHandler={handleOnDelete} />
+
+      <div className='flex gap-2'>
+        <ActionButton actionElements={actionButtons.edit} onClickHandler={handleOnModify} />
+        <ActionButton actionElements={actionButtons.delete} onClickHandler={handleOnDelete} />
+        <ActionButton
+          actionElements={actionButtons.comment}
+          onClickHandler={handleOnCreateComment}
+        />
+        <ActionButton actionElements={actionButtons.reports} onClickHandler={handleOnSeeReports} />
       </div>
     </article>
   );

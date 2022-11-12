@@ -1,4 +1,5 @@
 import { CustomModal } from 'components/layout/modal/custom-modal';
+import PageHeading from 'components/information/page-heading';
 import { branchCookie, tokenCookie } from 'constants/data';
 import 'react-confirm-alert/src/react-confirm-alert.css';
 import EmployeeCard from 'components/cards/employee';
@@ -6,7 +7,6 @@ import { PupuseriaApi } from 'services/PupuseriaApi';
 import useBranchContext from 'context/BranchContext';
 import { confirmAlert } from 'react-confirm-alert';
 import useAuthContext from 'context/AuthContext';
-import AddButton from 'components/buttons/add';
 import { adminPages } from 'constants/strings';
 import { adminRoutes } from 'routes/routes';
 import { useState, useEffect } from 'react';
@@ -63,14 +63,11 @@ const EmployeesPage = ({ allEmployees }) => {
       <Head>
         <title>{adminPages.employees}</title>
       </Head>
-
-      <div className='flex flex-wrap gap-3 justify-between mb-2 items-center'>
-        <h1 className='font-bold text-2xl sm:text-3xl'>{adminPages.employees}</h1>
-        <div className='flex gap-5'>
-          <AddButton route={adminRoutes.newEmployee} />
-        </div>
-      </div>
-
+      <PageHeading
+        title={adminPages.employees}
+        route={adminRoutes.newEmployee}
+        text='Agregar empleado'
+      />
       <div className='flex flex-col gap-5 md:grid md:grid-cols-2'>
         {allEmployees.length > 0 ? (
           employees.map(employee => {

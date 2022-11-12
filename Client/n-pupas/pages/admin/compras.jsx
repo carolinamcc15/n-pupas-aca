@@ -69,7 +69,11 @@ const PurchasesPage = ({ todayPurchases, allPurchases }) => {
       <Head>
         <title>{adminPages.purchases}</title>
       </Head>
-      <PageHeading title={adminPages.purchases} route={adminRoutes.newPurchase} />
+      <PageHeading
+        title={adminPages.purchases}
+        route={adminRoutes.newPurchase}
+        text='Agregar compra'
+      />
       <section>
         <SectionTitle title={titles.today} />
         {today.length > 0 ? (

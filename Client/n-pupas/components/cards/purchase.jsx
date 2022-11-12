@@ -1,7 +1,8 @@
-import { crudActionTypes } from 'constants/strings';
-import CrudButton from 'components/buttons/crud';
 import { useRouter } from 'next/router';
+
 import { adminRoutes } from 'routes/routes';
+import ActionButton from 'components/buttons/actionButton';
+import { actionButtons } from 'constants/data';
 
 const PurchaseCard = ({ purchase, onDeleteHandler }) => {
   const router = useRouter();
@@ -22,9 +23,9 @@ const PurchaseCard = ({ purchase, onDeleteHandler }) => {
           <p className='font-bold'> ${purchase.amount.toFixed(2)} </p>
         </div>
         <p className='text-sm mt-1'>{purchase.purchaseDate}</p>
-        <div>
-          <CrudButton actionType={crudActionTypes.update} onClickHandler={handleOnModify} />
-          <CrudButton actionType={crudActionTypes.delete} onClickHandler={handleOnDelete} />
+        <div className='flex gap-2'>
+          <ActionButton actionElements={actionButtons.edit} onClickHandler={handleOnModify} />
+          <ActionButton actionElements={actionButtons.delete} onClickHandler={handleOnDelete} />
         </div>
       </div>
     </article>

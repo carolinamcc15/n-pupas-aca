@@ -1,8 +1,8 @@
 import { adminRoutes, employeeRoutes } from 'routes/routes';
-import { loginRoute, registerRoute } from 'routes/routes';
 import { adminNav, employeeNav } from 'constants/data';
 import LogoutButton from 'components/buttons/logout';
 import useAuthContext from 'context/AuthContext';
+import { registerRoute } from 'routes/routes';
 import { useState, useEffect } from 'react';
 import { adminRole } from 'constants/data';
 import { useRouter } from 'next/router';
@@ -21,23 +21,11 @@ const Navbar = () => {
 
   return (
     <nav className='bg-[#FAFAFA] sticky top-0 z-10 px-2 shadow-md'>
-      {router.pathname === registerRoute ? (
-        <div className='relative flex justify-center items-center h-16 px-4 sm:px-6'>
-          <Link href={loginRoute} passHref>
-            <Image
-              src='/n-pupas.png'
-              alt='N Pupas'
-              width={40}
-              height={40}
-              className='md:w-12 cursor-pointer'
-            />
-          </Link>
-        </div>
-      ) : (
+      {router.pathname !== registerRoute && (
         <div className='w-full relative flex items-center justify-between h-16 px-4 sm:px-6'>
           <div className='flex items-center cursor-pointer'>
             <Link href={`${role === adminRole ? adminRoutes.home : employeeRoutes.home}`} passHref>
-              <Image src='/n-pupas.png' alt='N Pupas' width={40} height={40} className='md:w-12' />
+              <Image src='/n-pupas.png' alt='N Pupas' width={60} height={15} className='md:w-12' />
             </Link>
           </div>
           <div className='w-full ml-4 sm:ml-6 flex justify-between items-center'>

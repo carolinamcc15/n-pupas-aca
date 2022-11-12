@@ -61,8 +61,7 @@ const MenuPage = ({ productTypes, allProducts }) => {
       <Head>
         <title>{adminPages.menu}</title>
       </Head>
-      <PageHeading title={adminPages.menu} route={adminRoutes.newProduct} />
-
+      <PageHeading title={adminPages.menu} route={adminRoutes.newProduct} text='Agregar producto' />
       {productTypes.map(type => {
         return (
           <MenuProductsSection

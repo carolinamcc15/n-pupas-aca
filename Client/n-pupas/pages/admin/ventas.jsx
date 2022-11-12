@@ -100,7 +100,7 @@ const SalesPage = ({ products, allSales }) => {
       <Head>
         <title>{adminPages.sales}</title>
       </Head>
-      <PageHeading title={adminPages.sales} route={adminRoutes.newSale} />
+      <PageHeading title={adminPages.sales} route={adminRoutes.newSale} text='Agregar venta'/>
       <section>
         <SectionTitle title={titles.today} />
         {total > 0 ? (
