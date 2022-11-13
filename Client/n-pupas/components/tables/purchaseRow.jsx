@@ -13,7 +13,7 @@ const PurchaseTableRow = ({ purchase, extended = false, onDeleteHandler = null }
 
   const handleOnDelete = () => {
     if (onDeleteHandler) {
-      onDeleteHandler();
+      onDeleteHandler(purchase.id);
     }
   };
 
