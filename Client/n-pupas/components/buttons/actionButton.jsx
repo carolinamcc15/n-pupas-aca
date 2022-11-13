@@ -9,7 +9,7 @@ const ActionButton = ({ actionElements, onClickHandler }) => {
     <Tooltip text={actionElements.tooltip}>
       <button
         type='button'
-        className='rounded-full p-2'
+        className='rounded-full p-1.5'
         style={{ backgroundColor: actionElements.color }}
         onClick={handleOnClick}
       >
