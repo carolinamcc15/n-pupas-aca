@@ -24,7 +24,7 @@ const AdminHomePage = ({ pupuseriaName, branches }) => {
   };
 
   return (
-    <main className="grid grid-cols-5 grid-rows-2 bg-[url('/waves-bg.svg')] bg-no-repeat bg-cover h-full min-h-5/6 gap-7 p-5 md:p-7 ">
+    <main className="grid grid-cols-5 grid-rows-2 bg-[url('/waves-bg-1.svg')] bg-no-repeat bg-cover h-full min-h-5/6 gap-7 p-5 md:p-7 ">
       <Head>
         <title>{homePageName}</title>
       </Head>
@@ -41,7 +41,7 @@ const AdminHomePage = ({ pupuseriaName, branches }) => {
       <HomeMenu isAdmin={true} />   
 
       <div className='col-span-2 items-center  justify-center mx-auto flex flex-col'>
-          <img src='/menuEmpleado.png' className='w-26 sm:w-56 h-26 sm:h-56' />
+          <img src='/menuEmpleado.png' className='w-26 sm:w-72 h-26 sm:h-56' />
       </div>
 
     </main>
