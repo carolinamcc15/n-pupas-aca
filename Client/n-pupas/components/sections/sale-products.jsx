@@ -6,10 +6,10 @@ const SaleProductsSection = ({ products, type, onClickHandler }) => {
 
   return (
     <div>
-      <section className='flex flex-col gap-4'>
+      <section className='flex flex-col gap-5'>
         <SectionTitle title={type.type} />
         {categoryProducts.length > 0 ? (
-          <div className='flex flex-col gap-5 md:grid md:grid-cols-2'>
+          <div className='gap-5 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 mb-10'>
             {categoryProducts.map(product => {
               return (
                 <SaleProductCard
