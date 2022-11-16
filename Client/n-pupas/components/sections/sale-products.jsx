@@ -21,7 +21,7 @@ const SaleProductsSection = ({ products, type, onClickHandler }) => {
             })}
           </div>
         ) : (
-          <p>No se encontraron productos</p>
+          <p>No se encontraron productos.</p>
         )}
       </section>
     </div>
