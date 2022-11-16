@@ -39,8 +39,10 @@ const AdminHomePage = ({ pupuseriaName, branches }) => {
         </section>
       </div>
 
-      <HomeMenu isAdmin={true} />   
-
+      <div className="bg-gray-100 row-span-2 col-span-3 p-3 rounded-md shadow-sm shadow-black">
+        <HomeMenu isAdmin={true} />   
+      </div>
+      
       <div className='sm:visible invisible sm:col-span-2 sm:items-center sm:justify-center sm:mx-auto sm:flex flex-col'>
           <img src='/menuEmpleado.png' className='w-26 sm:w-72 h-26 sm:h-56' />
       </div>

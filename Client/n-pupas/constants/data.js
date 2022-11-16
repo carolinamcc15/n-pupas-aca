@@ -12,8 +12,8 @@ export const adminRole = 'Admin';
 export const employeeRole = 'Employee';
 
 export const employeeMenuOptions = [
-  { title: employeePages.comments, route: employeeRoutes.comments },
-  { title: employeePages.report, route: employeeRoutes.report },
+  { title: employeePages.report, route: employeeRoutes.report, img:'/informe.png', color:'#5C6EC9' },
+  { title: employeePages.comments, route: employeeRoutes.comments, img:'/mensaje.png', color:'#5BB7D3' },
 ];
 
 export const adminMenuOptions = [

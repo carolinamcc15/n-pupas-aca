@@ -3,9 +3,9 @@ import MenuOption from './option';
 
 const HomeMenu = ({ isAdmin = false }) => {
   const options = isAdmin ? adminMenuOptions : employeeMenuOptions;
-
+if(isAdmin==true){
   return (
-    <div className="bg-gray-100 row-span-2 col-span-3 p-3 rounded-md shadow-sm shadow-black">
+    <div>
       <h2 className="md:text-center pb-8 text-lg sm:text-xl md:text-2xl font-medium text-primary-500">
       ¿Qué deseas gestionar?
       </h2>
@@ -15,8 +15,21 @@ const HomeMenu = ({ isAdmin = false }) => {
         })}
       </div>
     </div>
+  );}else{
+    return (
+      <div>
+        <h2 className="md:text-center pb-8 text-lg sm:text-xl md:text-2xl font-medium text-primary-500">
+        ¿Qué deseas visualizar?
+        </h2>
+        <div className='grid grid-cols-1 gap-2'>
+          {options.map(option => {
+            return <MenuOption key={option.route} option={option} />;
+          })}
+        </div>
+      </div>
+    );
+  }
 
-  );
 };
 
 export default HomeMenu;
