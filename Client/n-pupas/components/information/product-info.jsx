@@ -1,10 +1,10 @@
 const ProductInfo = ({ product, quantity = 0 }) => {
     return (
-      <div className='flex flex-col xs:flex-row xs:justify-between font-bold '>
-        <h2>
+      <div className='flex flex-col justify-center items-center gap-1.5 text-primary-500 text-center'>
+        <h3 className='font-bold '>
           {product.name} {quantity > 0 ? `x${quantity}` : ''}
-        </h2>
-        <p>
+        </h3>
+        <p className='font-light'>
           {' '}
           {quantity > 0
             ? `$${(product.price * quantity).toFixed(2)}`
