@@ -5,11 +5,11 @@ const MenuProductsSection = ({ products, type, onDeleteHandler }) => {
   const categoryProducts = products.filter(product => product.type.id === type.id);
 
   return (
-    <div>
+    <div className="rounded-xl p-3 shadow-md shadow-gray-400 bg-blue-100 ">
       <section className='flex flex-col gap-5'>
         <SectionTitle title={type.type} />
         {categoryProducts.length > 0 ? (
-          <div className='gap-5 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 mb-10'>
+          <div className='gap-5 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 mb-10'>
             {categoryProducts.map(product => {
               return (
                 <ProductCard

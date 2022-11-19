@@ -11,7 +11,7 @@ export const employeePages = {
 export const adminPages = {
   purchases: 'COMPRAS',
   employees: 'EMPLEADOS',
-  menu: 'MENÚ',
+  menu: 'Menú',
   reports: 'REPORTES',
   branches: 'SUCURSALES',
   sales: 'VENTAS',
