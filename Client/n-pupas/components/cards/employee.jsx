@@ -24,18 +24,30 @@ const EmployeeCard = ({ employee, onDeleteHandler }) => {
     router.push(`${adminRoutes.reportEmployee}/${employee.id}`);
   };
 
+  console.log("User: ", employee);
+  const dateOptions = {
+    
+  };
+
   return (
-    <article className='bg-white shadow-md p-4'>
+    <article className='bg-white shadow-md w-[357px]'>
       <div className='flex mb-2 justify-between'>
-        <div className='flex flex-col mb-2'>
-          <h2 className='font-bold'>{employee.user.name}</h2>
-          <p> {`Empleado desde: ${employee.hiringDate}`} </p>
-          <p> {`Salario: $${employee.salary}`} </p>
+        <div className='flex flex-col mb-2 w-[100%]'>
+          <h2 className=' bg-primary-500 py-4 pl-4 text-white text-4xl' >{employee.user.name}</h2>
         </div>
-        <ReportsButton id={employee.id} />
+      </div>
+      <div className='grid grid-cols-5'>
+          <p className='col-span-1 text-primary-300 pl-4'>Nombre</p>
+          <p className='col-span-4 pl-8'>{employee.user.name}</p>
+          <p className='col-span-1 text-primary-300 pl-4'>Salario</p>
+          <p className='col-span-4 pl-8'>{`$${employee.salary}`}</p>
+          <p className='col-span-1 text-primary-300 pl-4'>Usuario</p>
+          <p className='col-span-4 pl-8'>{employee.user.username}</p>
+          <p className='col-span-1 text-primary-300 pl-4'>Desde</p>
+          <p className='col-span-4 pl-8'>{employee.hiringDate}</p>
       </div>
 
-      <div className='flex gap-2'>
+      <div className='flex justify-end gap-2'>
         <ActionButton actionElements={actionButtons.edit} onClickHandler={handleOnModify} />
         <ActionButton actionElements={actionButtons.delete} onClickHandler={handleOnDelete} />
         <ActionButton

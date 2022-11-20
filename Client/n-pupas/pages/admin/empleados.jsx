@@ -68,7 +68,20 @@ const EmployeesPage = ({ allEmployees }) => {
         route={adminRoutes.newEmployee}
         text='Agregar empleado'
       />
-      <div className='flex flex-col gap-5 md:grid md:grid-cols-2'>
+      <div className='grid grid-cols-4'>
+        {allEmployees.length > 0 ? (
+          employees.map(employee => {
+            return (
+              <EmployeeCard
+                employee={employee}
+                key={employee.id}
+                onDeleteHandler={() => onDeleteHandler(employee.id, employee.name)}
+              />
+            );
+          })
+        ) : (
+          <p>Aún no se han registrado empleados</p>
+        )}
         {allEmployees.length > 0 ? (
           employees.map(employee => {
             return (
