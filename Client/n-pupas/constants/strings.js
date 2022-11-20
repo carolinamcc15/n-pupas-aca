@@ -10,7 +10,7 @@ export const employeePages = {
 
 export const adminPages = {
   purchases: 'COMPRAS',
-  employees: 'EMPLEADOS',
+  employees: 'Empleados',
   menu: 'Menú',
   reports: 'REPORTES',
   branches: 'SUCURSALES',

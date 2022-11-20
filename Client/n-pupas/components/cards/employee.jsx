@@ -4,6 +4,7 @@ import ActionButton from 'components/buttons/actionButton';
 import ReportsButton from 'components/buttons/edit';
 import { adminRoutes } from 'routes/routes';
 import { actionButtons } from 'constants/data';
+import moment from 'moment/moment';
 
 const EmployeeCard = ({ employee, onDeleteHandler }) => {
   const router = useRouter();
@@ -24,10 +25,8 @@ const EmployeeCard = ({ employee, onDeleteHandler }) => {
     router.push(`${adminRoutes.reportEmployee}/${employee.id}`);
   };
 
-  console.log("User: ", employee);
-  const dateOptions = {
-    
-  };
+  moment.locale('es');
+  const hiringDate = moment(employee.hiringDate).format('D [de] MMMM [de] yyyy');
 
   return (
     <article className='bg-white shadow-md w-[357px]'>
@@ -36,7 +35,7 @@ const EmployeeCard = ({ employee, onDeleteHandler }) => {
           <h2 className=' bg-primary-500 py-4 pl-4 text-white text-4xl' >{employee.user.name}</h2>
         </div>
       </div>
-      <div className='grid grid-cols-5'>
+      <div className='grid grid-cols-5 mt-4 mb-8'>
           <p className='col-span-1 text-primary-300 pl-4'>Nombre</p>
           <p className='col-span-4 pl-8'>{employee.user.name}</p>
           <p className='col-span-1 text-primary-300 pl-4'>Salario</p>
@@ -44,10 +43,10 @@ const EmployeeCard = ({ employee, onDeleteHandler }) => {
           <p className='col-span-1 text-primary-300 pl-4'>Usuario</p>
           <p className='col-span-4 pl-8'>{employee.user.username}</p>
           <p className='col-span-1 text-primary-300 pl-4'>Desde</p>
-          <p className='col-span-4 pl-8'>{employee.hiringDate}</p>
+          <p className='col-span-4 pl-8'>{hiringDate}</p>
       </div>
 
-      <div className='flex justify-end gap-2'>
+      <div className='flex justify-end gap-2 mr-4 mb-2'>
         <ActionButton actionElements={actionButtons.edit} onClickHandler={handleOnModify} />
         <ActionButton actionElements={actionButtons.delete} onClickHandler={handleOnDelete} />
         <ActionButton
