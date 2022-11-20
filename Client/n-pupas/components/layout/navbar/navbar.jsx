@@ -25,7 +25,7 @@ const Navbar = () => {
         <div className='w-full relative flex items-center justify-between h-16 px-4 sm:px-6'>
           <div className='flex items-center cursor-pointer'>
             <Link href={`${role === adminRole ? adminRoutes.home : employeeRoutes.home}`} passHref>
-              <Image src='/n-pupas.png' alt='N Pupas' width={60} height={15} className='md:w-12' />
+              <Image src='/n-pupas.png' alt='N Pupas' width={67} height={14} className='md:w-12' />
             </Link>
           </div>
           <div className='w-full ml-4 sm:ml-6 flex justify-between items-center'>

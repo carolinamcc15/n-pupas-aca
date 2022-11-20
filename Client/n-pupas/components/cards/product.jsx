@@ -17,19 +17,22 @@ const ProductCard = ({ product, quantity = 0, onDeleteHandler }) => {
   };
 
   return (
-    <article className='bg-white shadow-md flex'>
-      <img
+    <article className='gap-2 grid-cols-1 bg-white shadow-md rounded-xl shadow-black'>
+      <div className='xs:p-0 flex w-full flex-col rounded-md'>
+        <img
         src={product.image ? `data:image/jpeg;base64,${product.image}` : '/no-image.jpg'}
         alt={product.name}
-        className='w-[80px] xs:w-[100px] object-cover'
-      />
-      <div className='p-3 xs:p-5 flex w-full flex-col'>
-        <ProductInfo product={product} quantity={quantity} />
-        <div className='flex gap-2'>
+        className='w-26 h-26 items-center rounded-md'/>
+          <div className=' flex self-end pr-2 gap-2'>
           <ActionButton actionElements={actionButtons.edit} onClickHandler={handleOnModify} />
           <ActionButton actionElements={actionButtons.delete} onClickHandler={handleOnDelete} />
         </div>
       </div>
+
+      <div className= "p-1">
+        <ProductInfo product={product} quantity={quantity} />
+      </div>
+      
     </article>
   );
 };
