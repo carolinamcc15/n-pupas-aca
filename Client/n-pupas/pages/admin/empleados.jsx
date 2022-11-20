@@ -82,19 +82,6 @@ const EmployeesPage = ({ allEmployees }) => {
         ) : (
           <p>Aún no se han registrado empleados</p>
         )}
-        {allEmployees.length > 0 ? (
-          employees.map(employee => {
-            return (
-              <EmployeeCard
-                employee={employee}
-                key={employee.id}
-                onDeleteHandler={() => onDeleteHandler(employee.id, employee.name)}
-              />
-            );
-          })
-        ) : (
-          <p>Aún no se han registrado empleados</p>
-        )}
       </div>
     </main>
   );
