@@ -9,12 +9,12 @@ export const employeePages = {
 };
 
 export const adminPages = {
-  purchases: 'COMPRAS',
+  purchases: 'Compras',
   employees: 'Empleados',
   menu: 'Menú',
-  reports: 'REPORTES',
-  branches: 'SUCURSALES',
-  sales: 'VENTAS',
+  reports: 'Reportes',
+  branches: 'Sucursales',
+  sales: 'Ventas',
   newPurchase: 'Registrar compra',
   newProduct: 'Agregar producto',
   newEmployee: 'Agregar empleado',
