@@ -40,7 +40,8 @@ export const titles = {
   pupuseriaData: 'Datos sobre pupusería',
   pupusas: 'Pupusas',
   drinks: 'Bebidas',
-  other: 'Otros'
+  other: 'Otros',
+  information: 'Información'
 };
 
 export const crudActionTypes = {
