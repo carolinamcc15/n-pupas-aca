@@ -57,7 +57,7 @@ const MenuPage = ({ productTypes, allProducts }) => {
   };
 
   return (
-    <main className='p-6 flex flex-col gap-6'>
+    <main className='p-6 flex flex-col gap-12'>
       <Head>
         <title>{adminPages.menu}</title>
       </Head>
