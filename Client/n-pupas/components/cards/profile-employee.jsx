@@ -2,7 +2,7 @@ const ProfileCardEmployee = ({ employee, logout }) => {
   return (
     <article className='bg-white shadow-md border-primary-300 mt-4'>
       <div className='flex flex-col'>
-        <div className='bg-primary-500 flex flex-col items-center p'>
+        <div className='bg-primary-500 flex flex-col items-center py-2'>
           <h2 className='text-white text-3xl p-2'>{employee.user.name}</h2>
           <p className='text-primary-300 uppercase p-2'>Empleado</p>
         </div>

@@ -57,12 +57,16 @@ const BranchesPage = ({ allBranches }) => {
   };
 
   return (
-    <main className='p-6 px-12 flex flex-col gap-5'>
+    <main className='p-6 sm:px-10 flex flex-col gap-5'>
       <Head>
         <title>{adminPages.branches}</title>
       </Head>
-      <PageHeading title={adminPages.branches} route={adminRoutes.newBranch} text='Agregar sucursal' />
-      <div className='flex flex-col gap-8 md:grid md:grid-cols-3 w-3/4'>
+      <PageHeading
+        title={adminPages.branches}
+        route={adminRoutes.newBranch}
+        text='Agregar sucursal'
+      />
+      <div className='gap-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3'>
         {branches.map(branch => {
           return (
             <BranchCard
