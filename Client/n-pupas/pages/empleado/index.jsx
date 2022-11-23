@@ -9,7 +9,7 @@ const pupuseriaApi = new PupuseriaApi();
 
 const EmployeeHomePage = ({ branch }) => {
   return (
-    <main className="bg-[url('/waves-bg-1.svg')] bg-no-repeat bg-cover h-full min-h-5/6 ">
+    <main className="flex-grow bg-[url('/waves-bg-1.svg')] bg-no-repeat bg-cover h-full min-h-5/6 ">
       <section className='grid sm:grid-cols-5 sm:grid-rows-2 w-full gap-7 p-5 md:p-7'>
 
       <Head>
