@@ -20,7 +20,7 @@ export const adminPages = {
   newEmployee: 'Agregar empleado',
   newBranch: 'Agregar sucursal',
   newSale: 'Registrar venta',
-  newReport: 'Nuevo reporte a empleado',
+  newReport: 'Enviar comentario',
   editProduct: 'Modificar producto',
   editEmployee: 'Modificar empleado',
   editBranch: 'Modificar sucursal',

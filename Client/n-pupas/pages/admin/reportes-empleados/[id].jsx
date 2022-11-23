@@ -58,25 +58,28 @@ const ReportesPages = ({ employee }) => {
   };
 
   return (
-    <main className='p-6 flex flex-col gap-5'>
+    <main className='p-6 flex-grow flex flex-col gap-5'>
       <Head>
         <title>{adminPages.reportsEmployee}</title>
       </Head>
       <h1 className='font-bold text-2xl sm:text-3xl  md:my-3'>Reportes a {employee.user.name}</h1>
-      <div className='flex flex-col gap-5 md:grid md:grid-cols-2'>
-        {reports.length > 0 ? (
-        reports.map(report => {
-          return (
-            <ReportECard
-              comment={report}
-              key={report.id}
-              onDeleteHandler={() => onDeleteHandler(report.id)}
-            />
-          );
-        })
-        ) : (
-          <p>Aún no se han registrado comentarios</p>
-        )}
+      <div className='flex-grow grid grid-cols-1 sm:grid-cols-2'>
+        <section className='w-full max-w-[1300px] rounded-md shadow-lg flex flex-col gap-4 bg-light-blue p-4 py-6 sm:px-5 sm:py-10 '>
+          {reports.length > 0 ? (
+          reports.map(report => {
+            return (
+              <ReportECard
+                comment={report}
+                key={report.id}
+                onDeleteHandler={() => onDeleteHandler(report.id)}
+              />
+            );
+          })
+          ) : (
+            <p>Aún no se han registrado comentarios</p>
+          )}
+        </section>
+        <img src='/onReports.png' alt='Empleado' className='w-28 sm:w-96 place-self-center object-center' />
       </div>
     </main>
   );
