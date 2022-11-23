@@ -9,16 +9,28 @@ const pupuseriaApi = new PupuseriaApi();
 
 const EmployeeHomePage = ({ branch }) => {
   return (
-    <main className='p-6 flex flex-col gap-5'>
+    <main className="bg-[url('/waves-bg-1.svg')] bg-no-repeat bg-cover h-full min-h-5/6 ">
+      <section className='grid sm:grid-cols-5 sm:grid-rows-2 w-full gap-7 p-5 md:p-7'>
+
       <Head>
         <title>{homePageName}</title>
       </Head>
-      <h1 className='font-bold text-2xl sm:text-3xl'>{homePageName}</h1>
-      <section>
-        <h2 className='text-primary-500 font-bold text-lg'>{`Sucursal ${branch.name}`}</h2>
-        <p>{branch.address}</p>
+      <div className='w-full h-48 col-span-2 rounded-md items-center justify-center mx-auto flex flex-col gap-4 bg-gray-100 shadow-sm shadow-black'>
+      <section className="w-full">
+        <h2 className='text-primary-500 font-bold text-2xl sm:text-3xl mb-3 text-center'>{`Sucursal ${branch.name}`}</h2>
+        <p className="text-center">{branch.address}</p>
       </section>
-      <HomeMenu />
+      </div>
+
+      <div className="bg-gray-100 row-span-2 col-span-3 p-3 rounded-md shadow-sm shadow-black">
+        <HomeMenu />
+      </div>
+
+      <div className='sm:visible invisible sm:col-span-2 sm:items-center sm:justify-center sm:mx-auto sm:flex flex-col'>
+          <img src='/menuEmpleado.png' className='w-26 sm:w-72 h-26 sm:h-56' />
+      </div>
+      
+      </section>
     </main>
   );
 };

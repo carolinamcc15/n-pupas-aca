@@ -1,6 +1,6 @@
 import Head from 'next/head';
 
-export default function Custom404() {
+export default function Custom500() {
   return (
     <main className='min-h-[60vh] flex flex-col justify-center items-center'>
       <Head>

@@ -1,21 +1,21 @@
-import { CustomModal } from 'components/layout/modal/custom-modal';
-import SectionTitle from 'components/information/section-title';
-import PageHeading from 'components/information/page-heading';
-import { branchCookie, tokenCookie } from 'constants/data';
 import 'react-confirm-alert/src/react-confirm-alert.css';
-import { adminPages, titles } from 'constants/strings';
-import SaleTableRow from 'components/tables/saleRow';
-import { PupuseriaApi } from 'services/PupuseriaApi';
-import useBranchContext from 'context/BranchContext';
 import { confirmAlert } from 'react-confirm-alert';
-import { calculateSaleTotal } from 'utils/utils';
-import useAuthContext from 'context/AuthContext';
-import SaleCard from 'components/cards/sale';
-import { adminRoutes } from 'routes/routes';
 import { useState, useEffect } from 'react';
 import { getCookie } from 'cookies-next';
 import toast from 'react-hot-toast';
 import Head from 'next/head';
+
+import { CustomModal } from 'components/layout/modal/custom-modal';
+import PageHeading from 'components/information/page-heading';
+import { branchCookie, tokenCookie } from 'constants/data';
+import { adminPages, titles } from 'constants/strings';
+import SaleTableRow from 'components/tables/saleRow';
+import { PupuseriaApi } from 'services/PupuseriaApi';
+import useBranchContext from 'context/BranchContext';
+import { calculateSaleTotal } from 'utils/utils';
+import useAuthContext from 'context/AuthContext';
+import SaleCard from 'components/cards/sale';
+import { adminRoutes } from 'routes/routes';
 
 const pupuseriaApi = new PupuseriaApi();
 
@@ -96,56 +96,58 @@ const SalesPage = ({ products, allSales }) => {
   };
 
   return (
-    <main className='p-6 flex flex-col gap-5'>
+    <main className='p-6 flex gap-5 flex-col flex-1 h-full'>
       <Head>
         <title>{adminPages.sales}</title>
       </Head>
-      <PageHeading title={adminPages.sales} route={adminRoutes.newSale} />
-      <section>
-        <SectionTitle title={titles.today} />
-        {total > 0 ? (
-          <div className='relative overflow-x-auto shadow-md sm:rounded-lg mb-6'>
-            <p className='text-lg text-primary-500 font-bold'>
-              Ingreso total: ${Number(total).toFixed(2)}
-            </p>
-            <table className='w-full text-sm text-left mt-6'>
-              <thead>
-                <tr>
-                  <th className='pl-6'>Producto</th>
-                  <th className='pl-5 '>Cantidad</th>
-                  <th className='pl-6 '>Total</th>
-                </tr>
-              </thead>
-              <tbody>
-                {salesByProduct.map(sale => {
-                  return <SaleTableRow sale={sale} key={sale.product.id} />;
-                })}
-              </tbody>
-            </table>
+      <PageHeading title={adminPages.sales} route={adminRoutes.newSale} text='Agregar venta' />
+      <div className='grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-10 flex-1'>
+        <section className='bg-secondary-500 p-5 sm:p-7 bg-opacity-40 rounded-lg shadow-md mb-3'>
+          <div className='flex justify-between mb-5'>
+            <h2 className='text-xl font-bold text-primary-500'>{titles.today} </h2>
+            <p className='text-xl text-green-600 font-bold mb-2'>${Number(total).toFixed(2)}</p>
           </div>
-        ) : (
-          <p>No se han realizado ventas en este día</p>
-        )}
-      </section>
-      <section>
-        <SectionTitle title={titles.history} />
-        <div className='flex flex-col gap-5 md:grid md:grid-cols-2'>
-          {sales.length > 0 ? (
-            sales.map(sale => {
-              return (
-                <SaleCard
-                  sale={sale}
-                  total={calculateSaleTotal(sale.details)}
-                  key={sale.id}
-                  onDeleteHandler={() => onDeleteHandler(sale.id)}
-                />
-              );
-            })
+          {total > 0 ? (
+            <div className='relative shadow-md mb-6 overflow-x-auto'>
+              <table className='w-full text-sm text-center overflow-x-auto'>
+                <thead className='bg-primary-500 text-white'>
+                  <tr>
+                    <th className='py-3'>Producto</th>
+                    <th className='py-3'>Cantidad</th>
+                    <th className='py-3'>Total</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {salesByProduct.map(sale => {
+                    return <SaleTableRow sale={sale} key={sale.product.id} />;
+                  })}
+                </tbody>
+              </table>
+            </div>
           ) : (
-            <p>No se encontraron ventas</p>
+            <p>No se han realizado ventas en este día</p>
           )}
-        </div>
-      </section>
+        </section>
+        <section className='bg-secondary-500 p-5 sm:p-7 bg-opacity-40 rounded-lg shadow-md mb-3'>
+          <h2 className='text-xl font-bold text-primary-500 mb-7'>{titles.history} </h2>
+          <div className='flex flex-col gap-5'>
+            {sales.length > 0 ? (
+              sales.map(sale => {
+                return (
+                  <SaleCard
+                    sale={sale}
+                    total={calculateSaleTotal(sale.details)}
+                    key={sale.id}
+                    onDeleteHandler={() => onDeleteHandler(sale.id)}
+                  />
+                );
+              })
+            ) : (
+              <p>No se encontraron ventas</p>
+            )}
+          </div>
+        </section>
+      </div>
     </main>
   );
 };

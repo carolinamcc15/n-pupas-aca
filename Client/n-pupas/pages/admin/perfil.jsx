@@ -31,16 +31,13 @@ const EmployeeProfilePage = ({ admin }) => {
   };
 
   return (
-    <main className='p-6 flex flex-col gap-5'>
+    <main className="p-6 flex flex-col gap-5 bg-[url('/waves-bg-1.svg')] h-screen bg-no-repeat bg-cover">
       <Head>
         <title>{profilePageName}</title>
       </Head>
-      <div className='w-full md:max-w-[800px] mx-auto flex flex-col gap-4'>
-        <h1 className='font-bold text-2xl sm:text-3xl md:text-center md:my-3'>{profilePageName}</h1>
-        <ProfileCardAdmin admin={admin} />
-      </div>
-      <div className='flex justify-center mt-4'>
-        <SecondaryButton text='Cerrar sesión' onClickHandler={handleOnLogout} isRed={true} />
+      <div className='w-full md:max-w-[550px] mx-auto flex flex-col gap-4'>
+        <h1 className='font-bold text-2xl sm:text-3xl md:text-center md:mt-20 mb-6 text-white'>{profilePageName}</h1>
+        <ProfileCardAdmin admin={admin} logout={handleOnLogout}/>
       </div>
     </main>
   );

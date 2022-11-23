@@ -1,7 +1,7 @@
 export const profilePageName = 'Perfil';
 export const homePageName = 'Inicio';
 export const registerPageName = 'Formulario de Registro';
-export const loginPageName = 'Inicio de Sesión';
+export const loginPageName = 'Inicio de sesión';
 
 export const employeePages = {
   comments: 'Comentarios y reportes',
@@ -9,12 +9,12 @@ export const employeePages = {
 };
 
 export const adminPages = {
-  purchases: 'Compras',
+  purchases: 'COMPRAS',
   employees: 'Empleados',
   menu: 'Menú',
-  reports: 'Reportes',
-  branches: 'Sucursales',
-  sales: 'Ventas',
+  reports: 'Genera un reporte',
+  branches: 'SUCURSALES',
+  sales: 'VENTAS',
   newPurchase: 'Registrar compra',
   newProduct: 'Agregar producto',
   newEmployee: 'Agregar empleado',
@@ -25,6 +25,7 @@ export const adminPages = {
   editEmployee: 'Modificar empleado',
   editBranch: 'Modificar sucursal',
   editReport: 'Modificar reporte',
+  editPurchase: 'Modifica una compra',
   editSale: 'Modificar venta',
   reportsEmployee: 'Reportes de empleados',
 };
@@ -39,7 +40,8 @@ export const titles = {
   pupuseriaData: 'Datos sobre pupusería',
   pupusas: 'Pupusas',
   drinks: 'Bebidas',
-  other: 'Otros'
+  other: 'Otros',
+  information: 'Información'
 };
 
 export const crudActionTypes = {

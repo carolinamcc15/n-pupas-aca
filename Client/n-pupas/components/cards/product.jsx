@@ -1,8 +1,9 @@
-import ProductInfo from 'components/information/product-info';
-import { crudActionTypes } from 'constants/strings';
-import CrudButton from 'components/buttons/crud';
-import { adminRoutes } from 'routes/routes';
 import { useRouter } from 'next/router';
+
+import ProductInfo from 'components/information/product-info';
+import ActionButton from 'components/buttons/actionButton';
+import { actionButtons } from 'constants/data';
+import { adminRoutes } from 'routes/routes';
 
 const ProductCard = ({ product, quantity = 0, onDeleteHandler }) => {
   const router = useRouter();
@@ -16,15 +17,22 @@ const ProductCard = ({ product, quantity = 0, onDeleteHandler }) => {
   };
 
   return (
-    <article className='bg-white shadow-md flex'>
-      <img src={product.image ? `data:image/jpeg;base64,${product.image}` : '/no-image.jpg'} alt={product.name} className='w-[80px] xs:w-[100px] object-cover' />
-      <div className='p-3 xs:p-5 flex w-full flex-col'>
-        <ProductInfo product={product} quantity={quantity} />
-        <div>
-          <CrudButton actionType={crudActionTypes.update} onClickHandler={handleOnModify} />
-          <CrudButton actionType={crudActionTypes.delete} onClickHandler={handleOnDelete} />
+    <article className='gap-2 grid-cols-1 bg-white shadow-md rounded-xl shadow-black'>
+      <div className='xs:p-0 flex w-full flex-col rounded-md'>
+        <img
+        src={product.image ? `data:image/jpeg;base64,${product.image}` : '/no-image.jpg'}
+        alt={product.name}
+        className='w-26 h-26 items-center rounded-md'/>
+          <div className=' flex self-end pr-2 gap-2'>
+          <ActionButton actionElements={actionButtons.edit} onClickHandler={handleOnModify} />
+          <ActionButton actionElements={actionButtons.delete} onClickHandler={handleOnDelete} />
         </div>
       </div>
+
+      <div className= "p-1">
+        <ProductInfo product={product} quantity={quantity} />
+      </div>
+      
     </article>
   );
 };

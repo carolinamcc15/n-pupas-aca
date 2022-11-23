@@ -1,9 +1,12 @@
+import toast from 'react-hot-toast';
+import Head from 'next/head';
+
+import BackButton from 'components/buttons/back-arrow';
 import { registerPageName } from 'constants/strings';
 import RegisterForm from 'components/forms/register';
 import { PupuseriaApi } from 'services/PupuseriaApi';
 import useAuthContext from 'context/AuthContext';
-import toast from 'react-hot-toast';
-import Head from 'next/head';
+import { loginRoute } from 'routes/routes';
 
 const RegisterPage = () => {
   const pupuseriaApi = new PupuseriaApi();
@@ -28,13 +31,22 @@ const RegisterPage = () => {
   };
 
   return (
-    <main className='p-6 flex flex-col gap-5'>
+    <div className="w-full bg-[url('/waves-bg.svg')] bg-no-repeat bg-cover h-full min-h-screen p-6 md:p-12 flex justify-center items-center">
       <Head>
         <title>{registerPageName}</title>
       </Head>
-      <h1 className='font-bold text-2xl sm:text-3xl md:text-center md:my-3'>{registerPageName}</h1>
-      <RegisterForm onSubmitHandler={onSubmitForm} />
-    </main>
+      <main className='w-full flex flex-col max-w-[1000px]'>
+        <div>
+          <div className='flex gap-3 items-center mb-5'>
+            <BackButton linkTo={loginRoute} />
+            <h1 className='text-white font-bold text-lg sm:text-xl md:text-2xl text-center'>
+              Regístrate en N Pupas
+            </h1>
+          </div>
+          <RegisterForm onSubmitHandler={onSubmitForm} />
+        </div>
+      </main>
+    </div>
   );
 };
 

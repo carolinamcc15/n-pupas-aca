@@ -1,21 +1,20 @@
+import 'react-confirm-alert/src/react-confirm-alert.css';
+import { confirmAlert } from 'react-confirm-alert';
+import { useState, useEffect } from 'react';
+import { getCookie } from 'cookies-next';
+import toast from 'react-hot-toast';
+import Head from 'next/head';
+
 import { CustomModal } from 'components/layout/modal/custom-modal';
-import SectionTitle from 'components/information/section-title';
 import PageHeading from 'components/information/page-heading';
 import PurchaseTableRow from 'components/tables/purchaseRow';
 import { branchCookie, tokenCookie } from 'constants/data';
-import 'react-confirm-alert/src/react-confirm-alert.css';
 import { adminPages, titles } from 'constants/strings';
 import { calculateTodayExpenses } from 'utils/utils';
 import { PupuseriaApi } from 'services/PupuseriaApi';
 import useBranchContext from 'context/BranchContext';
-import PurchaseCard from 'components/cards/purchase';
-import { confirmAlert } from 'react-confirm-alert';
 import useAuthContext from 'context/AuthContext';
-import { useState, useEffect } from 'react';
 import { adminRoutes } from 'routes/routes';
-import { getCookie } from 'cookies-next';
-import toast from 'react-hot-toast';
-import Head from 'next/head';
 
 const pupuseriaApi = new PupuseriaApi();
 
@@ -65,24 +64,30 @@ const PurchasesPage = ({ todayPurchases, allPurchases }) => {
   };
 
   return (
-    <main className='p-6 flex flex-col gap-5'>
+    <main className='p-6 flex gap-5 flex-col flex-1 h-full'>
       <Head>
         <title>{adminPages.purchases}</title>
       </Head>
-      <PageHeading title={adminPages.purchases} route={adminRoutes.newPurchase} />
-      <section>
-        <SectionTitle title={titles.today} />
-        {today.length > 0 ? (
-          <section>
-            <p className='text-lg text-primary-500 font-bold mb-5'>
-              Gasto total: ${calculateTodayExpenses(todayPurchases)}
+      <PageHeading
+        title={adminPages.purchases}
+        route={adminRoutes.newPurchase}
+        text='Agregar compra'
+      />
+      <div className='grid grid-cols-1 sm:grid-cols-5 gap-6 sm:gap-10 flex-1'>
+        <section className='sm:col-span-2 bg-secondary-500 p-5 sm:p-7 bg-opacity-40 rounded-lg shadow-md mb-3'>
+          <div className='flex justify-between mb-5'>
+            <h2 className='text-xl font-bold text-primary-500'>{titles.today} </h2>
+            <p className='text-xl text-red-700 font-bold mb-2'>
+              ${calculateTodayExpenses(todayPurchases)}
             </p>
-            <div className='relative overflow-x-auto shadow-md sm:rounded-lg mb-6'>
-              <table className='w-full text-sm text-left'>
-                <thead>
+          </div>
+          {today.length > 0 ? (
+            <div className='relative  shadow-md mb-6'>
+              <table className='w-full text-sm text-center overflow-x-auto'>
+                <thead className='bg-primary-500 text-white'>
                   <tr>
-                    <th className='pl-6'>Concepto</th>
-                    <th className='pl-6 '>Monto</th>
+                    <th className='py-3'>Concepto</th>
+                    <th className='py-3'>Monto</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -92,28 +97,42 @@ const PurchasesPage = ({ todayPurchases, allPurchases }) => {
                 </tbody>
               </table>
             </div>
-          </section>
-        ) : (
-          <p>No se han realizado compras este día</p>
-        )}
-      </section>
-      <section>
-        <SectionTitle title='Historial de compras' />
-        {purchases.length > 0 ? (
-          <section className='flex flex-col gap-5 md:grid md:grid-cols-2 lg:grid-cols-3'>
-            {purchases.map(purchase => {
-              return (
-                <PurchaseCard
-                  purchase={purchase}
-                  onDeleteHandler={() => onDeleteHandler(purchase.id)}
-                />
-              );
-            })}
-          </section>
-        ) : (
-          <p>Aún no se han realizado compras</p>
-        )}
-      </section>
+          ) : (
+            <p>No se han realizado compras este día</p>
+          )}
+        </section>
+        <section className='sm:col-span-3 bg-secondary-500 p-5 sm:p-7 bg-opacity-40 rounded-lg shadow-md mb-3'>
+          <h2 className='text-xl font-bold text-primary-500 mb-7'>Historial de compras</h2>
+          {purchases.length > 0 ? (
+            <section className='overflow-x-auto'>
+              <table className='w-full text-sm text-center mb-8'>
+                <thead className='bg-primary-500 text-white'>
+                  <tr>
+                    <th className='py-3'>Concepto</th>
+                    <th className='py-3'>Monto</th>
+                    <th className='py-3'>Fecha</th>
+                    <th className='py-3'>Acciones</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {purchases.map(purchase => {
+                    return (
+                      <PurchaseTableRow
+                        key={purchase.id}
+                        purchase={purchase}
+                        extended={true}
+                        onDeleteHandler={onDeleteHandler}
+                      />
+                    );
+                  })}
+                </tbody>
+              </table>
+            </section>
+          ) : (
+            <p>Aún no se han realizado compras</p>
+          )}
+        </section>
+      </div>
     </main>
   );
 };

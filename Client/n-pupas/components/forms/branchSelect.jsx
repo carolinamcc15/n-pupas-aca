@@ -8,7 +8,7 @@ const BranchSelect = ({ onChangeHandler, branches, value }) => {
       name='branch'
       value={value ? value : ''}
       onChange={handleOnChange}
-      className='shadow border border-gray-400 rounded w-full py-2 px-3 leading-tight focus:outline-none focus:border-2 focus:border-secondary-500'
+      className='rounded-xl pb-px-8 bg-purple-100 border border-gray-50 w-full py-3 px-3 leading-tight focus:outline-none focus:border-2 focus:border-secondary-500 '
     >
       {branches.map(branch => {
         return (

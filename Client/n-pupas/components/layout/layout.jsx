@@ -1,12 +1,11 @@
-import Footer from './footer';
 import Navbar from './navbar/navbar';
 
 const Layout = ({ children }) => {
   return (
-    <div className='relative pb-24 min-h-screen'>
+    <div className='relative min-h-screen flex flex-col'>
       <Navbar />
       {children}
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 };

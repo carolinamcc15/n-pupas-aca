@@ -93,23 +93,26 @@ export default function NewSalePage({ products, productTypes }) {
             );
           })}
         </div>
-        <div className='flex flex-col gap-5 col-span-2 bg-gray-200 p-6 lg:p-4'>
-          <h2 className='text-xl sm:text-2xl font-bold mt-3'>Detalle</h2>
+        <div className='flex flex-col gap-5 col-span-2 bg-primary-100 p-6 lg:p-4'>
+          <h2 className='text-xl font-bold mt-3 text-primary-500 text-center'>Detalle de venta</h2>
           {saleTotal > 0 ? (
-            <div className='flex justify-between items-center'>
-              <p className='text-primary-500 font-bold text-lg sm:text-xl text-right'>
-                Total: ${saleTotal}
-              </p>
+            <div className='flex justify-between items-center my-4'>
+              <p className='text-primary-500 font-bold text-lg text-right'>Total: ${saleTotal}</p>
               <button
                 type='button'
                 onClick={() => addSale()}
-                className='px-4 py-2 bg-primary-500 font-bold text-white uppercase rounded-md border-2 border-transparent cursor-pointer hover:bg-primary-700 transform transition duration-300 ease-in-out'
+                className='px-4 py-2 bg-primary-500 font-bold text-white uppercase rounded-md border-2 border-transparent cursor-pointer hover:bg-primary-700 transform transition duration-300 ease-in-out hover:opacity-80'
               >
-                Realizar venta
+                Agregar
               </button>
             </div>
           ) : (
-            <p className='text-lg'>No hay productos agregados.</p>
+            <div className='mt-6'>
+              <img src='/ice-cream-seller.svg' alt='Realizar compras' className='w-60 sm:w-72' />
+              <p className='px-6 text-center leading-7 font-bold text-primary-500'>
+                Selecciona los productos que deseas incluir
+              </p>
+            </div>
           )}
           {saleDetails.map((obj, index) => {
             return (
