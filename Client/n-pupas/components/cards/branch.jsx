@@ -16,7 +16,7 @@ const BranchCard = ({ branch, onDeleteHandler }) => {
   };
 
   return (
-    <article className='bg-white shadow-md w-96'>
+    <article className='bg-white shadow-md min-w-96'>
       <div className='flex flex-col mb-2'>
         <h2 className='font-bold text-3xl bg-primary-500 text-white py-5 pl-4'>{branch.name}</h2>
         <div className='grid grid-cols-5 gap-3'>

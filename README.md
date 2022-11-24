@@ -1,21 +1,36 @@
-# Entrega final de proyecto - Programación N-Capas
+# Proyecto final - Ingeniería de Software S01
+
+## Integrantes                                      
+
+- Alan Ariel Flores Martinez 00019420
+- Brian Darwin Carranza Campos	00136020 
+- Carolina María Carranza Carballo	00008119 
+- Nestor Eduardo Nieto Alas		00199019 
+- Wilfredo Josué Morales Alfaro	00025719 
+
 
 ## Un poco sobre  N-Pupas
 N-Pupas es una aplicación que permitirá a familias emprendedoras de pequeños negocios de pupuserías informales una ayuda en la administración de su negocio proyectando futuras inversiones de entes tanto gubernamentales como no gubernamentales almacenando un registro contable de las transacciones realizadas desde el momento que se utilice la aplicación y ayudando a emprendedores de clase baja o media que no pueden costear un sistema de índole privada a tener un acercamiento más directo y didáctico con los sistemas informáticos. Disminuyendo la brecha digital que se encuentra dentro del mercado competitivo de restaurantes, viéndose afectados los pequeños negocios por la gran capacidad adquisitiva de las grandes marcas.
+
+##  Usuarios de Prueba
+
+### Admin
+* **Usuario** : carolinamcc
+* **Contraseña** : 111111
+
+### Empleado
+* **Usuario** : michellelopez
+* **Contraseña** : Aa12345678!
+
+
+## Manual de Usuario
+![Manual](./Documents/Manual.pdf)
+
 
 ## Link de nuestra aplicación 
 
 - https://n-pupas.vercel.app/
 
-##  Usuarios de Prueba
-
-### Admin
-* **Usuario** : erikacarranza
-* **Contraseña** : Aa12345678!
-
-### Empleado
-* **Usuario** : michellelopez
-* **Contraseña** : Aa12345678!
 
 ## Guía de Instalación
 ### Tecnologías y prerrequisitos
@@ -63,12 +78,3 @@ La aplicación y sus componentes han sido utilizados y desarrollados en entorno 
 
 ![Ejemplo de ejecución en terminal](./Images/console.png)
 
-## Manual de Usuario
-![Manual](./Documents/Manual.pdf)
-
-## Integrantes                                      
-
-- Nestor Eduardo Nieto Alas &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; Carnet:    00199019
-- Carolina María Carranza Carballo &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;Carnet:    00008119
-- Wilfredo Josué Morales Alfaro    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Carnet: 00025719
-- Caroline Michelle Sierra Linares     &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;Carnet: 00091119
