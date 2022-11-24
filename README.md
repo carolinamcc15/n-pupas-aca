@@ -26,9 +26,11 @@ N-Pupas es una aplicación que permitirá a familias emprendedoras de pequeños 
 ## Manual de Usuario
 ![Manual](./Documents/Manual.pdf)
 
+## Aplicación con nueva interfaz
+https://software-engineer-project-ultimate.vercel.app/login
 
-## Link de nuestra aplicación 
 
+## Aplicación anterior
 - https://n-pupas.vercel.app/
 
 
