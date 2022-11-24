@@ -1,4 +1,3 @@
-import SectionTitle from 'components/information/section-title';
 import ProductCard from 'components/cards/product';
 
 const MenuProductsSection = ({ products, type, onDeleteHandler }) => {
