@@ -9,18 +9,18 @@ export const employeePages = {
 };
 
 export const adminPages = {
-  purchases: 'COMPRAS',
+  purchases: 'Compras',
   employees: 'Empleados',
   menu: 'Menú',
   reports: 'Genera un reporte',
-  branches: 'SUCURSALES',
-  sales: 'VENTAS',
+  branches: 'Sucursales',
+  sales: 'Ventas',
   newPurchase: 'Registrar compra',
   newProduct: 'Agregar producto',
   newEmployee: 'Agregar empleado',
   newBranch: 'Agregar sucursal',
   newSale: 'Registrar venta',
-  newReport: 'Nuevo reporte a empleado',
+  newReport: 'Enviar comentario',
   editProduct: 'Modificar producto',
   editEmployee: 'Modificar empleado',
   editBranch: 'Modificar sucursal',

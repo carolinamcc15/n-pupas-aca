@@ -19,7 +19,7 @@ import { adminRoutes } from 'routes/routes';
 const pupuseriaApi = new PupuseriaApi();
 
 const PurchasesPage = ({ todayPurchases, allPurchases }) => {
-  const [purchases, setPurchases] = useState(allPurchases);
+  const [purchases, setPurchases] = useState(allPurchases ?? []);
   const [today, setToday] = useState(todayPurchases);
   const [deleteToggle, setDeleteToggle] = useState(false);
   const { token } = useAuthContext();

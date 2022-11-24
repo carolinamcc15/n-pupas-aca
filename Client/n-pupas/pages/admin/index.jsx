@@ -24,29 +24,27 @@ const AdminHomePage = ({ pupuseriaName, branches }) => {
   };
 
   return (
-    <main className="bg-[url('/waves-bg-1.svg')] bg-no-repeat bg-cover h-full min-h-5/6 ">
-      <section className='grid sm:grid-cols-5 sm:grid-rows-2 w-full gap-7 p-5 md:p-7'>
-      <Head>
-        <title>{homePageName}</title>
-      </Head>
-      <div className='w-full h-48 col-span-2 rounded-md items-center justify-center mx-auto flex flex-col gap-4 bg-gray-100 shadow-sm shadow-black'>
-        <section className='w-full'>
-          <h1 className='text-primary-500 font-bold text-2xl sm:text-3xl mb-3 text-center'>{`Pupusería ${pupuseriaName}`}</h1>
-          <p className='px-7 flow-root'>SUCURSAL</p>
-          <div className='px-5 md:px-6 w-full md:max-w-[500px] m-auto'>
-            <BranchSelect onChangeHandler={changeBranch} branches={branches} value={branchID} />
-          </div>
-        </section>
-      </div>
+    <main className="bg-[url('/waves-bg-1.svg')] flex-1 bg-no-repeat bg-cover h-full p-6 md:p-10 flex">
+      <section className='grid sm:grid-cols-5 sm:grid-rows-2 w-full gap-7'>
+        <Head>
+          <title>{homePageName}</title>
+        </Head>
+        <div className='w-full h-48 col-span-2 rounded-md items-center px-6 justify-center mx-auto flex flex-col gap-4 bg-gray-100 shadow-sm shadow-black'>
+          <section className='w-full'>
+            <h1 className='text-primary-500 font-bold text-xl sm:text-2xl mb-6'>{`Pupusería ${pupuseriaName}`}</h1>
+            <p className='flow-root text-sm mb-1.5'>SUCURSAL</p>
+            <div className='w-full md:max-w-[500px] m-auto'>
+              <BranchSelect onChangeHandler={changeBranch} branches={branches} value={branchID} />
+            </div>
+          </section>
+        </div>
+        <div className='bg-gray-100 row-span-2 col-span-3 p-3 rounded-md shadow-sm shadow-black'>
+          <HomeMenu isAdmin={true} />
+        </div>
 
-      <div className="bg-gray-100 row-span-2 col-span-3 p-3 rounded-md shadow-sm shadow-black">
-        <HomeMenu isAdmin={true} />   
-      </div>
-      
-      <div className='sm:visible invisible sm:col-span-2 sm:items-center sm:justify-center sm:mx-auto sm:flex flex-col'>
+        <div className='sm:visible invisible sm:col-span-2 sm:items-center sm:justify-center sm:mx-auto sm:flex flex-col'>
           <img src='/menuEmpleado.png' className='w-26 sm:w-72 h-26 sm:h-56' />
-      </div>
-      
+        </div>
       </section>
     </main>
   );

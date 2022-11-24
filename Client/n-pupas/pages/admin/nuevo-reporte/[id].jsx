@@ -12,6 +12,7 @@ import { getCurrentDate } from 'utils/utils';
 import { useRouter } from 'next/router';
 import useAuthContext from 'context/AuthContext';
 import useBranchContext from 'context/BranchContext';
+import BackButton from 'components/buttons/back-arrow';
 
 const pupuseriaApi = new PupuseriaApi();
 
@@ -38,15 +39,27 @@ export default function NewEmployeeReportPage({ employee }) {
   };
 
   return (
-    <main className='p-6 flex flex-col gap-5'>
+    <main className="bg-[url('/waves-bg.svg')] flex-1 bg-no-repeat bg-cover h-full p-6 md:p-12 flex justify-center items-center">
       <Head>
         <title>{adminPages.newReport}</title>
       </Head>
-      <h1 className='font-bold text-2xl sm:text-3xl md:text-center md:my-3'>
-        {adminPages.newReport}
-      </h1>
-      <h2 className='font-bold w-full md:max-w-[900px] mx-auto'>Para: {employee.user.name}</h2>
-      <AddEmployeeReportForm onSubmitHandler={onSubmitForm} />
+      <section className='grid grid-cols-1 sm:grid-cols-2 w-full max-w-[1000px] bg-white rounded-md shadow-lg'>
+        <div className='flex flex-col  bg-primary-100 p-4 py-6 sm:px-5 sm:py-10 rounded-t-md sm:rounded-l-md gap-4'>
+          <div className='flex gap-3'>
+            <BackButton linkTo={adminRoutes.employees} colorClass='text-primary-500' />
+            <h1 className='font-bold text-xl sm:text-2xl md:text-left md:my-3'>
+              {adminPages.newReport}
+            </h1>
+          </div> 
+          <div className='w-full flex flex-col place-items-center'>
+            <img src='/newComent.png' alt='Empleado' className='w-28 sm:w-96' />
+          </div>
+        </div> 
+        <div className='font-bold p-6 sm:px-6 sm:pb-8 sm:pt-12 flex flex-col grid grid-cols-20 mt-4 mb-8 '>
+          Para: {employee.user.name}
+          <AddEmployeeReportForm onSubmitHandler={onSubmitForm} />
+        </div>
+      </section>
     </main>
   );
 }
