@@ -32,26 +32,26 @@ const ReportPage = ({ employee }) => {
           <div className='grid justify-items-start mb-5 '>
               <h2 className='text-xl md:text-2xl font-bold text-primary-500 mb-5'>{titles.information} </h2>
               <div className='grid grid-rows-3 grid-flow-col'>
-                <div className='mb-5 p-3 border-l-4 border-violet-500'>
-                  <p className=' text-primary-400 pl-4'>NOMBRE</p>
-                  <p className='text-base pl-4'>{employee.user.name}</p>
+                <div className='mb-5 px-3 border-l-4 border-violet-600 text-sm'>
+                  <p className=' text-primary-500 pl-4 text-sm'>NOMBRE</p>
+                  <p className='text-base pl-4 mt-1 font-semibold'>{employee.user.name}</p>
                 </div>
-                <div className='mb-5 p-3 border-l-4 border-violet-500'>
-                  <p className='text-primary-400 pl-4 '>EMPLEADO DESDE</p>
-                  <p className='text-base pl-4'>{employee.hiringDate}</p>
+                <div className='mb-5 px-3 border-l-4 border-violet-600 text-sm'>
+                  <p className='text-primary-500 pl-4 text-sm'>EMPLEADO DESDE</p>
+                  <p className='text-base pl-4 mt-1 font-semibold'>{employee.hiringDate}</p>
                 </div>
-                <div className='mb-5 p-3 border-l-4 border-violet-500'>
-                  <p className='text-primary-400 pl-4'>TIEMPO LABORADO</p>
-                  <p className='text-base pl-4'>{getPeriodOfTime(employee.hiringDate)}</p>
+                <div className='mb-5 px-3 border-l-4 border-violet-600 text-sm'>
+                  <p className='text-primary-500 pl-4 text-sm'>TIEMPO LABORADO</p>
+                  <p className='text-base pl-4 mt-1 font-semibold'>{getPeriodOfTime(employee.hiringDate)}</p>
                 </div>
               </div>
           </div>
         </section>
         <section className='bg-secondary-500 p-5 bg-opacity-40 rounded-lg shadow-md w-fit md:w-full'>
-        <div className='flex grid mb-5 justify-items-start'>
+        <div className='grid mb-5 justify-items-start'>
             <h2 className='text-xl md:text-2xl font-bold text-primary-500 mb-5'>{titles.salary} </h2>
             <p className='text-xl text-primary-500 pl-2'>Salario mensual: 
-                <span className='pl-3 md:inline-flex md:items-baseline pl-5'>
+                <span className='pl-3 md:inline-flex md:items-baseline'>
                   <span className='text-xl font-bold text-primary-500'>
                     ${employee.salary}
                   </span>
@@ -99,19 +99,19 @@ const ReportPage = ({ employee }) => {
           </table>
           </div>
           <div className='flex flex-col md:flex-row md:justify-between gap-1 mt-6'>
-            <div className='bg-[#8E6FB6] bg-opacity-30 rounded-[30px] shadow-md h-10 w-64 mb-4'>
-              <p className='mt-2 ml-2 text-primary-500'>Salario neto mensual: 
+            <div className='bg-[#8E6FB6] rounded-[30px] shadow-md px-4 py-3'>
+              <p className=' text-white self-center'>Salario neto mensual: 
                   <span className=''>
-                    <span className='font-bold text-primary-500 pl-1'>
+                    <span className='font-bold text-white pl-1'>
                     ${employee.salary - monthlyISSS - monthlyAFP - monthlyRent}
                     </span>
                   </span>
               </p> 
             </div>
-            <section className='bg-[#8E6FB6] bg-opacity-30 rounded-[30px] shadow-md h-10 w-64 '>
-              <p className='mt-2 ml-2 text-primary-500'>Salario neto quincenal: 
+            <section className='bg-[#8E6FB6] rounded-[30px] shadow-md px-4 py-3'>
+              <p className=' text-white'>Salario neto quincenal: 
                     <span className=''>
-                      <span className='font-bold text-primary-500 pl-1'>
+                      <span className='font-bold text-white pl-1'>
                       ${employee.salary / 2 - biweeklyISSS - biweeklyAFP - biweeklyRent}
                       </span>
                     </span>

@@ -15,7 +15,7 @@ const CommentsPage = ({ reports }) => {
       </Head>
       <h1 className='font-bold text-2xl sm:text-3xl md:my-3'>{employeePages.comments}</h1>
       <div className='flex-grow grid grid-cols-1 sm:grid-cols-2'>
-        <section className='w-full max-w-[1300px] rounded-md shadow-lg flex flex-col gap-4 bg-light-blue p-4 py-6 sm:px-5 sm:py-10'>
+        <section className='w-full max-w-[1300px] rounded-md shadow-lg flex flex-col gap-4 bg-secondary-500 bg-opacity-40 p-6 sm:px-8 sm:py-10'>
           {reports.length > 0 ? (
             reports.map(comment => {
               return <CommentCard comment={comment} key={comment.id} />;
@@ -24,7 +24,7 @@ const CommentsPage = ({ reports }) => {
             <p>No has recibido ningún reporte aún</p>
           )}
         </section>
-        <img src='/onReports.png' alt='Empleado' className='w-28 sm:w-96 place-self-center object-center' />
+        <img src='/onReports.png' alt='Empleado' className='sm:w-96 place-self-center object-center hidden lg:block' />
       </div>
     </main>
   );
