@@ -12,7 +12,7 @@ export const adminPages = {
   purchases: 'Compras',
   employees: 'Empleados',
   menu: 'Menú',
-  reports: 'Reportes',
+  reports: 'Genera un reporte',
   branches: 'Sucursales',
   sales: 'Ventas',
   newPurchase: 'Registrar compra',
