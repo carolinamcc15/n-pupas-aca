@@ -1,14 +1,3 @@
-# Proyecto final - Ingeniería de Software S01
-
-## Integrantes                                      
-
-- Alan Ariel Flores Martinez 00019420
-- Brian Darwin Carranza Campos	00136020 
-- Carolina María Carranza Carballo	00008119 
-- Nestor Eduardo Nieto Alas		00199019 
-- Wilfredo Josué Morales Alfaro	00025719 
-
-
 ## Un poco sobre  N-Pupas
 N-Pupas es una aplicación que permitirá a familias emprendedoras de pequeños negocios de pupuserías informales una ayuda en la administración de su negocio proyectando futuras inversiones de entes tanto gubernamentales como no gubernamentales almacenando un registro contable de las transacciones realizadas desde el momento que se utilice la aplicación y ayudando a emprendedores de clase baja o media que no pueden costear un sistema de índole privada a tener un acercamiento más directo y didáctico con los sistemas informáticos. Disminuyendo la brecha digital que se encuentra dentro del mercado competitivo de restaurantes, viéndose afectados los pequeños negocios por la gran capacidad adquisitiva de las grandes marcas.
 
@@ -21,7 +10,6 @@ N-Pupas es una aplicación que permitirá a familias emprendedoras de pequeños 
 ### Empleado
 * **Usuario** : michellelopez
 * **Contraseña** : Aa12345678!
-
 
 ## Manual de Usuario
 ![Manual](./Documents/Manual.pdf)
