@@ -15,7 +15,7 @@
 	<name>N-Pupas</name>
 	<description>Web Service para N Pupas</description>
 	<properties>
-		<java.version>11</java.version>
+		<java.version>16</java.version>
 	</properties>
 	<dependencies>
 		<dependency>
