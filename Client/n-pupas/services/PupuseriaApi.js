@@ -1,6 +1,6 @@
 import { toFormData } from 'utils/utils';
 
-export const BASE_URL = 'https://npupas.herokuapp.com';
+export const BASE_URL = 'http://localhost:8080';
 let instance;
 
 const getData = async (path, token) => {
