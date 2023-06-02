@@ -1,6 +1,6 @@
 import { toFormData } from 'utils/utils';
 
-export const BASE_URL = 'http://localhost:8080';
+export const BASE_URL = 'http://localhost:4000/api';
 let instance;
 
 const getData = async (path, token) => {

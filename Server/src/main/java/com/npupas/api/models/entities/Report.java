@@ -12,7 +12,13 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+@Getter
+@Setter
+@NoArgsConstructor
 @Entity(name= "report")
 public class Report {
 	@Id
@@ -29,59 +35,11 @@ public class Report {
 	
 	@ManyToOne
 	@JsonBackReference
-	@JoinColumn(name = "id_admin", nullable = true)
+	@JoinColumn(name = "id_admin")
 	private Admin admin;
 	
 	@ManyToOne
 	@JsonBackReference
-	@JoinColumn(name = "id_employee", nullable = true)
+	@JoinColumn(name = "id_employee")
 	private Employee employee;
-	
-
-	public Report() {
-		super();
-	}
-
-	public Long getID() {
-		return ID;
-	}
-
-	public void setID(Long iD) {
-		ID = iD;
-	}
-
-	public String getComment() {
-		return comment;
-	}
-
-	public void setComment(String comment) {
-		this.comment = comment;
-	}
-
-	public LocalDate getReportDate() {
-		return reportDate;
-	}
-
-	public void setReportDate(LocalDate reportDate) {
-		this.reportDate = reportDate;
-	}
-
-	public Admin getAdmin() {
-		return admin;
-	}
-
-	public void setAdmin(Admin admin) {
-		this.admin = admin;
-	}
-
-	public Employee getEmployee() {
-		return employee;
-	}
-
-	public void setEmployee(Employee employee) {
-		this.employee = employee;
-	}
-
-	
-		
 }
