@@ -1,6 +1,6 @@
 package com.npupas.api.models.entities;
 
-import java.time.LocalDate;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -31,7 +31,7 @@ public class Report {
 	private String comment;
 	
 	@Column(name = "report_date")
-	private LocalDate reportDate;
+	private Date reportDate;
 	
 	@ManyToOne
 	@JsonBackReference

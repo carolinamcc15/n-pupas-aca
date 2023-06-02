@@ -1,7 +1,7 @@
 package com.npupas.api.models.entities;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -18,6 +18,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -48,7 +49,7 @@ public class Employee {
 	private BigDecimal Rent;
 
 	@Column(name = "hiring_date")
-	private LocalDate hiringDate;
+	private Date hiringDate;
 
 	@JoinColumn(name = "user_id")
 	@JsonManagedReference

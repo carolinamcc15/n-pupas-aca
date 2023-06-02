@@ -6,4 +6,3 @@ public enum Mass {
     Mass(String name){
     }
 }
-

@@ -1,6 +1,5 @@
 package com.npupas.api.models.entities;
 
-import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -30,7 +29,7 @@ public class Branch {
 	private String address;
 	
 	@Column(name = "opening_date")
-	private LocalDate openingDate;
+	private Date openingDate;
 	
 	@ManyToOne
 	@JsonIgnore

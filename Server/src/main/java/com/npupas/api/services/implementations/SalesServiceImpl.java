@@ -1,7 +1,7 @@
 package com.npupas.api.services.implementations;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,15 +48,12 @@ public class SalesServiceImpl implements SalesService {
 		if (branch == null)
 			return null;
 
-		List<Sale> sales = salesRepository.findBySaleDateAndBranch(LocalDate.now(), branch);
-
-		return sales;
+		return salesRepository.findBySaleDateAndBranch(new Date(), branch);
 	}
 
 	@Override
-	public List<Sale> getSalesBetweenDates(Long branchId, LocalDate initialDate, LocalDate finalDate) {
-		List<Sale> sales = salesRepository.findBetweenDates(branchId, initialDate, finalDate);
-		return sales;
+	public List<Sale> getSalesBetweenDates(Long branchId, Date initialDate, Date finalDate) {
+		return salesRepository.findBetweenDates(branchId, initialDate, finalDate);
 	};
 
 	@Override
