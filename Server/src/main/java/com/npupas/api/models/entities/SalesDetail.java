@@ -13,12 +13,18 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 
+import com.npupas.api.enums.Mass;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.annotations.NotFound;
 import org.hibernate.annotations.NotFoundAction;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-
+@Getter
+@Setter
+@NoArgsConstructor
 @Entity(name = "sales_detail")
 public class SalesDetail {
 	@Id
@@ -32,6 +38,9 @@ public class SalesDetail {
 	
 	@Column
 	private BigDecimal total;
+
+	@Column
+	private Mass mass;
 	
 	@ManyToOne
 	@JsonIgnore
@@ -42,62 +51,4 @@ public class SalesDetail {
 	@JsonManagedReference
 	@JoinColumn(name = "id_product", nullable = true)
 	private Product product;
-	
-	@NotFound(action = NotFoundAction.IGNORE)
-	@OneToOne(mappedBy = "details", cascade = CascadeType.ALL)
-	private SalesDetailMass massDetails;
-
-	public SalesDetail() {
-		super();
-	}
-
-	public Long getID() {
-		return ID;
-	}
-
-	public void setID(Long iD) {
-		ID = iD;
-	}
-
-	public Long getAmount() {
-		return amount;
-	}
-
-	public void setAmount(Long amount) {
-		this.amount = amount;
-	}
-
-	public BigDecimal getTotal() {
-		return total;
-	}
-
-	public void setTotal(BigDecimal total) {
-		this.total = total;
-	}
-
-	public Sale getSale() {
-		return sale;
-	}
-
-	public void setSale(Sale sale) {
-		this.sale = sale;
-	}
-
-	public Product getProduct() {
-		return product;
-	}
-
-	public void setProduct(Product product) {
-		this.product = product;
-	}
-
-	public SalesDetailMass getMassDetails() {
-		return massDetails;
-	}
-
-	public void setMassDetails(SalesDetailMass massDetails) {
-		this.massDetails = massDetails;
-	}
-	
-	
 }
