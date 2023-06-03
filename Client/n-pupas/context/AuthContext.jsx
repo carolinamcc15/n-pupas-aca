@@ -1,10 +1,10 @@
-import React, { useContext, createContext, useState, useMemo } from 'react';
-import { getCookie, setCookies, removeCookies } from 'cookies-next';
-import { branchCookie, roleCookie, tokenCookie } from 'constants/data';
-import { adminRoutes, loginRoute } from 'routes/routes';
-import { PupuseriaApi } from 'services/PupuseriaApi';
-import { useRouter } from 'next/router';
-import toast from 'react-hot-toast';
+import React, { useContext, createContext, useState, useMemo } from "react";
+import { getCookie, setCookies, removeCookies } from "cookies-next";
+import { branchCookie, roleCookie, tokenCookie } from "constants/data";
+import { adminRoutes, loginRoute } from "routes/routes";
+import { PupuseriaApi } from "services/PupuseriaApi";
+import { useRouter } from "next/router";
+import toast from "react-hot-toast";
 
 export const AuthContext = createContext(null);
 
@@ -14,22 +14,29 @@ export const AuthContextProvider = ({ children }) => {
   const pupuseriaApi = new PupuseriaApi();
   const router = useRouter();
 
-  const login = async credentials => {
+  const login = async (credentials) => {
     try {
       const loggedUser = await pupuseriaApi.login(credentials);
 
       if (loggedUser.token) {
-        setToken(loggedUser.token);
-        setRole(loggedUser.role);
-        setCookies(tokenCookie, loggedUser.token);
-        setCookies(roleCookie, loggedUser.role);
+        const saveData = new Promise((resolve, reject) => {
+          setToken(loggedUser.token);
+          setRole(loggedUser.role);
+          setCookies(tokenCookie, loggedUser.token);
+          setCookies(roleCookie, loggedUser.role);
+          resolve();
+          reject();
+        });
 
-        router.push(adminRoutes.home);
+        saveData.then(() => {
+          router.push(adminRoutes.home)
+        });
+
       } else {
-        toast.error('Credenciales inválidas');
+        toast.error("Credenciales inválidas");
       }
     } catch (e) {
-      toast.error('Ocurrió un error');
+      toast.error("Ocurrió un error");
     }
   };
 
@@ -58,7 +65,7 @@ export function useAuthContext() {
   const context = useContext(AuthContext);
 
   if (!context) {
-    console.error('An error has occurred');
+    console.error("An error has occurred");
   }
   return context;
 }
