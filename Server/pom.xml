@@ -14,9 +14,11 @@
 	<version>0.0.1</version>
 	<name>N-Pupas</name>
 	<description>Web Service para N Pupas</description>
-	<properties>
-		<java.version>16</java.version>
-	</properties>
+    <properties>
+        <java.version>16</java.version>
+        <maven.compiler.source>19</maven.compiler.source>
+        <maven.compiler.target>19</maven.compiler.target>
+    </properties>
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
