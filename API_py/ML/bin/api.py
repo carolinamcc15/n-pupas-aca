@@ -2,16 +2,17 @@ from flask import Flask, request, jsonify
 import numpy as np
 import datetime
 import psycopg2
+import DBConn
 from sklearn.linear_model import LinearRegression
 
 app = Flask(__name__)
 
 #Definimos la conexion a la base de datos de la app
 conn = psycopg2.connect(
-    host="localhost",
-    database="npupas",
-    user="postgres",
-    password="cmcc"
+    host=DBConn.host,
+    database=DBConn.database,
+    user=DBConn.user,
+    password=DBConn.password
 )
 
 #Creamos metodo POST para la prediccion para sucursales especificas. Devolvera unicamente las ventas predichas de los siguientes 3 meses
