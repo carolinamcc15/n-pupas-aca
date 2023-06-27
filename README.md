@@ -68,3 +68,23 @@ La aplicación y sus componentes han sido utilizados y desarrollados en entorno 
 
 ![Ejemplo de ejecución en terminal](./Images/console.png)
 
+## Instalación de API RestFul (Creada por Miguel Herrera - 00041006)
+1. Debe tener instalada la versión ```3.10.4``` de Python y la versión ```pip3 --version``` deberá ser la ```22.0.4```
+   ![Imagen de version Python](./Images/PythonVersionWindows.png) ![Imagen de version Pip](./Images/Pip3VersionWindows.png)
+
+2. Dentro de la carpeta ```n-pupas-aca/API_py/``` ejecutar los siguientes comandos:
+
+   2.1 ```python -m venv ML``` el cual creará un ambiente de desarrollo de Python (ya existe la carpeta ML, por lo cual solo la definirá como ambiente de Python para la máquina donde se ejecute)
+
+   2.2 ```copy ML\bin\api.py ML\Scripts\``` el cual copiará el archivo ```api.py``` de la carpeta ```bin``` a la carpeta ```Scripts```
+
+   2.3 ```ML\Scripts\activate.bat``` este comando activará el ambiente de Python. Para evidenciarlo, al inicio de la linea de comandos colocará "(ML)"
+
+   ![Imagen de ambiente activo](./Images/ActivatedEnvironmentWindows.png)
+
+   2.4 ```pip3 install -r ML\requirements.txt``` este comando instalará todas las librerías necesarias para la ejecucion de la API. Estas son las librerías que instalará
+
+   ![Imagen librerias a instalar](./Images/RequiredLibraries.png)
+
+   2.5 ```py ML\Scripts\api.py``` este comando pondrá en ejecución la API
+   ![Imagen de API ejecutandose](./Images/ExcecutedAPIWindows.png)
