@@ -76,15 +76,17 @@ La aplicación y sus componentes han sido utilizados y desarrollados en entorno 
 
    2.1 ```python -m venv ML``` el cual creará un ambiente de desarrollo de Python (ya existe la carpeta ML, por lo cual solo la definirá como ambiente de Python para la máquina donde se ejecute)
 
-   2.2 ```copy ML\bin\api.py ML\Scripts\``` el cual copiará el archivo ```api.py``` de la carpeta ```bin``` a la carpeta ```Scripts```
+   2.2 ```copy ML\bin\DBConn.py ML\Scripts\``` el cual copiará el archivo ```DBConn.py``` de la carpeta ```bin``` a la carpeta ```Scripts```
 
-   2.3 ```ML\Scripts\activate.bat``` este comando activará el ambiente de Python. Para evidenciarlo, al inicio de la linea de comandos colocará "(ML)"
+   2.3 ```copy ML\bin\api.py ML\Scripts\``` el cual copiará el archivo ```api.py``` de la carpeta ```bin``` a la carpeta ```Scripts```
+
+   2.4 ```ML\Scripts\activate.bat``` este comando activará el ambiente de Python. Para evidenciarlo, al inicio de la linea de comandos colocará "(ML)"
 
    ![Imagen de ambiente activo](./Images/ActivatedEnvironmentWindows.png)
 
-   2.4 ```pip3 install -r ML\requirements.txt``` este comando instalará todas las librerías necesarias para la ejecucion de la API. Estas son las librerías que instalará
+   2.5 ```pip3 install -r ML\requirements.txt``` este comando instalará todas las librerías necesarias para la ejecucion de la API. Estas son las librerías que instalará
 
    ![Imagen librerias a instalar](./Images/RequiredLibraries.png)
 
-   2.5 ```py ML\Scripts\api.py``` este comando pondrá en ejecución la API
+   2.6 ```py ML\Scripts\api.py``` este comando pondrá en ejecución la API
    ![Imagen de API ejecutandose](./Images/ExcecutedAPIWindows.png)
