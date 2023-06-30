@@ -2,9 +2,6 @@ package com.npupas.api.repositories;
 
 import com.npupas.api.models.entities.Sale;
 import com.npupas.api.projections.ChartStats;
-import com.npupas.api.projections.LineChartStat;
-import com.npupas.api.projections.PairStat;
-import com.npupas.api.projections.PieChartStat;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
