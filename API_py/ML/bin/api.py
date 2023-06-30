@@ -20,36 +20,42 @@ conn = psycopg2.connect(
 def predict_branch_sales():
     data = request.get_json()
     id_branch = data['id_branch']
+    rowcount = 0
 
     #Definimos query de extraccion con la cantidad total de productos y del valor de estos para el training de la regresion lineal
-    Query = "select row_number() OVER(order by tabla.sale_date), tabla.sale_date, sum(tabla.amount), sum(tabla.valor) from (select date_trunc('month', s.sale_date) sale_date, pu.name nombre, b.name sucursal, b.address, sd.amount, (sd.amount * p.price) valor 	 		from public.sale s inner join public.sales_detail sd ON (s.id = sd.id_sale) inner join public.product p ON (sd.id_product = p.id) 			 inner join public.branch b ON (s.id_branch = b.id) inner join public.pupuseria pu ON (pu.id = b.id_pupuseria) 	 		where b.id = %s 		order by pu.name, b.name, b.address, date_trunc('month', s.sale_date) asc) tabla group by tabla.sale_date, tabla.nombre, tabla.sucursal, tabla.address order by tabla.sale_date, tabla.nombre, tabla.sucursal asc"
+    Query = "select row_number() OVER(order by tabla.sale_date), tabla.sale_date, sum(tabla.amount), sum(tabla.valor) from (select date_trunc('month', s.sale_date) sale_date, pu.name nombre, b.name sucursal, b.address, sd.amount, (sd.amount * p.price) valor 	 		from public.sale s inner join public.sales_detail sd ON (s.id = sd.id_sale) inner join public.product p ON (sd.id_product = p.id) 			 inner join public.branch b ON (s.id_branch = b.id) inner join public.pupuseria pu ON (pu.id = b.id_pupuseria) 	 		where b.id = " + id_branch + " 		order by pu.name, b.name, b.address, date_trunc('month', s.sale_date) asc) tabla group by tabla.sale_date, tabla.nombre, tabla.sucursal, tabla.address order by tabla.sale_date, tabla.nombre, tabla.sucursal asc"
 
     month = []
     sales = []
     lastmonth = 0
     with conn:
         with conn.cursor() as cursor:
-            cursor.execute(Query, id_branch)
+            cursor.execute(Query)
             rows = cursor.fetchall()
+            rowcount = cursor.rowcount
+            
+            if(rowcount > 0):
+                #Arriba utilizamos la conexion y creamos cursor para recorrer la informacion extraida. Abajo vamos creando un arreglo con la
+                #info de la primera columna y cuarta columna (correlativo de meses y valor vendido por mes)
+                for row in rows:
+                    month.append(row[0])
+                    sales.append(row[3])
+                    lastmonth = lastmonth + 1
 
-            #Arriba utilizamos la conexion y creamos cursor para recorrer la informacion extraida. Abajo vamos creando un arreglo con la
-            #info de la primera columna y cuarta columna (correlativo de meses y valor vendido por mes)
-            for row in rows:
-                month.append(row[0])
-                sales.append(row[3])
-                lastmonth = lastmonth + 1
+    if(rowcount > 0):
+        #Creamos los objetos tipo array usando numpy para ingresarlos a la regresion lineal
+        monthNP = np.array(month).reshape(-1, 1)
+        salesNP = np.array(sales)
+        # Crear el modelo de regresión lineal
+        model = LinearRegression()
+        model.fit(monthNP, salesNP)
 
-    #Creamos los objetos tipo array usando numpy para ingresarlos a la regresion lineal
-    monthNP = np.array(month).reshape(-1, 1)
-    salesNP = np.array(sales)
-    # Crear el modelo de regresión lineal
-    model = LinearRegression()
-    model.fit(monthNP, salesNP)
-
-    #Realizamos la prediccion de los 3 siguientes meses a partir de la info extraida de la BD
-    future_month = np.array([lastmonth + 1, lastmonth + 2, lastmonth + 3]).reshape(-1, 1)
-    predictions = model.predict(future_month)
-    response = {'predictions': predictions.tolist()}
+        #Realizamos la prediccion de los 3 siguientes meses a partir de la info extraida de la BD
+        future_month = np.array([lastmonth + 1, lastmonth + 2, lastmonth + 3]).reshape(-1, 1)
+        predictions = model.predict(future_month)
+        response = {'predictions': predictions.tolist()}
+    else:
+        response = {'msg': 'no data found'}
 
     return jsonify(response)
 
@@ -58,36 +64,42 @@ def predict_branch_sales():
 def predic_pupuseria_sales():
     data = request.get_json()
     id_pupuseria = data['id_pupuseria']
+    rowcount = 0
 
     #Definimos query de extraccion con la cantidad total de productos y del valor de estos para el training de la regresion lineal
-    Query = "select row_number() OVER(order by tabla.sale_date), tabla.sale_date, sum(tabla.amount), sum(tabla.valor) from (select 	date_trunc('month', s.sale_date) sale_date, pu.name nombre, b.name sucursal, b.address, sd.amount, 	  			(sd.amount * p.price) valor, b.id 	 		 	  from 	public.sale s inner join public.sales_detail sd ON (s.id = sd.id_sale) 	  		inner join public.product p ON (sd.id_product = p.id) 			 	  		inner join public.branch b ON (s.id_branch = b.id) 	  		inner join public.pupuseria pu ON (pu.id = b.id_pupuseria) 	 		 	  where pu.id = %s 	  order by pu.name, b.name, b.address, date_trunc('month', s.sale_date), b.id asc) tabla group by tabla.sale_date order by tabla.sale_date asc"
+    Query = "select row_number() OVER(order by tabla.sale_date), tabla.sale_date, sum(tabla.amount), sum(tabla.valor) from (select 	date_trunc('month', s.sale_date) sale_date, pu.name nombre, b.name sucursal, b.address, sd.amount, 	  			(sd.amount * p.price) valor, b.id 	 		 	  from 	public.sale s inner join public.sales_detail sd ON (s.id = sd.id_sale) 	  		inner join public.product p ON (sd.id_product = p.id) 			 	  		inner join public.branch b ON (s.id_branch = b.id) 	  		inner join public.pupuseria pu ON (pu.id = b.id_pupuseria) 	 		 	  where pu.id = " + id_pupuseria + " 	  order by pu.name, b.name, b.address, date_trunc('month', s.sale_date), b.id asc) tabla group by tabla.sale_date order by tabla.sale_date asc"
 
     month = []
     sales = []
     lastmonth = 0
     with conn:
         with conn.cursor() as cursor:
-            cursor.execute(Query, id_pupuseria)
+            cursor.execute(Query)
             rows = cursor.fetchall()
+            rowcount = cursor.rowcount
+            
+            if(rowcount > 0):
+                #Arriba utilizamos la conexion y creamos cursor para recorrer la informacion extraida. Abajo vamos creando un arreglo con la
+                #info de la primera columna y cuarta columna (correlativo de meses y valor vendido por mes)
+                for row in rows:
+                    month.append(row[0])
+                    sales.append(row[3])
+                    lastmonth = lastmonth + 1
+    
+    if(rowcount > 0):
+        #Creamos los objetos tipo array usando numpy para ingresarlos a la regresion lineal
+        monthNP = np.array(month).reshape(-1, 1)
+        salesNP = np.array(sales)
+        # Crear el modelo de regresión lineal
+        model = LinearRegression()
+        model.fit(monthNP, salesNP)
 
-            #Arriba utilizamos la conexion y creamos cursor para recorrer la informacion extraida. Abajo vamos creando un arreglo con la
-            #info de la primera columna y cuarta columna (correlativo de meses y valor vendido por mes)
-            for row in rows:
-                month.append(row[0])
-                sales.append(row[3])
-                lastmonth = lastmonth + 1
-
-    #Creamos los objetos tipo array usando numpy para ingresarlos a la regresion lineal
-    monthNP = np.array(month).reshape(-1, 1)
-    salesNP = np.array(sales)
-    # Crear el modelo de regresión lineal
-    model = LinearRegression()
-    model.fit(monthNP, salesNP)
-
-    #Realizamos la prediccion de los 3 siguientes meses a partir de la info extraida de la BD
-    future_month = np.array([lastmonth + 1, lastmonth + 2, lastmonth + 3]).reshape(-1, 1)
-    predictions = model.predict(future_month)
-    response = {'predictions': predictions.tolist()}
+        #Realizamos la prediccion de los 3 siguientes meses a partir de la info extraida de la BD
+        future_month = np.array([lastmonth + 1, lastmonth + 2, lastmonth + 3]).reshape(-1, 1)
+        predictions = model.predict(future_month)
+        response = {'predictions': predictions.tolist()}
+    else:
+        response = {'msg': 'no data found'}
 
     return jsonify(response)
 
@@ -98,7 +110,7 @@ def predic_pupuseria_sales_report():
     id_pupuseria = data['id_pupuseria']
 
     #Definimos query de extraccion con la cantidad total de productos y del valor de estos para el training de la regresion lineal
-    Query = "select row_number() OVER(order by tabla.sale_date), tabla.sale_date, sum(tabla.amount), sum(tabla.valor) from (select 	date_trunc('month', s.sale_date) sale_date, pu.name nombre, b.name sucursal, b.address, sd.amount, 	  			(sd.amount * p.price) valor, b.id 	 		 	  from 	public.sale s inner join public.sales_detail sd ON (s.id = sd.id_sale) 	  		inner join public.product p ON (sd.id_product = p.id) 			 	  		inner join public.branch b ON (s.id_branch = b.id) 	  		inner join public.pupuseria pu ON (pu.id = b.id_pupuseria) 	 		 	  where pu.id = %s 	  order by pu.name, b.name, b.address, date_trunc('month', s.sale_date), b.id asc) tabla group by tabla.sale_date order by tabla.sale_date asc"
+    Query = "select row_number() OVER(order by tabla.sale_date), tabla.sale_date, sum(tabla.amount), sum(tabla.valor) from (select 	date_trunc('month', s.sale_date) sale_date, pu.name nombre, b.name sucursal, b.address, sd.amount, 	  			(sd.amount * p.price) valor, b.id 	 		 	  from 	public.sale s inner join public.sales_detail sd ON (s.id = sd.id_sale) 	  		inner join public.product p ON (sd.id_product = p.id) 			 	  		inner join public.branch b ON (s.id_branch = b.id) 	  		inner join public.pupuseria pu ON (pu.id = b.id_pupuseria) 	 		 	  where pu.id = " + id_pupuseria +" 	  order by pu.name, b.name, b.address, date_trunc('month', s.sale_date), b.id asc) tabla group by tabla.sale_date order by tabla.sale_date asc"
 
     month = []
     monthDisplay = []
@@ -107,34 +119,39 @@ def predic_pupuseria_sales_report():
     lastmonth = 0
     with conn:
         with conn.cursor() as cursor:
-            cursor.execute(Query, id_pupuseria)
+            cursor.execute(Query)
             rows = cursor.fetchall()
+            rowcount = cursor.rowcount
+            
+            if(rowcount > 0):
+                #Arriba utilizamos la conexion y creamos cursor para recorrer la informacion extraida. Abajo vamos creando un arreglo con la
+                #info de la primera columna y cuarta columna (correlativo de meses y valor vendido por mes)
+                for row in rows:
+                    month.append(row[0])
+                    monthDisplay.append(row[1].strftime("%b") + ', ' + row[1].strftime("%Y"))
+                    monthBase.append(row[1])
+                    sales.append(row[3])
+                    lastmonth = lastmonth + 1
 
-            #Arriba utilizamos la conexion y creamos cursor para recorrer la informacion extraida. Abajo vamos creando un arreglo con la
-            #info de la primera columna y cuarta columna (correlativo de meses y valor vendido por mes)
-            for row in rows:
-                month.append(row[0])
-                monthDisplay.append(row[1].strftime("%b") + ', ' + row[1].strftime("%Y"))
-                monthBase.append(row[1])
-                sales.append(row[3])
-                lastmonth = lastmonth + 1
+    if(rowcount > 0):
+        #Creamos los objetos tipo array usando numpy para ingresarlos a la regresion lineal
+        monthNP = np.array(month).reshape(-1, 1)
+        monthDNP = np.array(monthDisplay).reshape(-1, 1)
+        salesNP = np.array(sales)
+        # Crear el modelo de regresión lineal
+        model = LinearRegression()
+        model.fit(monthNP, salesNP)
 
-    #Creamos los objetos tipo array usando numpy para ingresarlos a la regresion lineal
-    monthNP = np.array(month).reshape(-1, 1)
-    monthDNP = np.array(monthDisplay).reshape(-1, 1)
-    salesNP = np.array(sales)
-    # Crear el modelo de regresión lineal
-    model = LinearRegression()
-    model.fit(monthNP, salesNP)
-
-    #Realizamos la prediccion de los 3 siguientes meses a partir de la info extraida de la BD
-    future_month = np.array([lastmonth + 1, lastmonth + 2, lastmonth + 3]).reshape(-1, 1)
-    lastMonthDate = monthBase[-1]
-    future_month2 = np.array([1, 2, 3])
-    predictions = model.predict(future_month)
-    prevMonth = monthDNP.tolist()
-    prevSales = salesNP.tolist()
-    response = {'1PrevMonth': prevMonth, '2PrevSales': prevSales, '3MonthPrediction': future_month2.tolist(), '4SalesPredictions': predictions.tolist()}
+        #Realizamos la prediccion de los 3 siguientes meses a partir de la info extraida de la BD
+        future_month = np.array([lastmonth + 1, lastmonth + 2, lastmonth + 3]).reshape(-1, 1)
+        lastMonthDate = monthBase[-1]
+        future_month2 = np.array([1, 2, 3])
+        predictions = model.predict(future_month)
+        prevMonth = monthDNP.tolist()
+        prevSales = salesNP.tolist()
+        response = {'1PrevMonth': prevMonth, '2PrevSales': prevSales, '3MonthPrediction': future_month2.tolist(), '4SalesPredictions': predictions.tolist()}
+    else:
+        response = {'msg': 'no data found'}
 
     return jsonify(response)
 
@@ -143,9 +160,10 @@ def predic_pupuseria_sales_report():
 def predic_branch_sales_report():
     data = request.get_json()
     id_branch = data['id_branch']
+    rowcount = 0
 
     #Definimos query de extraccion con la cantidad total de productos y del valor de estos para el training de la regresion lineal
-    Query = "select row_number() OVER(order by tabla.sale_date), tabla.sale_date, sum(tabla.amount), sum(tabla.valor) from (select date_trunc('month', s.sale_date) sale_date, pu.name nombre, b.name sucursal, b.address, sd.amount, (sd.amount * p.price) valor 	 		from public.sale s inner join public.sales_detail sd ON (s.id = sd.id_sale) inner join public.product p ON (sd.id_product = p.id) 			 inner join public.branch b ON (s.id_branch = b.id) inner join public.pupuseria pu ON (pu.id = b.id_pupuseria) 	 		where b.id = %s 		order by pu.name, b.name, b.address, date_trunc('month', s.sale_date) asc) tabla group by tabla.sale_date, tabla.nombre, tabla.sucursal, tabla.address order by tabla.sale_date, tabla.nombre, tabla.sucursal asc"
+    Query = "select row_number() OVER(order by tabla.sale_date), tabla.sale_date, sum(tabla.amount), sum(tabla.valor) from (select date_trunc('month', s.sale_date) sale_date, pu.name nombre, b.name sucursal, b.address, sd.amount, (sd.amount * p.price) valor 	 		from public.sale s inner join public.sales_detail sd ON (s.id = sd.id_sale) inner join public.product p ON (sd.id_product = p.id) 			 inner join public.branch b ON (s.id_branch = b.id) inner join public.pupuseria pu ON (pu.id = b.id_pupuseria) 	 		where b.id = " + id_branch + " 		order by pu.name, b.name, b.address, date_trunc('month', s.sale_date) asc) tabla group by tabla.sale_date, tabla.nombre, tabla.sucursal, tabla.address order by tabla.sale_date, tabla.nombre, tabla.sucursal asc"
 
     month = []
     monthDisplay = []
@@ -154,34 +172,39 @@ def predic_branch_sales_report():
     lastmonth = 0
     with conn:
         with conn.cursor() as cursor:
-            cursor.execute(Query, id_branch)
+            cursor.execute(Query)
             rows = cursor.fetchall()
+            rowcount = cursor.rowcount
+            
+            if(rowcount > 0):
+                #Arriba utilizamos la conexion y creamos cursor para recorrer la informacion extraida. Abajo vamos creando un arreglo con la
+                #info de la primera columna y cuarta columna (correlativo de meses y valor vendido por mes)
+                for row in rows:
+                    month.append(row[0])
+                    monthDisplay.append(row[1].strftime("%b") + ', ' + row[1].strftime("%Y"))
+                    monthBase.append(row[1])
+                    sales.append(row[3])
+                    lastmonth = lastmonth + 1
+    
+    if(rowcount > 0):
+        #Creamos los objetos tipo array usando numpy para ingresarlos a la regresion lineal
+        monthNP = np.array(month).reshape(-1, 1)
+        monthDNP = np.array(monthDisplay).reshape(-1, 1)
+        salesNP = np.array(sales)
+        # Crear el modelo de regresión lineal
+        model = LinearRegression()
+        model.fit(monthNP, salesNP)
 
-            #Arriba utilizamos la conexion y creamos cursor para recorrer la informacion extraida. Abajo vamos creando un arreglo con la
-            #info de la primera columna y cuarta columna (correlativo de meses y valor vendido por mes)
-            for row in rows:
-                month.append(row[0])
-                monthDisplay.append(row[1].strftime("%b") + ', ' + row[1].strftime("%Y"))
-                monthBase.append(row[1])
-                sales.append(row[3])
-                lastmonth = lastmonth + 1
-
-    #Creamos los objetos tipo array usando numpy para ingresarlos a la regresion lineal
-    monthNP = np.array(month).reshape(-1, 1)
-    monthDNP = np.array(monthDisplay).reshape(-1, 1)
-    salesNP = np.array(sales)
-    # Crear el modelo de regresión lineal
-    model = LinearRegression()
-    model.fit(monthNP, salesNP)
-
-    #Realizamos la prediccion de los 3 siguientes meses a partir de la info extraida de la BD
-    future_month = np.array([lastmonth + 1, lastmonth + 2, lastmonth + 3]).reshape(-1, 1)
-    lastMonthDate = monthBase[-1]
-    future_month2 = np.array([1, 2, 3])
-    predictions = model.predict(future_month)
-    prevMonth = monthDNP.tolist()
-    prevSales = salesNP.tolist()
-    response = {'1PrevMonth': prevMonth, '2PrevSales': prevSales, '3MonthPrediction': future_month2.tolist(), '4SalesPredictions': predictions.tolist()}
+        #Realizamos la prediccion de los 3 siguientes meses a partir de la info extraida de la BD
+        future_month = np.array([lastmonth + 1, lastmonth + 2, lastmonth + 3]).reshape(-1, 1)
+        lastMonthDate = monthBase[-1]
+        future_month2 = np.array([1, 2, 3])
+        predictions = model.predict(future_month)
+        prevMonth = monthDNP.tolist()
+        prevSales = salesNP.tolist()
+        response = {'1PrevMonth': prevMonth, '2PrevSales': prevSales, '3MonthPrediction': future_month2.tolist(), '4SalesPredictions': predictions.tolist()}
+    else:
+        response = {'msg': 'no data found'}
 
     return jsonify(response)
 
