@@ -258,4 +258,73 @@ export const PupuseriaApi = class {
     return getData('/pupuserias/branches/employees/branch', token);
   }
 
+  getTodaySalesStats(branchId, token) {
+    return getData(`/stats/sales/today/${branchId}`, token);
+  }
+
+  getTodayPurchasesStats(branchId, token) {
+    return getData(`/stats/purchases/today/${branchId}`, token);
+  }
+
+  async getDailySalesStats(branchId, token, date) {
+    const response = await fetch(`${BASE_URL}/stats/sales/daily/${branchId}`, {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        from: date,
+      }),
+    });
+
+    return response.json();
+  }
+
+  async getDailyPurchasesStats(branchId, token, date) {
+    const response = await fetch(`${BASE_URL}/stats/purchases/daily/${branchId}`, {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        from: date,
+      }),
+    });
+
+    return response.json();
+  }
+
+  async getRangeSalesStats(branchId, token, startDate, endDate) {
+    const response = await fetch(`${BASE_URL}/stats/sales/range/${branchId}`, {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        from: startDate,
+        to: endDate,
+      }),
+    });
+
+    return response.json();
+  }
+
+  async getRangePurchasesStats(branchId, token, startDate, endDate) {
+    const response = await fetch(`${BASE_URL}/stats/purchases/range/${branchId}`, {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        from: startDate,
+        to: endDate,
+      }),
+    });
+
+    return response.json();
+  }
 };
