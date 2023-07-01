@@ -59,6 +59,31 @@ export const adminMenuStatsOptions = [
   },
 ];
 
+export const statsTimeOptions = {
+  today: 'Este día',
+  day: 'Un día',
+  range: 'Rango',
+};
+
+export const statsRadioButtons = [
+  statsTimeOptions.today,
+  statsTimeOptions.day,
+  statsTimeOptions.range,
+];
+
+export const statsTabs = [
+  {
+    id: 0,
+    title: 'Ventas',
+    options: statsRadioButtons,
+  },
+  {
+    id: 1,
+    title: 'Compras',
+    options: statsRadioButtons,
+  },
+];
+
 export const adminNav = [
   {
     name: `${homePageName}`,
