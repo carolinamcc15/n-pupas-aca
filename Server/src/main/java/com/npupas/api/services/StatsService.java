@@ -14,4 +14,5 @@ public interface StatsService {
     List<RangeStatDTO> getRangePurchasesStatsByBranchId(Long branchId, StatRequestDTO dto);
     List<PairStatDTO> getBranchesMonthSalesStats(String token);
     List<PairStatDTO> getBranchesMonthCategorySalesStats(String token);
+    LineChartGroupDTO getLinechartMonthStats(Long branchId);
 }
