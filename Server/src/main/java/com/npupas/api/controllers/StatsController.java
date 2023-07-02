@@ -55,4 +55,9 @@ public class StatsController {
     public ResponseEntity<List<PairStatDTO>> getBranchesMonthCategoriesSalesStats(@RequestHeader("Authorization") String token){
         return ResponseEntity.ok(service.getBranchesMonthCategorySalesStats(token));
     }
+
+    @GetMapping("/linechart/month/{branchId}")
+    public ResponseEntity<LineChartGroupDTO> getLinechartsStats(@PathVariable("branchId") Long branchId) {
+        return ResponseEntity.ok(service.getLinechartMonthStats(branchId));
+    }
 }
