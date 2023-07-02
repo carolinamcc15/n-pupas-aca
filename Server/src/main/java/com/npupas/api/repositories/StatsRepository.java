@@ -2,6 +2,7 @@ package com.npupas.api.repositories;
 
 import com.npupas.api.models.entities.Sale;
 import com.npupas.api.projections.ChartStats;
+import com.npupas.api.projections.PairStat;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -34,5 +35,15 @@ public interface StatsRepository extends JpaRepository<Sale, Long> {
             "FROM purchase p " +
             "WHERE p.id_branch = :branchId AND p.purchase_date BETWEEN :from AND :to", nativeQuery = true)
     List<ChartStats> getRangePurchasesStats(@Param("branchId") Long branchId, @Param("from") Date from, @Param("to") Date to);
+
+    @Query(value = "SELECT b.name AS title, SUM(sd.total) AS total " +
+            "FROM sale s " +
+            "INNER JOIN sales_detail sd ON sd.id_sale = s.id " +
+            "INNER JOIN branch b ON b.id = s.id_branch " +
+            "INNER JOIN pupuseria p ON p.id = b.id_pupuseria " +
+            "INNER JOIN admin a ON a.id = p.id_admin " +
+            "WHERE s.sale_date >= DATE_TRUNC('month', CURRENT_DATE) AND a.id = :adminId " +
+            "GROUP BY b.id", nativeQuery = true)
+    List<PairStat> getBranchesMonthSalesStats(@Param("adminId") Long adminId);
 
 }
