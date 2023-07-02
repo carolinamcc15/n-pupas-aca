@@ -46,4 +46,15 @@ public interface StatsRepository extends JpaRepository<Sale, Long> {
             "GROUP BY b.id", nativeQuery = true)
     List<PairStat> getBranchesMonthSalesStats(@Param("adminId") Long adminId);
 
+    @Query(value = "SELECT t.type AS title, SUM(sd.total) AS total " +
+            "FROM sale s " +
+            "INNER JOIN sales_detail sd ON sd.id_sale = s.id " +
+            "INNER JOIN product pr ON pr.id = sd.id_product " +
+            "INNER JOIN type t ON t.id = pr.id_type " +
+            "INNER JOIN branch b ON b.id = s.id_branch " +
+            "INNER JOIN pupuseria p ON p.id = b.id_pupuseria " +
+            "INNER JOIN admin a ON a.id = p.id_admin " +
+            "WHERE s.sale_date >= DATE_TRUNC('month', CURRENT_DATE) AND a.id = :adminId " +
+            "GROUP BY t.id", nativeQuery = true)
+    List<PairStat> getBranchesMonthCategorySalesStats(@Param("adminId") Long adminId);
 }
