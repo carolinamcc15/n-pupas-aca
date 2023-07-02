@@ -45,4 +45,9 @@ public class StatsController {
     public ResponseEntity<List<RangeStatDTO>> getRangePurchaseStats(@PathVariable("branchId") Long branchId, @RequestBody StatRequestDTO requestDTO){
         return ResponseEntity.ok(service.getRangePurchasesStatsByBranchId(branchId, requestDTO));
     }
+
+    @GetMapping("/sales/current-month")
+    public ResponseEntity<List<PairStatDTO>> getBranchesMonthSalesStats(@RequestHeader("Authorization") String token){
+        return ResponseEntity.ok(service.getBranchesMonthSalesStats(token));
+    }
 }
