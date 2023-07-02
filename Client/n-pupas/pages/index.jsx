@@ -51,7 +51,7 @@ const AdminHomePage = () => {
         </Head>
         <div className='w-full h-48 col-span-2 rounded-md items-center px-6 justify-center mx-auto flex flex-col gap-4 bg-gray-100 shadow-sm shadow-black'>
           <section className='w-full'>
-            <h1 className='text-primary-500 font-bold text-xl sm:text-2xl mb-6'>{`Pupusería ${pupuseriaName}`}</h1>
+            <h1 className='text-primary-500 font-bold text-xl sm:text-2xl mb-6'>{pupuseriaName}</h1>
             <p className='flow-root text-sm mb-1.5'>SUCURSAL</p>
             <div className='w-full md:max-w-[500px] m-auto'>
               <BranchSelect onChangeHandler={changeBranch} branches={branches} value={branchID} />
