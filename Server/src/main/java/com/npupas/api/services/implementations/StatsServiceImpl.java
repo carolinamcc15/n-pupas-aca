@@ -1,11 +1,11 @@
 package com.npupas.api.services.implementations;
 
-import com.npupas.api.models.dtos.DailyStatDTO;
-import com.npupas.api.models.dtos.RangeStatDTO;
-import com.npupas.api.models.dtos.SaleStatDTO;
-import com.npupas.api.models.dtos.StatRequestDTO;
+import com.npupas.api.models.dtos.*;
+import com.npupas.api.models.entities.Admin;
 import com.npupas.api.repositories.StatsRepository;
+import com.npupas.api.services.AdminService;
 import com.npupas.api.services.StatsService;
+import com.npupas.api.utils.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +15,9 @@ import static com.npupas.api.utils.DateUtils.getDateInstant;
 
 @Service
 public class StatsServiceImpl implements StatsService {
+
+    @Autowired
+    AdminService adminService;
 
     @Autowired
     StatsRepository repository;
@@ -61,6 +64,13 @@ public class StatsServiceImpl implements StatsService {
         List<SaleStatDTO> stats = repository.getDailyPurchasesStats(branchId, date).stream().map(SaleStatDTO::new).toList();
 
         return buildDailyStats(stats);
+    }
+
+    @Override
+    public List<PairStatDTO> getBranchesMonthSalesStats(String entireToken) {
+        Admin admin = adminService.getAdminByToken(Utils.getToken(entireToken));
+
+        return repository.getBranchesMonthSalesStats(admin.getID()).stream().map(PairStatDTO::new).toList();
     }
 
     private List<RangeStatDTO> buildRangeStats(List<SaleStatDTO> stats) {
