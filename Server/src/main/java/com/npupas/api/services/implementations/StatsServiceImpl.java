@@ -73,6 +73,13 @@ public class StatsServiceImpl implements StatsService {
         return repository.getBranchesMonthSalesStats(admin.getID()).stream().map(PairStatDTO::new).toList();
     }
 
+    @Override
+    public List<PairStatDTO> getBranchesMonthCategorySalesStats(String entireToken) {
+        Admin admin = adminService.getAdminByToken(Utils.getToken(entireToken));
+
+        return repository.getBranchesMonthCategorySalesStats(admin.getID()).stream().map(PairStatDTO::new).toList();
+    }
+
     private List<RangeStatDTO> buildRangeStats(List<SaleStatDTO> stats) {
         SortedMap<Long, Double> timeSaleMap = new TreeMap<>();
 
