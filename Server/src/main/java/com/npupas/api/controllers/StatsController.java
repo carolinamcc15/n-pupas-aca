@@ -50,4 +50,9 @@ public class StatsController {
     public ResponseEntity<List<PairStatDTO>> getBranchesMonthSalesStats(@RequestHeader("Authorization") String token){
         return ResponseEntity.ok(service.getBranchesMonthSalesStats(token));
     }
+
+    @GetMapping("/sales/categories/current-month")
+    public ResponseEntity<List<PairStatDTO>> getBranchesMonthCategoriesSalesStats(@RequestHeader("Authorization") String token){
+        return ResponseEntity.ok(service.getBranchesMonthCategorySalesStats(token));
+    }
 }
