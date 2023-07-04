@@ -12,4 +12,7 @@ public interface StatsService {
     List<DailyStatDTO> getDailyPurchasesStatsByBranchId(Long branchId, Date date);
     List<RangeStatDTO> getRangeSalesStatsByBranchId(Long branchId, StatRequestDTO requestDTO);
     List<RangeStatDTO> getRangePurchasesStatsByBranchId(Long branchId, StatRequestDTO dto);
+    List<PairStatDTO> getBranchesMonthSalesStats(String token);
+    List<PairStatDTO> getBranchesMonthCategorySalesStats(String token);
+    LineChartGroupDTO getLinechartMonthStats(Long branchId);
 }

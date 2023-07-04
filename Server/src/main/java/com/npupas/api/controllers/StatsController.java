@@ -45,4 +45,19 @@ public class StatsController {
     public ResponseEntity<List<RangeStatDTO>> getRangePurchaseStats(@PathVariable("branchId") Long branchId, @RequestBody StatRequestDTO requestDTO){
         return ResponseEntity.ok(service.getRangePurchasesStatsByBranchId(branchId, requestDTO));
     }
+
+    @GetMapping("/sales/current-month")
+    public ResponseEntity<List<PairStatDTO>> getBranchesMonthSalesStats(@RequestHeader("Authorization") String token){
+        return ResponseEntity.ok(service.getBranchesMonthSalesStats(token));
+    }
+
+    @GetMapping("/sales/categories/current-month")
+    public ResponseEntity<List<PairStatDTO>> getBranchesMonthCategoriesSalesStats(@RequestHeader("Authorization") String token){
+        return ResponseEntity.ok(service.getBranchesMonthCategorySalesStats(token));
+    }
+
+    @GetMapping("/linechart/month/{branchId}")
+    public ResponseEntity<LineChartGroupDTO> getLinechartsStats(@PathVariable("branchId") Long branchId) {
+        return ResponseEntity.ok(service.getLinechartMonthStats(branchId));
+    }
 }
