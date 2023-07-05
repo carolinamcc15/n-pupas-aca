@@ -20,13 +20,13 @@ public class Task {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "task_id_gen")
     private Long ID;
 
-    @Column
+    @Column(name = "taskdescription")
     private String description;
 
-    @Column
+    @Column(name = "initdate")
     private Date deadlineDate;
 
-    @Column
+    @Column(name = "finishdate")
     private Date finishDate;
 
     @Column
