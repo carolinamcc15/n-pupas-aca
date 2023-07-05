@@ -57,3 +57,4 @@ public class Branch {
 	@OneToOne(mappedBy = "branch",  cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
 	private Schedule schedule;
 }
+

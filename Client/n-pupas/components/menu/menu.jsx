@@ -1,4 +1,4 @@
-import { adminMenuOptions, employeeMenuOptions } from 'constants/data';
+import { adminMenuOptions, adminMenuStatsOptions, employeeMenuOptions } from 'constants/data';
 import MenuOption from './option';
 
 const HomeMenu = ({ isAdmin = false }) => {
@@ -13,6 +13,15 @@ const HomeMenu = ({ isAdmin = false }) => {
           {options.map(option => {
             return <MenuOption key={option.route} option={option} />;
           })}
+          {isAdmin ? (
+            <div className='flex flex-col gap-5'>
+              {adminMenuStatsOptions?.map(option => {
+                return <MenuOption key={option.route} option={option} horizontal={true} />;
+              })}
+            </div>
+          ) : (
+            <></>
+          )}
         </div>
       </div>
     );

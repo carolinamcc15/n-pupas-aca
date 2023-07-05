@@ -28,3 +28,4 @@ public class Schedule {
     @JoinColumn(name = "branch_id", referencedColumnName = "id")
     private Branch branch;
 }
+

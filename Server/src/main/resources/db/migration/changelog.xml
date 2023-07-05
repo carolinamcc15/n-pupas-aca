@@ -1,0 +1,15 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.5.xsd">
+
+    <changeSet id="1" author="Nestor">
+        <sqlFile path="db/migration/1_add_latitude_longitude_to_branch.sql"/>
+    </changeSet>
+    <changeSet id="2" author="Nestor">
+        <sqlFile path="db/migration/2_update_schedule_data_type.sql"/>
+    </changeSet>
+    <changeSet id="3" author="Nestor">
+        <sqlFile path="db/migration/3_default_schedule_values.sql"/>
+    </changeSet>
+</databaseChangeLog>

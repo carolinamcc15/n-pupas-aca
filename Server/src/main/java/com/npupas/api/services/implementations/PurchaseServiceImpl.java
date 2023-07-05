@@ -1,6 +1,6 @@
 package com.npupas.api.services.implementations;
 
-import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,7 +40,7 @@ public class PurchaseServiceImpl implements PurchaseService {
 			return null;
 		}
 
-		List<Purchase> foundBranchPurchases = purchaseRepository.findByBranchAndPurchaseDate(branch, LocalDate.now());
+		List<Purchase> foundBranchPurchases = purchaseRepository.findByBranchAndPurchaseDate(branch, new Date());
 
 		return foundBranchPurchases;
 	}
@@ -52,7 +52,7 @@ public class PurchaseServiceImpl implements PurchaseService {
 	}
 
 	@Override
-	public List<Purchase> getPurchasesBetweenDates(Long branchId, LocalDate initialDate, LocalDate finalDate) {
+	public List<Purchase> getPurchasesBetweenDates(Long branchId, Date initialDate, Date finalDate) {
 		List<Purchase> purchases = purchaseRepository.findBetweenDates(branchId, initialDate, finalDate);
 		return purchases;
 	};

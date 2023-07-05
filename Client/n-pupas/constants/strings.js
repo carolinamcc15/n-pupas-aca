@@ -12,7 +12,8 @@ export const adminPages = {
   purchases: 'Compras',
   employees: 'Empleados',
   menu: 'Menú',
-  reports: 'Genera un reporte',
+  reports: 'Reportes',
+  stats: 'Estadísticas',
   branches: 'Sucursales',
   sales: 'Ventas',
   newPurchase: 'Registrar compra',
@@ -41,7 +42,7 @@ export const titles = {
   pupusas: 'Pupusas',
   drinks: 'Bebidas',
   other: 'Otros',
-  information: 'Información'
+  information: 'Información',
 };
 
 export const crudActionTypes = {
