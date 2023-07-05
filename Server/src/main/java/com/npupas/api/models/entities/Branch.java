@@ -30,6 +30,12 @@ public class Branch {
 	
 	@Column(name = "opening_date")
 	private Date openingDate;
+
+	@Column
+	private Double latitude;
+
+	@Column
+	private Double longitude;
 	
 	@ManyToOne
 	@JsonIgnore
@@ -48,6 +54,7 @@ public class Branch {
 	@OneToMany(mappedBy = "branch", fetch = FetchType.LAZY, cascade = { CascadeType.MERGE })
 	private List<Employee> employees;
 
-	@OneToOne(mappedBy = "branch")
+	@OneToOne(mappedBy = "branch",  cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
 	private Schedule schedule;
 }
+
