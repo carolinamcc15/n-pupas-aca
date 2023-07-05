@@ -1,6 +1,6 @@
 package com.npupas.api.services;
 
-import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 import com.npupas.api.models.dtos.AddSaleDTO;
@@ -12,7 +12,7 @@ public interface SalesService {
 
 	List<Sale> getTodaySales(Long branchId);
 
-	List<Sale> getSalesBetweenDates(Long branchId, LocalDate initialDate, LocalDate finalDate);
+	List<Sale> getSalesBetweenDates(Long branchId, Date initialDate, Date finalDate);
 
 	Sale getSale(Long branchId, Long idSale);
 
@@ -21,6 +21,4 @@ public interface SalesService {
 	Boolean updateSale(Long branchId, AddSaleDTO dto, Long saleId);
 	
 	Boolean deleteSale(Long branchId, Long saleId);
-	
-
 }

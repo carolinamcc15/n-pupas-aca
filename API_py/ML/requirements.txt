@@ -1,0 +1,4 @@
+flask
+numpy
+scikit-learn
+psycopg2-binary

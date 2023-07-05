@@ -1,7 +1,7 @@
 package com.npupas.api.services.implementations;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,15 +10,11 @@ import org.springframework.stereotype.Service;
 import com.npupas.api.models.dtos.AddSaleDTO;
 import com.npupas.api.models.dtos.SalesDetailsDTO;
 import com.npupas.api.models.entities.Branch;
-import com.npupas.api.models.entities.Mass;
 import com.npupas.api.models.entities.Product;
 import com.npupas.api.models.entities.Sale;
 import com.npupas.api.models.entities.SalesDetail;
-import com.npupas.api.models.entities.SalesDetailMass;
 import com.npupas.api.repositories.BranchRepository;
-import com.npupas.api.repositories.MassRepository;
 import com.npupas.api.repositories.ProductRepository;
-import com.npupas.api.repositories.SalesDetailsMassRepository;
 import com.npupas.api.repositories.SalesDetailsRepository;
 import com.npupas.api.repositories.SalesRepository;
 import com.npupas.api.services.SalesService;
@@ -34,13 +30,6 @@ public class SalesServiceImpl implements SalesService {
 
 	@Autowired
 	ProductRepository productRepository;
-
-	@Autowired
-	SalesDetailsMassRepository detailsMassRepository;
-
-	@Autowired
-	MassRepository massRepository;
-
 	@Autowired
 	SalesDetailsRepository detailsRepository;
 
@@ -59,15 +48,12 @@ public class SalesServiceImpl implements SalesService {
 		if (branch == null)
 			return null;
 
-		List<Sale> sales = salesRepository.findBySaleDateAndBranch(LocalDate.now(), branch);
-
-		return sales;
+		return salesRepository.findBySaleDateAndBranch(new Date(), branch);
 	}
 
 	@Override
-	public List<Sale> getSalesBetweenDates(Long branchId, LocalDate initialDate, LocalDate finalDate) {
-		List<Sale> sales = salesRepository.findBetweenDates(branchId, initialDate, finalDate);
-		return sales;
+	public List<Sale> getSalesBetweenDates(Long branchId, Date initialDate, Date finalDate) {
+		return salesRepository.findBetweenDates(branchId, initialDate, finalDate);
 	};
 
 	@Override
@@ -104,14 +90,7 @@ public class SalesServiceImpl implements SalesService {
 
 			Product product = productRepository.findById(dt.getIdProducto()).orElse(null);
 			if (product.getType().getType().equals("Pupusas")) {
-
-				SalesDetailMass detailsMass = new SalesDetailMass();
-				Mass mass = massRepository.findById(dt.getMass()).get();
-				System.out.println("Lo que encontre es: " + dt.getMass());
-				detailsMass.setMass(mass);
-
-				detailsMass.setDetails(detail);
-				detail.setMassDetails(detailsMass);
+				detail.setMass(dt.getMass());
 			}
 
 			detail.setProduct(product);
@@ -152,18 +131,7 @@ public class SalesServiceImpl implements SalesService {
 
 			Product product = productRepository.findById(dt.getIdProducto()).orElse(null);
 			if (product.getType().getType().equals("Pupusas")) {
-
-				SalesDetailMass detailsMass = new SalesDetailMass();
-				if (dt.getMass() != null) {
-					Mass mass = massRepository.findById(dt.getMass()).get();
-					detailsMass.setMass(mass);
-				} else {
-					detailsMass.setMass(null);
-				}
-
-				detailsMass.setDetails(detail);
-
-				detail.setMassDetails(detailsMass);
+				detail.setMass(dt.getMass());
 			}
 
 			detail.setProduct(product);

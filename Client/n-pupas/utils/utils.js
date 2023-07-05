@@ -177,3 +177,28 @@ export const biweeklyDiscounts = {
   isss: salary => (salary / 2) * 0.03,
   afp: salary => (salary / 2) * 0.0725,
 };
+
+export const formatDate = date => {
+  const options = { day: '2-digit', month: '2-digit', year: 'numeric' };
+  const formattedDate = date.toLocaleDateString(undefined, options);
+  return formattedDate.replace(/\//g, '/');
+};
+
+export const generateRandomColors = count => {
+  const fallbackColors = ['#715884', '#85ACD1', '#BFFFFF', '#7A82AF', '#9BD6EB'];
+  const colors = [];
+
+  for (let i = 0; i < count; i++) {
+    let color;
+
+    if (i < fallbackColors.length) {
+      color = fallbackColors[i];
+    } else {
+      color = `#${Math.floor(Math.random() * 16777215).toString(16)}`;
+    }
+
+    colors.push(color);
+  }
+
+  return colors;
+};
