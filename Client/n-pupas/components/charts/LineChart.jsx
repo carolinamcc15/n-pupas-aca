@@ -4,13 +4,9 @@ import { formatDate } from 'utils/utils';
 
 const LineChart = ({ data }) => {
   const chartRef = useRef(null);
-  const isHour = typeof data[0].time === 'number';
 
   useEffect(() => {
-    console.log(data);
-    const timeLabels = data.map(item => {
-      return isHour ? `${item.time}:00` : formatDate(new Date(item.date));
-    });
+    const timeLabels = data.map(item => item.time || formatDate(new Date(item.date)));
     const totalData = data.map(item => item.total);
 
     const chartOptions = {
@@ -25,7 +21,7 @@ const LineChart = ({ data }) => {
           display: true,
           title: {
             display: true,
-            text: isHour ? 'Hora' : 'Fecha',
+            text: 'Time',
           },
         },
         y: {
@@ -35,6 +31,7 @@ const LineChart = ({ data }) => {
             text: 'Total',
           },
         },
+
       },
     };
 
