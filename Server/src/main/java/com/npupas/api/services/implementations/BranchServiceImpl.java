@@ -106,4 +106,15 @@ public class BranchServiceImpl implements BranchService {
 
 		branchRepository.save(branch);
 	}
+
+	@Override
+	public List<BranchDTO> getCompetenceBranches(String fullToken) {
+		String token = Utils.getToken(fullToken);
+		Admin admin = adminService.getAdminByToken(token);
+		List<BranchDTO> branches = branchRepository.getByPupuseriaAdminIsNot(admin).stream().map(BranchDTO::new).toList();
+
+		return branches;
+	}
+
 }
+

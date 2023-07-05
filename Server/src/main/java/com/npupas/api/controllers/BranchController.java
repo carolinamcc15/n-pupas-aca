@@ -51,6 +51,16 @@ public class BranchController {
 		}
 	}
 
+	@GetMapping("/competence")
+	private ResponseEntity<List<BranchDTO>> getCompetenceBranchesData(@RequestHeader("Authorization") String token) {
+		try {
+			return new ResponseEntity<>(branchService.getCompetenceBranches(token), HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+		}
+	}
+
+
 	@GetMapping("/{id}")
 	private ResponseEntity<BranchDTO> getOneBranch(@RequestHeader("Authorization") String token,
 			@PathVariable("id") Long id) {
