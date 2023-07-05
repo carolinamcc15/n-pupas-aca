@@ -1,12 +1,13 @@
 import { useEffect, useState } from 'react';
 import { getCookie } from 'cookies-next';
+import toast from 'react-hot-toast';
 import Head from 'next/head';
 
 import { TransactionsGraph } from 'components/stats/transactions/transactionsGraph';
-import ComparativeChart from 'components/Charts/ComparativeChart';
-import { PupuseriaApi } from 'services/PupuseriaApi';
-import RingChart from 'components/Charts/RingChart';
+import ComparativeChart from 'components/charts/ComparativeChart';
 import useBranchContext from 'context/BranchContext';
+import { PupuseriaApi } from 'services/PupuseriaApi';
+import RingChart from 'components/charts/RingChart';
 import { adminPages } from 'constants/strings';
 import { tokenCookie } from 'constants/data';
 
@@ -39,7 +40,7 @@ const StatsPage = () => {
   }, []);
 
   return (
-    <main className='bg-[#614C72] flex-1 bg-no-repeat bg-cover p-6 flex'>
+    <main className='bg-[#614C72] flex-1 bg-no-repeat bg-cover px-6 py-4 flex flex-col items-center gap-3'>
       <Head>
         <title>{adminPages.stats}</title>
       </Head>
@@ -49,11 +50,11 @@ const StatsPage = () => {
         </div>
         <div className='w-full flex flex-col gap-3 bg-white rounded-md p-3'>
           <h2 className='uppercase text-center font-semibold'>Ventas por sucursal</h2>
-          <RingChart data={salesByBranch} />
+          <RingChart data={salesByBranch || []} />
         </div>
         <div className='w-full flex flex-col gap-3 bg-white rounded-md p-3'>
           <h2 className='uppercase text-center font-semibold'>Ventas por categorías</h2>
-          <RingChart data={salesByCategory} />
+          <RingChart data={salesByCategory || []} />
         </div>
         <div className='w-full flex flex-col gap-3 bg-white rounded-md p-3 text-center font-semibold'>
           <h2 className='uppercase text-center font-semibold'>Costos</h2>

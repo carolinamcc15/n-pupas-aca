@@ -5,7 +5,7 @@ import { getCookie } from 'cookies-next';
 
 import { statsRadioButtons, statsTabs, statsTimeOptions } from 'constants/data';
 import { PupuseriaApi } from 'services/PupuseriaApi';
-import LineChart from 'components/Charts/LineChart';
+import LineChart from 'components/charts/LineChart';
 import useBranchContext from 'context/BranchContext';
 import { tokenCookie } from 'constants/data';
 import Tab from './StatsTabs';

@@ -2,7 +2,8 @@ import React, { useEffect, useRef } from 'react';
 import Chart from 'chart.js/auto';
 import { generateRandomColors } from 'utils/utils';
 
-const RingChart = ({ data }) => {
+const RingChart = ({ data = [] }) => {
+  console.log(data);
   const chartRef = useRef(null);
   const chartInstanceRef = useRef(null);
 
@@ -25,11 +26,11 @@ const RingChart = ({ data }) => {
       data: {
         datasets: [
           {
-            data: data.map(item => item.total),
+            data: data?.map(item => item.total),
             backgroundColor: generateRandomColors(data.length),
           },
         ],
-        labels: data.map(item => item.title),
+        labels: data?.map(item => item.title),
       },
       options: chartOptions,
     };
