@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 import ActionButton from 'components/buttons/actionButton';
 import { adminRoutes } from 'routes/routes';
 import { actionButtons } from 'constants/data';
+import { formatDate } from 'utils/utils';
 
 const BranchCard = ({ branch, onDeleteHandler }) => {
   const router = useRouter();
@@ -34,7 +35,7 @@ const BranchCard = ({ branch, onDeleteHandler }) => {
           <p className='ml-4 w-4 col-span-1 text-primary-300'> Dirección </p>
           <p className='ml-10 col-span-4'> {branch.address} </p>
           <p className='ml-4 col-span-1 text-primary-300'> Apertura </p>
-          <p className='ml-10 col-span-4'> {branch.openingDate} </p>
+          <p className='ml-10 col-span-4'> {formatDate(branch.openingDate, true)} </p>
           <p className='ml-4 col-span-1 text-primary-300'> Horario </p>
           <p className='ml-10 col-span-4'>
             {' '}

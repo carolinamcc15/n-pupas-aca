@@ -75,7 +75,7 @@ const ComparisonChart = ({ data, label, color }) => {
         </p>
         <ComparativeChartLabel
           name='Monto total'
-          value={data?.past?.totalSales.toFixed(2)}
+          value={data?.past?.totalSales?.toFixed(2)}
           isMoney={true}
         />
         {label && <ComparativeChartLabel name={label} value={data?.past?.salesQuantity} />}
@@ -89,7 +89,7 @@ const ComparisonChart = ({ data, label, color }) => {
         </p>
         <ComparativeChartLabel
           name='Monto total'
-          value={data?.present?.totalSales.toFixed(2)}
+          value={data?.present?.totalSales?.toFixed(2)}
           isMoney={true}
         />
         {label && <ComparativeChartLabel name={label} value={data?.present?.salesQuantity} />}

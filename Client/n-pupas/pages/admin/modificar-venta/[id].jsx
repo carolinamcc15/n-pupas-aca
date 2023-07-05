@@ -41,7 +41,7 @@ export default function EditSalePage({ sale, products, productTypes }) {
         idProducto: detail.product.id,
         product: detail.product,
         amount: Number(detail.amount),
-        mass: Number(detail.massDetails ? detail.massDetails.mass.id : null),
+        mass: detail.mass || null,
         total: Number(detail.product.price * detail.amount),
       });
     });
@@ -161,6 +161,7 @@ export async function getServerSideProps({ query, req, res }) {
     const products = await pupuseriaApi.getAllProducts(token);
     const productTypes = await pupuseriaApi.getProductTypes(token);
 
+    console.log(sale)
     return {
       props: {
         sale: sale,

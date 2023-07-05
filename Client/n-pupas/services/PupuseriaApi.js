@@ -1,6 +1,7 @@
 import { toFormData } from 'utils/utils';
 
-export const BASE_URL = 'http://localhost:4000/api';
+const BASE_URL = 'http://localhost:4000/api';
+
 let instance;
 
 const getData = async (path, token) => {
@@ -9,7 +10,6 @@ const getData = async (path, token) => {
       Authorization: `Bearer ${token}`,
     },
   });
-
   const data = response.json();
   return data;
 };
@@ -102,7 +102,6 @@ export const PupuseriaApi = class {
   updateBranch(token, id, body) {
     return putData(`/pupuserias/branches/${id}`, token, body);
   }
-
   getTodayPurchases(token, branchID) {
     return getData(`/pupuserias/branches/${branchID}/purchases/today`, token);
   }
@@ -267,10 +266,6 @@ export const PupuseriaApi = class {
     return getData(`/stats/sales/today/${branchId}`, token);
   }
 
-  getTodayPurchasesStats(branchId, token) {
-    return getData(`/stats/purchases/today/${branchId}`, token);
-  }
-
   async getDailySalesStats(branchId, token, date) {
     const response = await fetch(`${BASE_URL}/stats/sales/daily/${branchId}`, {
       method: 'POST',
@@ -332,4 +327,21 @@ export const PupuseriaApi = class {
 
     return response.json();
   }
+
+  getTodayPurchasesStats(branchId, token) {
+    return getData(`/stats/purchases/today/${branchId}`, token);
+  }
+
+  getMonthlySalesByCategories(token) {
+    return getData(`/stats/sales/categories/current-month`, token);
+  }
+
+  getMonthlySalesByBranch(token) {
+    return getData(`/stats/sales/current-month`, token);
+  }
+
+  getComparativeDataByBranch(branchId, token) {
+    return getData(`/stats/linechart/month/${branchId}`, token);
+  }
+
 };

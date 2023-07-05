@@ -45,12 +45,10 @@ const AdminHomePage = () => {
   }, []);
 
   useEffect(() => {
-    if (!!pupuseriaName) {
-      if (!getCookie(branchCookie)) {
-        setBranchID(branches[0].id);
-      }
+    if (!getCookie(branchCookie) && branches.length > 0) {
+      setBranchID(branches[0].id);
     }
-  }, [branches, branchID, setBranchID]);
+  }, [branches, branchID, pupuseriaName]);
 
   const changeBranch = id => {
     setBranchID(id);
