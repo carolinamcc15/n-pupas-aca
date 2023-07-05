@@ -81,6 +81,11 @@ export const PupuseriaApi = class {
     return branches;
   }
 
+  getCompetenceBranches(token) {
+    const branches = getData('/pupuserias/branches/competence', token);
+    return branches;
+  }
+
   getOneBranch(token, id) {
     const branch = getData(`/pupuserias/branches/${id}`, token);
     return branch;
