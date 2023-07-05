@@ -54,6 +54,7 @@ export const toFormData = data => {
   return formData;
 };
 
+
 export const calculateTodayExpenses = purchases => {
   let total = 0;
   if (purchases.length > 0) {
