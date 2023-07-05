@@ -180,6 +180,7 @@ export const biweeklyDiscounts = {
   isss: salary => (salary / 2) * 0.03,
   afp: salary => (salary / 2) * 0.0725,
 };
+
 export const generateRandomColors = count => {
   const fallbackColors = ['#715884', '#85ACD1', '#BFFFFF', '#7A82AF', '#9BD6EB'];
   const colors = [];
@@ -199,8 +200,11 @@ export const generateRandomColors = count => {
   return colors;
 };
 
-export const formatDate = date => {
-  const options = { day: '2-digit', month: '2-digit', year: 'numeric' };
-  const formattedDate = date.toLocaleDateString(undefined, options);
-  return formattedDate.replace(/\//g, '/');
+export const formatDate = dateString => {
+  const date = new Date(dateString);
+  const day = date.getDate().toString().padStart(2, '0');
+  const month = (date.getMonth() + 1).toString().padStart(2, '0');
+  const year = date.getFullYear();
+
+  return `${year}-${month}-${day}`;
 };

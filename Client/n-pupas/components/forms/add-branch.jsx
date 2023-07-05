@@ -1,23 +1,23 @@
-import { HomeIcon } from '@heroicons/react/24/solid';
+import { ClockIcon, HomeIcon } from '@heroicons/react/24/solid';
 import { useForm } from 'react-hook-form';
 
-import { LocationIcon } from 'components/icons/LocationIcon';
 import { SolidCalendarIcon } from 'components/icons/SolidCalendarIcon';
 import PrimaryButton from 'components/buttons/primary';
 import Input from './inputs/text-input';
+import { formatDate } from 'utils/utils';
 
 const AddBranchForm = ({ onSubmitHandler, branch = false }) => {
   const {
     register,
     handleSubmit,
     formState: { errors },
-    reset,
   } = useForm();
 
   const onSubmit = data => {
     onSubmitHandler(data);
   };
 
+  console.log(branch);
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
@@ -46,32 +46,33 @@ const AddBranchForm = ({ onSubmitHandler, branch = false }) => {
           id='openingDate'
           label='Fecha de apertura'
           placeholder='12/03/2021'
-          defaultValue={branch ? branch.openingDate : ''}
+          defaultValue={branch ? formatDate(branch.openingDate) : ''}
           icon={<SolidCalendarIcon className='text-primary-500 w-5' />}
           error={errors?.openingDate?.message}
           register={{ ...register('openingDate', { required: 'Fecha de apertura requerida' }) }}
         />
-        <Input
-          id='address'
-          label='Dirección'
-          defaultValue={branch ? branch.address : ''}
-          placeholder='Bulevar de Los Próceres San Salvador'
-          icon={<LocationIcon />}
-          error={errors?.address?.message}
-          register={{
-            ...register('address', {
-              required: 'Dirección requerida',
-              minLength: {
-                value: 6,
-                message: 'El mínimo de caracteres es 8',
-              },
-              maxLength: {
-                value: 80,
-                message: 'El máximo de caracteres es 80',
-              },
-            }),
-          }}
-        />
+        <div className='flex justify-between gap-5 md:gap-10'>
+          <Input
+            id='openingTime'
+            label='Hora de apertura (24h)'
+            defaultValue={branch ? branch.openingTime : ''}
+            placeholder='HH:MM'
+            icon={<ClockIcon className='text-primary-500 w-5' />}
+            type='time'
+            error={errors?.openingTime?.message}
+            register={{ ...register('openingTime', { required: 'Campo requerido' }) }}
+          />
+          <Input
+            id='closingTime'
+            label='Hora de cierre (24h)'
+            defaultValue={branch ? branch.closingTime : ''}
+            placeholder='HH:MM'
+            icon={<ClockIcon className='text-primary-500 w-5' />}
+            type='time'
+            error={errors?.openingTime?.message}
+            register={{ ...register('closingTime', { required: 'Campo requerido' }) }}
+          />
+        </div>
       </div>
       <div className='mt-6 sm:mt-8 m-auto'>
         <PrimaryButton text={branch ? 'Actualizar sucursal' : 'Agregar sucursal'} />

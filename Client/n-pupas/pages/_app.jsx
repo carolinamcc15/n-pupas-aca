@@ -25,11 +25,12 @@ function MyApp({ Component, pageProps }) {
         <Toaster
           position='top-center'
           reverseOrder={false}
-          containerClassName='toast-container font-bold'
+          containerClassName='toast-container'
           toastOptions={{
             style: {
               padding: '14px',
               background: 'rgba(0, 0, 0, 0.7)',
+              fontSize: '0.9rem',
               color: '#fff',
             },
           }}
