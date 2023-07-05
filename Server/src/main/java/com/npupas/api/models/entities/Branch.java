@@ -47,7 +47,4 @@ public class Branch {
 	@JsonManagedReference
 	@OneToMany(mappedBy = "branch", fetch = FetchType.LAZY, cascade = { CascadeType.MERGE })
 	private List<Employee> employees;
-
-	@OneToOne(mappedBy = "branch")
-	private Schedule schedule;
 }

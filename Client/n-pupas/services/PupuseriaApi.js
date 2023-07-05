@@ -227,9 +227,16 @@ export const PupuseriaApi = class {
     );
   }
 
-  async getReportSales(branchID, token, body) {
+  async getReportSales (branchID, token, body) {
     return getData(
       `/pupuserias/branches/${branchID}/sales/report?initialDate=${body.initialDate}&finalDate=${body.finalDate}`,
+      token
+    );
+  }
+
+  async getPredictionSales(pupuseriaID, token, body) {
+    return getData(
+      `/pupuserias/branches/${pupuseriaID}/sales/prediction`,
       token
     );
   }

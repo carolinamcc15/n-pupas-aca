@@ -1,4 +1,5 @@
 import GenerateReportForm from 'components/forms/generate-report';
+import GeneratePredictionForm from 'components/forms/generate-prediction';
 import { PupuseriaApi } from 'services/PupuseriaApi';
 import useBranchContext from 'context/BranchContext';
 import useAuthContext from 'context/AuthContext';
@@ -7,8 +8,11 @@ import { adminRoutes } from 'routes/routes';
 import { useRouter } from 'next/router';
 import toast from 'react-hot-toast';
 import generatePDF from 'utils/pdf';
+import generatePDFpred from 'utils/pdf-proyeccion';
 import Head from 'next/head';
 import BackButton from 'components/buttons/back-arrow';
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import 'react-tabs/style/react-tabs.css';
 
 const pupuseriaApi = new PupuseriaApi();
 
@@ -24,6 +28,24 @@ const ReportsPage = () => {
       generatePDF(purchases, sales, data);
 
       router.push(adminRoutes.home);
+    } catch (e) {
+      toast.error('Ocurrió un error interno');
+    }
+  };
+
+  const generatePrediction = async data => {
+    try {
+      //const projections = await pupuseriaApi.getPredictionSales(PupuseriaID, token, data);
+      const projections = {
+        "id": 1,
+        "sucursal": "Sucursal 1",
+        "mes": "Julio",
+        "monto": 600
+      };
+      generatePDFpred(projections); //crear un pdf diferente
+
+      router.push(adminRoutes.home);
+
     } catch (e) {
       toast.error('Ocurrió un error interno');
     }
@@ -46,7 +68,19 @@ const ReportsPage = () => {
         </div>
         <div className='p-6 sm:px-6 sm:pb-10 sm:pt-16 flex flex-col justify-between items-center'>
           
-          <GenerateReportForm onSubmitHandler={generateReport} />
+          <Tabs>
+            <TabList>
+              <Tab>Ingresos</Tab>
+              <Tab>Proyección</Tab>
+            </TabList>
+
+            <TabPanel>
+              <GenerateReportForm onSubmitHandler={generateReport} />
+            </TabPanel>
+            <TabPanel>
+              <GeneratePredictionForm onSubmitHandler={generatePrediction} />
+            </TabPanel>
+          </Tabs>
         </div>
       </section>
 
