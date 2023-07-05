@@ -49,10 +49,4 @@ public class User {
 	@JsonIgnore
 	private List<Token> tokens;
 
-	@ManyToMany
-	@JoinTable(
-			name = "role_by_user",
-			joinColumns = @JoinColumn(name = "user_id"),
-			inverseJoinColumns = @JoinColumn(name = "role_id"))
-	private Set<Role> roles;
 }
