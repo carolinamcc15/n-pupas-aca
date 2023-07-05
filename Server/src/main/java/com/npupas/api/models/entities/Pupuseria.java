@@ -14,7 +14,13 @@ import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+@Getter
+@Setter
+@NoArgsConstructor
 @Entity(name="pupuseria")
 public class Pupuseria {
 	@Id
@@ -27,7 +33,7 @@ public class Pupuseria {
 	private String name;
 	
 	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "id_admin", nullable = true)
+	@JoinColumn(name = "id_admin")
 	@JsonIgnore
 	private Admin admin;
 	
@@ -36,50 +42,5 @@ public class Pupuseria {
 	
 	@OneToMany(mappedBy = "pupuseria")
 	private List<Product> products;
-
-	public Pupuseria() {
-		super();
-	}
-
-	public Long getID() {
-		return ID;
-	}
-
-	public void setID(Long iD) {
-		ID = iD;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public Admin getAdmin() {
-		return admin;
-	}
-
-	public void setAdmin(Admin admin) {
-		this.admin = admin;
-	}
-
-	public List<Branch> getBranches() {
-		return branches;
-	}
-
-	public void setBranches(List<Branch> branches) {
-		this.branches = branches;
-	}
-
-	public List<Product> getProducts() {
-		return products;
-	}
-
-	public void setProducts(List<Product> products) {
-		this.products = products;
-	}
-	
 	
 }

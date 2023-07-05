@@ -1,0 +1,32 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//ES" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>NPupas</title>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    <link href='http://fonts.googleapis.com/css?family=Monserrat' rel='stylesheet' type='text/css'/>
+
+    <style>
+        body {
+            font-family: 'Monserrat', sans-serif;
+            font-size: 48px;
+        }
+    </style>
+</head>
+<body>
+ <p>Hola <span id="name"></span>,</p>
+ <br />
+ <p>¡Bienvenido a nuestro software de administración de restaurantes! Nos complace que hayas decidido utilizar nuestra plataforma para gestionar tu negocio de pupusas.</p>
+ <p>Tu registro ha sido exitoso y a partir de ahora podrás disfrutar de todas las herramientas que ofrecemos para simplificar la gestión de tu restaurante. Desde el control de inventario hasta la gestión de pedidos, nuestro software te ayudará a optimizar tu negocio.</p>
+ <p>Te recomendamos que leas nuestros <b>Términos y Condiciones</b> para que puedas disfrutar de una gran experiencia con nosotros.</p>
+ <br />
+ <p>Si tienes alguna duda o comentario, no dudes en ponerte en contacto con nosotros. ¡Estamos aquí para ayudarte!</p>
+ <p>Saludos cordiales,</p>
+    <br />
+    <em th:text="${sign}"></em>
+    <p th:text="${location}"></p>
+ </p>
+</body>
+</html>

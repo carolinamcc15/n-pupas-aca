@@ -143,13 +143,6 @@ CREATE TABLE IF NOT EXISTS public.sale
         ON DELETE NO ACTION
 );
 
-CREATE TABLE IF NOT EXISTS public.mass
-(
-    id serial NOT NULL,
-    mass character varying COLLATE pg_catalog."default" NOT NULL,
-    CONSTRAINT mass_pkey PRIMARY KEY (id)
-);
-
 CREATE TABLE IF NOT EXISTS public.sales_detail
 (
     id serial NOT NULL,
@@ -157,6 +150,7 @@ CREATE TABLE IF NOT EXISTS public.sales_detail
     total decimal NOT NULL,
     id_sale integer NOT NULL,
     id_product integer NOT NULL,
+    mass character varying COLLATE pg_catalog."default" NULL,
     CONSTRAINT pk_sales_detail PRIMARY KEY (id),
     CONSTRAINT fk_sales_detail_id_product FOREIGN KEY (id_product)
         REFERENCES public.product (id) MATCH SIMPLE
@@ -164,22 +158,6 @@ CREATE TABLE IF NOT EXISTS public.sales_detail
         ON DELETE NO ACTION,
     CONSTRAINT fk_sales_detail_id_sale FOREIGN KEY (id_sale)
         REFERENCES public.sale (id) MATCH SIMPLE
-        ON UPDATE NO ACTION
-        ON DELETE NO ACTION
-);
-
-CREATE TABLE IF NOT EXISTS public.sales_details_mass
-(
-    id serial NOT NULL,
-    id_sale_detail integer NOT NULL,
-    id_mass integer,
-    CONSTRAINT pk_sales_details_mass PRIMARY KEY (id),
-    CONSTRAINT fk_sales_details_mass_id FOREIGN KEY (id_mass)
-        REFERENCES public.mass (id) MATCH SIMPLE
-        ON UPDATE NO ACTION
-        ON DELETE NO ACTION,
-    CONSTRAINT fk_sales_details_sale_id FOREIGN KEY (id_sale_detail)
-        REFERENCES public.sales_detail (id) MATCH SIMPLE
         ON UPDATE NO ACTION
         ON DELETE NO ACTION
 );

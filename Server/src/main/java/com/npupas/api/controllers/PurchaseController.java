@@ -1,6 +1,5 @@
 package com.npupas.api.controllers;
 
-import java.time.LocalDate;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -15,7 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,9 +23,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-@RestController
-@CrossOrigin(origins = { "http://localhost:3000", "https://n-pupas.vercel.app" }, allowCredentials = "true")
+import static com.npupas.api.utils.DateUtils.standardFormat;
 
+@RestController
 @RequestMapping("/pupuserias/branches")
 public class PurchaseController {
 	@Autowired
@@ -52,10 +50,11 @@ public class PurchaseController {
 
 	@GetMapping("/{id}/purchases/report")
 	public ResponseEntity<List<Purchase>> getBetweenDates(@PathVariable("id") Long branchId,
-			@RequestParam("initialDate") String initialDate, @RequestParam("finalDate") String finalDate) {
+			@RequestParam("initialDate") String initialDateStr, @RequestParam("finalDate") String finalDateStr) {
 		try {
-			List<Purchase> purchases = purchaseService.getPurchasesBetweenDates(branchId, LocalDate.parse(initialDate),
-					LocalDate.parse(finalDate));
+
+			List<Purchase> purchases = purchaseService.getPurchasesBetweenDates(branchId, standardFormat(initialDateStr),
+					standardFormat(finalDateStr));
 			if (purchases == null)
 				return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 
