@@ -54,11 +54,14 @@ export const toFormData = data => {
   return formData;
 };
 
+
 export const calculateTodayExpenses = purchases => {
   let total = 0;
-  purchases.forEach(purchase => {
-    total += purchase.amount;
-  });
+  if (purchases.length > 0) {
+    purchases.forEach(purchase => {
+      total += purchase.amount;
+    });
+  }
 
   return total.toFixed(2);
 };
@@ -177,13 +180,6 @@ export const biweeklyDiscounts = {
   isss: salary => (salary / 2) * 0.03,
   afp: salary => (salary / 2) * 0.0725,
 };
-
-export const formatDate = date => {
-  const options = { day: '2-digit', month: '2-digit', year: 'numeric' };
-  const formattedDate = date.toLocaleDateString(undefined, options);
-  return formattedDate.replace(/\//g, '/');
-};
-
 export const generateRandomColors = count => {
   const fallbackColors = ['#715884', '#85ACD1', '#BFFFFF', '#7A82AF', '#9BD6EB'];
   const colors = [];
@@ -201,4 +197,10 @@ export const generateRandomColors = count => {
   }
 
   return colors;
+};
+
+export const formatDate = date => {
+  const options = { day: '2-digit', month: '2-digit', year: 'numeric' };
+  const formattedDate = date.toLocaleDateString(undefined, options);
+  return formattedDate.replace(/\//g, '/');
 };
