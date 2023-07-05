@@ -1,7 +1,14 @@
 package com.npupas.api.services.implementations;
 
 import java.util.List;
+import java.util.Optional;
 
+import com.npupas.api.models.dtos.BranchDTO;
+import com.npupas.api.models.entities.Admin;
+import com.npupas.api.models.entities.Schedule;
+
+import com.npupas.api.services.AdminService;
+import com.npupas.api.utils.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -63,6 +70,16 @@ public class BranchServiceImpl implements BranchService {
 		branch.setOpeningDate(branchDTO.getOpeningDate());
 
 		branchRepository.save(branch);
+	}
+
+	
+	@Override
+	public List<BranchDTO> getCompetenceBranches(String fullToken) {
+		String token = Utils.getToken(fullToken);
+		Admin admin = adminService.getAdminByToken(token);
+		List<BranchDTO> branches = branchRepository.getByPupuseriaAdminIsNot(admin).stream().map(BranchDTO::new).toList();
+
+		return branches;
 	}
 
 }

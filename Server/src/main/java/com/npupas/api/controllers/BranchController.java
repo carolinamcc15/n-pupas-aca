@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import com.npupas.api.models.dtos.BranchDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -50,6 +51,16 @@ public class BranchController {
 			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
+
+	@GetMapping("/competence")
+	private ResponseEntity<List<BranchDTO>> getCompetenceBranchesData(@RequestHeader("Authorization") String token) {
+		try {
+			return new ResponseEntity<>(branchService.getCompetenceBranches(token), HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+		}
+	}
+
 
 	@GetMapping("/{id}")
 	private ResponseEntity<Branch> getOneBranch(@RequestHeader("Authorization") String token,
