@@ -56,9 +56,11 @@ export const toFormData = data => {
 
 export const calculateTodayExpenses = purchases => {
   let total = 0;
-  purchases.forEach(purchase => {
-    total += purchase.amount;
-  });
+  if (purchases.length > 0) {
+    purchases.forEach(purchase => {
+      total += purchase.amount;
+    });
+  }
 
   return total.toFixed(2);
 };
@@ -176,4 +178,32 @@ export const biweeklyDiscounts = {
   },
   isss: salary => (salary / 2) * 0.03,
   afp: salary => (salary / 2) * 0.0725,
+};
+
+export const generateRandomColors = count => {
+  const fallbackColors = ['#715884', '#85ACD1', '#BFFFFF', '#7A82AF', '#9BD6EB'];
+  const colors = [];
+
+  for (let i = 0; i < count; i++) {
+    let color;
+
+    if (i < fallbackColors.length) {
+      color = fallbackColors[i];
+    } else {
+      color = `#${Math.floor(Math.random() * 16777215).toString(16)}`;
+    }
+
+    colors.push(color);
+  }
+
+  return colors;
+};
+
+export const formatDate = dateString => {
+  const date = new Date(dateString);
+  const day = date.getDate().toString().padStart(2, '0');
+  const month = (date.getMonth() + 1).toString().padStart(2, '0');
+  const year = date.getFullYear();
+
+  return `${year}-${month}-${day}`;
 };
