@@ -35,7 +35,7 @@ export const checkForProduct = (addedProducts, product, formData) => {
         idProducto: product.id,
         product: product,
         amount: Number(formData.quantity),
-        mass: Number(formData.dough),
+        mass: formData.dough,
         total: Number(product.price * formData.quantity),
       },
     ];
@@ -53,7 +53,6 @@ export const toFormData = data => {
 
   return formData;
 };
-
 
 export const calculateTodayExpenses = purchases => {
   let total = 0;
@@ -200,11 +199,11 @@ export const generateRandomColors = count => {
   return colors;
 };
 
-export const formatDate = dateString => {
+export const formatDate = (dateString, ddmmyyyy = false) => {
   const date = new Date(dateString);
   const day = date.getDate().toString().padStart(2, '0');
   const month = (date.getMonth() + 1).toString().padStart(2, '0');
   const year = date.getFullYear();
 
-  return `${year}-${month}-${day}`;
+  return ddmmyyyy ? `${day}/${month}/${year}` : `${year}-${month}-${day}`;
 };
