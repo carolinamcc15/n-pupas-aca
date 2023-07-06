@@ -90,3 +90,6 @@ La aplicación y sus componentes han sido utilizados y desarrollados en entorno 
 
    2.6 ```py ML\Scripts\api.py``` este comando pondrá en ejecución la API
    ![Imagen de API ejecutandose](./Images/ExcecutedAPIWindows.png)
+
+   ## Implementaciion de Reporteria por Email y Proyeccion por Historial de Ventas (Grupo 9)
+   ![Documentacion Reporteria](./Documents/DocumentacionReporteria.pdf)
