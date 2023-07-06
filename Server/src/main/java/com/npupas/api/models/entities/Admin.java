@@ -14,9 +14,16 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.annotations.NotFound;
 import org.hibernate.annotations.NotFoundAction;
 
+@Getter
+@Setter
+@NoArgsConstructor
 @Entity(name = "admin")
 public class Admin {
 	@Id
@@ -44,66 +51,8 @@ public class Admin {
 	@OneToMany(mappedBy = "admin", fetch = FetchType.LAZY, cascade = { CascadeType.MERGE })
 	private List<Report> reports;
 
-	public Admin() {
-		super();
-	}
-
-	public Long getID() {
-		return ID;
-	}
-
-	public void setID(Long iD) {
-		ID = iD;
-	}
-
-	public String getDUI() {
-		return DUI;
-	}
-
-	public void setDUI(String dUI) {
-		DUI = dUI;
-	}
-
-	public String getNIT() {
-		return NIT;
-	}
-
-	public void setNIT(String nIT) {
-		NIT = nIT;
-	}
-
-	public String getPhoneNumber() {
-		return phoneNumber;
-	}
-
-	public void setPhoneNumber(String phoneNumber) {
-		this.phoneNumber = phoneNumber;
-	}
-
-	public User getUser() {
-		return user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
-	}
-
-	public Pupuseria getPupuseria() {
-		return pupuseria;
-	}
-
-	public void setPupuseria(Pupuseria pupuseria) {
-		this.pupuseria = pupuseria;
-	}
-
-	public List<Report> getReports() {
-		return reports;
-	}
-
-	public void setReports(List<Report> reports) {
-		this.reports = reports;
-	}
-	
-	
+	@OneToMany(mappedBy = "admin", fetch = FetchType.LAZY, cascade = { CascadeType.MERGE })
+	@JsonManagedReference
+	private List<Task> tasks;
 	
 }

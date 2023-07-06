@@ -5,6 +5,7 @@ import ActionButton from 'components/buttons/actionButton';
 import { actionButtons } from 'constants/data';
 import useToggle from 'hooks/useToggle';
 import { ChevronDownIcon, ChevronUpIcon } from '@heroicons/react/24/solid';
+import { formatDate } from 'utils/utils';
 
 const SaleCard = ({ sale, total, onDeleteHandler }) => {
   const [isExpanded, toggleIsExpanded] = useToggle();
@@ -31,7 +32,7 @@ const SaleCard = ({ sale, total, onDeleteHandler }) => {
           <p className='text-primary-500 font-semibold '>${total.toFixed(2)}</p>
           {isExpanded ? <ChevronUpIcon className='w-6' /> : <ChevronDownIcon className='w-6' />}
         </div>
-        <p className='font-light text-sm'>{` ${sale.saleDate}`}</p>
+        <p className='font-light text-sm'>{` ${formatDate(sale.saleDate, true)}`}</p>
       </div>
       {isExpanded && (
         <div className='p-4 pt-3'>
@@ -46,9 +47,7 @@ const SaleCard = ({ sale, total, onDeleteHandler }) => {
                     <p>
                       {detail.product.name} x{detail.amount}
                     </p>
-                    {detail.massDetails && detail.massDetails.mass && (
-                      <p className='text-gray-500 text-sm'>{detail.massDetails.mass.mass}</p>
-                    )}
+                    {detail.mass && <p className='text-gray-500 text-sm'>{detail.mass}</p>}
                   </div>
 
                   <p>{`$${detail.total.toFixed(2)}`}</p>

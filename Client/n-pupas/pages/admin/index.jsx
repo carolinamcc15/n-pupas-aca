@@ -5,19 +5,50 @@ import { homePageName } from 'constants/strings';
 import { branchCookie, tokenCookie } from 'constants/data';
 import HomeMenu from 'components/menu/menu';
 import { getCookie } from 'cookies-next';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import Head from 'next/head';
 
 const pupuseriaApi = new PupuseriaApi();
 
-const AdminHomePage = ({ pupuseriaName, branches }) => {
+const AdminHomePage = () => {
   const { branchID, setBranchID } = useBranchContext();
+  const [pupuseriaName, setPupuseriaName] = useState('');
+  const [branches, setBranches] = useState([]);
+
+  const fetchPupuseriaData = async () => {
+    try {
+      const token = getCookie(tokenCookie);
+      const pupuseria = await pupuseriaApi.getMyPupuseria(token);
+      const allBranches = await pupuseriaApi.getAllBranches(token);
+
+      setPupuseriaName(pupuseria.name);
+      setBranches(allBranches);
+    } catch (e) {
+      console.log('Error: ', e);
+    }
+  };
+
+  const fetchBranchesData = async () => {
+    try {
+      const token = getCookie(tokenCookie);
+      const allBranches = await pupuseriaApi.getAllBranches(token);
+
+      setBranches(allBranches);
+    } catch (e) {
+      console.log('Error: ', e);
+    }
+  };
 
   useEffect(() => {
-    if (!getCookie(branchCookie)) {
+    fetchPupuseriaData();
+    fetchBranchesData();
+  }, []);
+
+  useEffect(() => {
+    if (!getCookie(branchCookie) && branches.length > 0) {
       setBranchID(branches[0].id);
     }
-  }, [branches, branchID, setBranchID]);
+  }, [branches, branchID, pupuseriaName]);
 
   const changeBranch = id => {
     setBranchID(id);
@@ -51,23 +82,3 @@ const AdminHomePage = ({ pupuseriaName, branches }) => {
 };
 
 export default AdminHomePage;
-
-export async function getServerSideProps({ req, res }) {
-  const token = getCookie(tokenCookie, { req, res });
-
-  try {
-    const pupuseria = await pupuseriaApi.getMyPupuseria(token);
-    return {
-      props: {
-        pupuseriaName: pupuseria.name,
-        branches: pupuseria.branches,
-      },
-    };
-  } catch (e) {
-    return {
-      redirect: {
-        destination: '/500',
-      },
-    };
-  }
-}

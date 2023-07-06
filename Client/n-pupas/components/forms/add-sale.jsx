@@ -25,7 +25,7 @@ const AddSaleForm = ({ onSubmitHandler, product }) => {
                 {...register('dough', { required: true })}
                 type='radio'
                 name='dough'
-                value='1'
+                value={1}
                 className='mr-1'
                 id='rice'
               />
@@ -36,7 +36,7 @@ const AddSaleForm = ({ onSubmitHandler, product }) => {
                 {...register('dough', { required: 'Selecciona el tipo de masa' })}
                 type='radio'
                 name='dough'
-                value='2'
+                value={0}
                 className='mr-1'
                 id='corn'
               />

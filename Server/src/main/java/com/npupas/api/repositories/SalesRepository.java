@@ -1,6 +1,6 @@
 package com.npupas.api.repositories;
 
-import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -13,11 +13,11 @@ public interface SalesRepository extends JpaRepository<Sale, Long> {
 
 	List<Sale> findByBranch(Branch branch);
 
-	List<Sale> findBySaleDate(LocalDate saleDate);
+	List<Sale> findBySaleDate(Date saleDate);
 
-	List<Sale> findBySaleDateAndBranch(LocalDate saleDate, Branch branch);
+	List<Sale> findBySaleDateAndBranch(Date saleDate, Branch branch);
 
 	@Query(value = "SELECT * FROM sale WHERE id_branch = :branchId AND sale_date >= :initialDate AND sale_date <= :finalDate", nativeQuery = true)
-	List<Sale> findBetweenDates(Long branchId, LocalDate initialDate, LocalDate finalDate);
+	List<Sale> findBetweenDates(Long branchId, Date initialDate, Date finalDate);
 
 }

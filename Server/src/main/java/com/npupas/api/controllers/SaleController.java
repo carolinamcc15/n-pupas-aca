@@ -1,6 +1,5 @@
 package com.npupas.api.controllers;
 
-import java.time.LocalDate;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -9,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,9 +22,9 @@ import com.npupas.api.models.dtos.AddSaleDTO;
 import com.npupas.api.models.dtos.MessageDTO;
 import com.npupas.api.models.entities.Sale;
 import com.npupas.api.services.SalesService;
+import static com.npupas.api.utils.DateUtils.standardFormat;
 
 @RestController
-@CrossOrigin(origins = { "http://localhost:3000", "https://n-pupas.vercel.app" }, allowCredentials = "true")
 @RequestMapping("/pupuserias/branches")
 public class SaleController {
 
@@ -49,10 +47,9 @@ public class SaleController {
 
 	@GetMapping("/{id}/sales/report")
 	public ResponseEntity<List<Sale>> getBetweenDates(@PathVariable("id") Long branchId,
-			@RequestParam("initialDate") String initialDate, @RequestParam("finalDate") String finalDate) {
+			@RequestParam("initialDate") String initialDateStr, @RequestParam("finalDate") String finalDateStr) {
 		try {
-			List<Sale> sales = salesService.getSalesBetweenDates(branchId, LocalDate.parse(initialDate),
-					LocalDate.parse(finalDate));
+			List<Sale> sales = salesService.getSalesBetweenDates(branchId, standardFormat(initialDateStr), standardFormat(finalDateStr));
 			if (sales == null)
 				return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 

@@ -1,12 +1,18 @@
 package com.npupas.api.models.dtos;
 
-import java.time.LocalDate;
+import java.util.Date;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 
+@Getter
+@Setter
+@NoArgsConstructor
 public class RegistrationFormDTO {
 
 	@NotBlank(message = "Name cannot be blank!")
@@ -26,7 +32,7 @@ public class RegistrationFormDTO {
 	private String phoneNumber;
 
 	@NotBlank(message = "User Name cannot be blank!")
-	@Size(min = 8, message = "User Name has to be 5 characters minimum")
+	@Size(min = 6, message = "User Name has to be 5 characters minimum")
 	private String username;
 
 	@NotBlank(message = "Password cannot be blank!")
@@ -46,11 +52,7 @@ public class RegistrationFormDTO {
 	private String address;
 
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private LocalDate openingDate;
-
-	public RegistrationFormDTO() {
-		super();
-	}
+	private Date openingDate;
 
 	public RegistrationFormDTO(
 			@NotBlank(message = "Name cannot be blank!") @Size(min = 5, max = 50, message = "Name has to be 8 characters minimum") String name,
@@ -62,7 +64,7 @@ public class RegistrationFormDTO {
 			@NotBlank(message = "Name of the pupuseria cannot be blank!") @Size(min = 8, message = "Name of the pupuseria has to be 8 characters minimum") String namePupuseria,
 			@NotBlank(message = "Name of the branch cannot be blank!") @Size(min = 8, message = "Name of the branch has to be 8 characters minimum") String nameBranch,
 			@NotBlank(message = "Address cannot be blank!") @Size(min = 6, message = "Address has to be 6 characters minimum") String address,
-			@NotBlank(message = "Date cannot be blank!") LocalDate openingDate) {
+			@NotBlank(message = "Date cannot be blank!") Date openingDate) {
 		super();
 		this.name = name;
 		this.DUI = dUI;
@@ -75,85 +77,4 @@ public class RegistrationFormDTO {
 		this.address = address;
 		this.openingDate = openingDate;
 	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getDUI() {
-		return DUI;
-	}
-
-	public void setDUI(String dUI) {
-		DUI = dUI;
-	}
-
-	public String getNIT() {
-		return NIT;
-	}
-
-	public void setNIT(String nIT) {
-		NIT = nIT;
-	}
-
-	public String getPhoneNumber() {
-		return phoneNumber;
-	}
-
-	public void setPhoneNumber(String phoneNumber) {
-		this.phoneNumber = phoneNumber;
-	}
-
-	public String getUsername() {
-		return username;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-	public String getNamePupuseria() {
-		return namePupuseria;
-	}
-
-	public void setNamePupuseria(String namePupuseria) {
-		this.namePupuseria = namePupuseria;
-	}
-
-	public String getAddress() {
-		return address;
-	}
-
-	public void setAddress(String address) {
-		this.address = address;
-	}
-
-	public LocalDate getOpeningDate() {
-		return openingDate;
-	}
-
-	public void setOpeningDate(LocalDate openingDate) {
-		this.openingDate = openingDate;
-	}
-
-	public String getNameBranch() {
-		return nameBranch;
-	}
-
-	public void setNameBranch(String nameBranch) {
-		this.nameBranch = nameBranch;
-	}
-
 }

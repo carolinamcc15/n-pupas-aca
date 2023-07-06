@@ -6,17 +6,17 @@ const MenuOption = ({ option, horizontal = false }) => {
       {horizontal ? (
         <div
           style={{ backgroundColor: option.color }}
-          className='flex gap-4 p-6 sm:p-8 items-center justify-center rounded-md cursor-pointer hover:opacity-90 shadow-md transition duration-300 ease-in-out'
+          className='flex sm:flex-wrap lg:flex-nowrap gap-4 p-6 items-center justify-center rounded-md cursor-pointer hover:opacity-90 shadow-md transition duration-300 ease-in-out'
         >
-          <img src={option.img} className='px-4 w-26 sm:w-32 h-26 items-center min-w-[80px]' />
+          <img src={option.img} className='w-10 lg:w-12 items-center' />
           <p className='font-bold text-center text-white text-sm uppercase'>{option.title}</p>
         </div>
       ) : (
         <div
           style={{ backgroundColor: option.color }}
-          className='flex flex-col gap-4 p-6 sm:p-8 items-center justify-center rounded-md cursor-pointer hover:opacity-90 shadow-md transition duration-300 ease-in-out'
+          className='flex flex-col gap-4 p-6 lg:p-8 items-center justify-center rounded-md cursor-pointer hover:opacity-90 shadow-md transition duration-300 ease-in-out'
         >
-          <img src={option.img} className='px-4 w-26 sm:w-32 h-26 items-center min-w-[80px]' />
+          <img src={option.img} className='px-4 w-20 lg:w-28 items-center' />
           <p className='font-bold text-center text-white text-sm uppercase'>{option.title}</p>
         </div>
       )}

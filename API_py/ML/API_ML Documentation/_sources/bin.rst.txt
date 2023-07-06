@@ -1,0 +1,10 @@
+bin package
+===========
+
+bin.api module
+--------------
+
+.. automodule:: bin.api
+   :members:
+   :undoc-members:
+   :show-inheritance:

@@ -1,13 +1,18 @@
 package com.npupas.api.models.dtos;
 
-import java.time.LocalDate;
+import java.util.Date;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
-
+@Getter
+@Setter
+@NoArgsConstructor
 public class AddBranchDTO {
 
 	@NotBlank(message = "Name cannot be blank!")
@@ -19,44 +24,21 @@ public class AddBranchDTO {
 
 	@NotNull
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private LocalDate openingDate;
+	private Date openingDate;
 
-	public AddBranchDTO() {
-		super();
-	}
+	private Double latitude;
+	private Double longitude;
+	private String openingTime;
+	private String closingTime;
 
 	public AddBranchDTO(
 			@NotBlank(message = "Name cannot be blank!") @Size(min = 8, message = "Name has to be 8 characters minimum") String nameBranch,
 			@NotBlank(message = "Name cannot be blank!") String address,
-			@NotNull LocalDate openingDate) {
+			@NotNull Date openingDate) {
 		super();
 		this.nameBranch = nameBranch;
 		this.address = address;
 		this.openingDate = openingDate;
 	}
-
-	public String getNameBranch() {
-		return nameBranch;
-	}
-
-	public void setNameBranch(String nameBranch) {
-		this.nameBranch = nameBranch;
-	}
-
-	public String getAddress() {
-		return address;
-	}
-
-	public void setAddress(String address) {
-		this.address = address;
-	}
-
-	public LocalDate getOpeningDate() {
-		return openingDate;
-	}
-
-	public void setOpeningDate(LocalDate openingDate) {
-		this.openingDate = openingDate;
-	}
-
 }
+
