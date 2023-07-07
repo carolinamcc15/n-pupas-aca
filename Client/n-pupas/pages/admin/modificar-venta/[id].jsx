@@ -170,6 +170,7 @@ export async function getServerSideProps({ query, req, res }) {
       },
     };
   } catch (e) {
+    console.log(e)
     return {
       redirect: {
         destination: '/500',

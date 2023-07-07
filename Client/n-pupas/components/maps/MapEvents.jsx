@@ -9,4 +9,8 @@ export const MapEvents = ({ setSelectedLocation, setAddress }) => {
   });
 
   return null;
+<<<<<<< Updated upstream
 };
+=======
+};
+>>>>>>> Stashed changes

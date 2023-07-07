@@ -31,7 +31,11 @@ const LineChart = ({ data }) => {
             text: 'Total',
           },
         },
+<<<<<<< Updated upstream
 
+=======
+        
+>>>>>>> Stashed changes
       },
     };
 

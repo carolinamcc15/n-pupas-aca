@@ -50,4 +50,8 @@ const MultipleLocationsMap = ({ branches, competenceBranches }) => {
   );
 };
 
+<<<<<<< Updated upstream
 export default MultipleLocationsMap;
+=======
+export default MultipleLocationsMap;
+>>>>>>> Stashed changes

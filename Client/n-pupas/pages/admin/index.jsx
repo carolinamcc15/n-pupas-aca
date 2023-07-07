@@ -45,8 +45,15 @@ const AdminHomePage = () => {
   }, []);
 
   useEffect(() => {
+<<<<<<< Updated upstream
     if (!getCookie(branchCookie) && branches.length > 0) {
       setBranchID(branches[0].id);
+=======
+    if (!!pupuseriaName) {
+      if (!getCookie(branchCookie)) {
+        setBranchID(branches[0].id);
+      }
+>>>>>>> Stashed changes
     }
   }, [branches, branchID, pupuseriaName]);
 

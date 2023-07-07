@@ -3,6 +3,10 @@ import { useRouter } from 'next/router';
 import ActionButton from 'components/buttons/actionButton';
 import { adminRoutes } from 'routes/routes';
 import { actionButtons } from 'constants/data';
+<<<<<<< Updated upstream
+=======
+import moment from 'moment/moment';
+>>>>>>> Stashed changes
 import { formatDate } from 'utils/utils';
 
 const EmployeeCard = ({ employee, onDeleteHandler }) => {
@@ -36,7 +40,11 @@ const EmployeeCard = ({ employee, onDeleteHandler }) => {
         <p className='col-span-4 pl-8'>{employee.user.name}</p>
         <p className='col-span-1 text-primary-300 pl-4'>Salario</p>
         <p className='col-span-4 pl-8'>{`$${employee.salary}`}</p>
+<<<<<<< Updated upstream
         <p className='col-span-1 text-primary-300 pl-4'>Usuario</p>
+=======
+        <p className='col-span-1 text-primary-300 pl-4'>Email</p>
+>>>>>>> Stashed changes
         <p className='col-span-4 pl-8'>{employee.user.username}</p>
         <p className='col-span-1 text-primary-300 pl-4'>Desde</p>
         <p className='col-span-4 pl-8'>{formatDate(employee.hiringDate, true)}</p>

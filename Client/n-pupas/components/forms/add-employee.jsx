@@ -5,6 +5,7 @@ import PrimaryButton from 'components/buttons/primary';
 import Input from './inputs/text-input';
 import { CurrencyDollarIcon, LockClosedIcon, UserCircleIcon } from '@heroicons/react/24/solid';
 import { SolidCalendarIcon } from 'components/icons/SolidCalendarIcon';
+import { formatDate } from 'utils/utils';
 
 const AddEmployeeForm = ({ onSubmitHandler, employee = false }) => {
   const {
@@ -52,7 +53,7 @@ const AddEmployeeForm = ({ onSubmitHandler, employee = false }) => {
           <Input
             type='date'
             id='hiringDate'
-            defaultValue={employee ? employee.hiringDate : ''}
+            defaultValue={employee ? formatDate(employee.hiringDate) : ''}
             label='Contratación'
             placeholder='12/10/2020'
             icon={<SolidCalendarIcon />}

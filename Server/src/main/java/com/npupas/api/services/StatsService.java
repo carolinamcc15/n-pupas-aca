@@ -85,4 +85,6 @@ public interface StatsService {
      * @return a LineChartGroupDTO object representing the line chart statistics for the specific branch
      */
     LineChartGroupDTO getLinechartMonthStats(Long branchId);
+
+    SalesBranchesDTO getSalesChartsBranches(Long adminId);
 }

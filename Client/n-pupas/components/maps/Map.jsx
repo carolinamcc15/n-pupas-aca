@@ -118,4 +118,8 @@ export default function MapComponent({
       </MapContainer>
     </>
   );
+<<<<<<< Updated upstream
 }
+=======
+}
+>>>>>>> Stashed changes

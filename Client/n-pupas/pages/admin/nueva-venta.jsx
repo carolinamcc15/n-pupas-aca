@@ -51,6 +51,7 @@ export default function NewSalePage({ products, productTypes }) {
 
   const addSale = async () => {
     const sale = createSaleObject(saleDetails);
+    console.log(sale);
 
     try {
       const created = await pupuseriaApi.createSale(token, branchID, sale);

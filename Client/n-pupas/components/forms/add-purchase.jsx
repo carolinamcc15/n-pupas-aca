@@ -44,7 +44,7 @@ const AddPurchaseForm = ({ onSubmitHandler, purchase = false }) => {
           <Input
             type='date'
             id='purchaseDate'
-            defaultValue={purchase ? purchase.purchaseDate : ''}
+            defaultValue={purchase ? formatDate(purchase.purchaseDate) : ''}
             label='Fecha de compra'
             placeholder='12/10/2020'
             icon={<SolidCalendarIcon />}

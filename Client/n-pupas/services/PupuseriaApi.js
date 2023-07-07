@@ -1,6 +1,10 @@
 import { toFormData } from 'utils/utils';
 
+<<<<<<< Updated upstream
 const BASE_URL = 'http://localhost:4000/api';
+=======
+const BASE_URL = 'http://192.241.159.76/4000/api';
+>>>>>>> Stashed changes
 
 let instance;
 
@@ -81,6 +85,14 @@ export const PupuseriaApi = class {
     return branches;
   }
 
+<<<<<<< Updated upstream
+=======
+  getAllTasks(token){
+    const tasks = getData('/tareas/all', token);
+    return tasks;
+  }
+  
+>>>>>>> Stashed changes
   getCompetenceBranches(token) {
     const branches = getData('/pupuserias/branches/competence', token);
     return branches;
@@ -91,17 +103,37 @@ export const PupuseriaApi = class {
     return branch;
   }
 
+  getOneTask(token, id){
+    const task = getData(`/tareas/all/${id}`, token);
+    return task;
+  }
+
   createBranch(token, body) {
     return postData('/pupuserias/branches/', token, body);
   }
 
+  createTask(token, body){
+    return postData('/tareas/createTask/',token,body);
+  }
   deleteBranch(token, id) {
     return deleteData(`/pupuserias/branches/${id}`, token);
+  }
+
+  deleteTask(token, id){
+    return deleteData(`/tareas/deleteTask/${id}`, token);
   }
 
   updateBranch(token, id, body) {
     return putData(`/pupuserias/branches/${id}`, token, body);
   }
+<<<<<<< Updated upstream
+=======
+
+  updateTask(token, id, body){
+    return putData(`/tareas/updateTask/${id}`, token, body);
+  }
+
+>>>>>>> Stashed changes
   getTodayPurchases(token, branchID) {
     return getData(`/pupuserias/branches/${branchID}/purchases/today`, token);
   }
@@ -344,4 +376,19 @@ export const PupuseriaApi = class {
     return getData(`/stats/linechart/month/${branchId}`, token);
   }
 
+<<<<<<< Updated upstream
+=======
+  createEmployeeTask(token, body){
+    return postData(
+      '/tareas/createTask/',
+      token,
+      body
+    )
+  }
+
+  sendStatsEmail(pupuseriaId, token) {
+    return getData(`/email/sales/branches/${pupuseriaId}`, token);
+  }
+
+>>>>>>> Stashed changes
 };
