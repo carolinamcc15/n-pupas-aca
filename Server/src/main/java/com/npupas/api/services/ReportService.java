@@ -18,5 +18,7 @@ public interface ReportService {
 	Boolean update(Long reportId, AddReportDTO reportDTO);
 
 	List<Report> getAllReport(Long adminId);
+
+	void generateSalesMonthlyReport();
 	
 }

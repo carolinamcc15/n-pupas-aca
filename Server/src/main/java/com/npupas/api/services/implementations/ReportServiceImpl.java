@@ -28,9 +28,22 @@ public class ReportServiceImpl implements ReportService {
 
 	@Autowired
 	EmployeeRepository employeeRepository;
-	
+
 	@Autowired
 	AdminRepository adminRepository;
+
+	@Autowired
+	private StatsService statsService;
+
+	@Autowired
+	private PupuseriaService pupuseriaService;
+
+	@Autowired
+	private EmailService emailService;
+
+	@Value("${mail.email}")
+	private String email;
+
 
 	@Override
 	public Report getOneReport(Long reportId) {
@@ -84,4 +97,38 @@ public class ReportServiceImpl implements ReportService {
 		return true;
 	}
 
+	@Scheduled(cron = "0 0 0 1 * ?")
+	public void generateSalesMonthlyReport() {
+
+		List<Long> adminIds = adminRepository.findAllAdminIds();
+
+		for (Long adminId : adminIds) {
+			SalesBranchesDTO salesChartsDTO = statsService.getSalesChartsBranches(adminId);
+
+			if (salesChartsDTO == null) {
+				continue;
+			}
+
+			salesChartsDTO.calculateSalesStatistics();
+
+			Pupuseria pupuseria = pupuseriaService.getPupuseriaByAdminId(adminId);
+			if (pupuseria == null) {
+				continue;
+			}
+
+			String ownerEmail = pupuseria.getAdmin().getUser().getUsername();
+
+			MailMessageDTO mail = new MailMessageDTO();
+			mail.setMailTo(ownerEmail);
+			mail.setSubject("Sales Report for Branches - Admin ID: " + adminId);
+			mail.setFrom(email);
+
+			try {
+				emailService.sendSalesBranchesEmail(mail, pupuseria.getName(), salesChartsDTO);
+			} catch (Exception e) {
+				System.out.println("Error sending email: " + e.getMessage());
+				// Handle errors if the email sending fails
+			}
+		}
+	}
 }

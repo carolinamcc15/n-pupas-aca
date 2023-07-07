@@ -8,4 +8,6 @@ import com.npupas.api.models.entities.Pupuseria;
 public interface PupuseriaRepository extends JpaRepository<Pupuseria, Long> {
 	Pupuseria findOneByAdmin(Admin admin);
 	Pupuseria findOneByName(String name);
+
+    Pupuseria findByAdminId(Long adminId);
 }
