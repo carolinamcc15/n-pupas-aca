@@ -4,6 +4,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.npupas.api.models.entities.Admin;
 
-public interface AdminRepository extends JpaRepository<Admin, Long>{
+import java.util.List;
 
+public interface AdminRepository extends JpaRepository<Admin, Long>{
+    List<Long> findAllAdminIds();
 }
