@@ -1,11 +1,6 @@
 import { toFormData } from 'utils/utils';
 
-<<<<<<< Updated upstream
-const BASE_URL = 'http://localhost:4000/api';
-=======
-const BASE_URL = 'http://192.241.159.76/4000/api';
->>>>>>> Stashed changes
-
+export const BASE_URL = 'http://localhost:4000/api';
 let instance;
 
 const getData = async (path, token) => {
@@ -14,6 +9,7 @@ const getData = async (path, token) => {
       Authorization: `Bearer ${token}`,
     },
   });
+
   const data = response.json();
   return data;
 };
@@ -85,55 +81,23 @@ export const PupuseriaApi = class {
     return branches;
   }
 
-<<<<<<< Updated upstream
-=======
-  getAllTasks(token){
-    const tasks = getData('/tareas/all', token);
-    return tasks;
-  }
-  
->>>>>>> Stashed changes
-  getCompetenceBranches(token) {
-    const branches = getData('/pupuserias/branches/competence', token);
-    return branches;
-  }
-
   getOneBranch(token, id) {
     const branch = getData(`/pupuserias/branches/${id}`, token);
     return branch;
-  }
-
-  getOneTask(token, id){
-    const task = getData(`/tareas/all/${id}`, token);
-    return task;
   }
 
   createBranch(token, body) {
     return postData('/pupuserias/branches/', token, body);
   }
 
-  createTask(token, body){
-    return postData('/tareas/createTask/',token,body);
-  }
   deleteBranch(token, id) {
     return deleteData(`/pupuserias/branches/${id}`, token);
-  }
-
-  deleteTask(token, id){
-    return deleteData(`/tareas/deleteTask/${id}`, token);
   }
 
   updateBranch(token, id, body) {
     return putData(`/pupuserias/branches/${id}`, token, body);
   }
-<<<<<<< Updated upstream
-=======
 
-  updateTask(token, id, body){
-    return putData(`/tareas/updateTask/${id}`, token, body);
-  }
-
->>>>>>> Stashed changes
   getTodayPurchases(token, branchID) {
     return getData(`/pupuserias/branches/${branchID}/purchases/today`, token);
   }
@@ -263,9 +227,16 @@ export const PupuseriaApi = class {
     );
   }
 
-  async getReportSales(branchID, token, body) {
+  async getReportSales (branchID, token, body) {
     return getData(
       `/pupuserias/branches/${branchID}/sales/report?initialDate=${body.initialDate}&finalDate=${body.finalDate}`,
+      token
+    );
+  }
+
+  async getPredictionSales(pupuseriaID, token, body) {
+    return getData(
+      `/pupuserias/branches/${pupuseriaID}/sales/prediction`,
       token
     );
   }
@@ -294,101 +265,4 @@ export const PupuseriaApi = class {
     return getData('/pupuserias/branches/employees/branch', token);
   }
 
-  getTodaySalesStats(branchId, token) {
-    return getData(`/stats/sales/today/${branchId}`, token);
-  }
-
-  async getDailySalesStats(branchId, token, date) {
-    const response = await fetch(`${BASE_URL}/stats/sales/daily/${branchId}`, {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${token}`,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        from: date,
-      }),
-    });
-
-    return response.json();
-  }
-
-  async getDailyPurchasesStats(branchId, token, date) {
-    const response = await fetch(`${BASE_URL}/stats/purchases/daily/${branchId}`, {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${token}`,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        from: date,
-      }),
-    });
-
-    return response.json();
-  }
-
-  async getRangeSalesStats(branchId, token, startDate, endDate) {
-    const response = await fetch(`${BASE_URL}/stats/sales/range/${branchId}`, {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${token}`,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        from: startDate,
-        to: endDate,
-      }),
-    });
-
-    return response.json();
-  }
-
-  async getRangePurchasesStats(branchId, token, startDate, endDate) {
-    const response = await fetch(`${BASE_URL}/stats/purchases/range/${branchId}`, {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${token}`,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        from: startDate,
-        to: endDate,
-      }),
-    });
-
-    return response.json();
-  }
-
-  getTodayPurchasesStats(branchId, token) {
-    return getData(`/stats/purchases/today/${branchId}`, token);
-  }
-
-  getMonthlySalesByCategories(token) {
-    return getData(`/stats/sales/categories/current-month`, token);
-  }
-
-  getMonthlySalesByBranch(token) {
-    return getData(`/stats/sales/current-month`, token);
-  }
-
-  getComparativeDataByBranch(branchId, token) {
-    return getData(`/stats/linechart/month/${branchId}`, token);
-  }
-
-<<<<<<< Updated upstream
-=======
-  createEmployeeTask(token, body){
-    return postData(
-      '/tareas/createTask/',
-      token,
-      body
-    )
-  }
-
-  sendStatsEmail(pupuseriaId, token) {
-    return getData(`/email/sales/branches/${pupuseriaId}`, token);
-  }
-
->>>>>>> Stashed changes
 };
