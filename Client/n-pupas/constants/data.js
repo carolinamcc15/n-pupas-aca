@@ -57,6 +57,12 @@ export const adminMenuStatsOptions = [
     img: '/reportes.png',
     color: '#4A3957',
   },
+  {
+    title: adminPages.task,
+    route: adminRoutes.task,
+    img: '/reportes.png',
+    color: '#4A3957',
+  },
 ];
 
 export const statsTimeOptions = {
@@ -64,7 +70,6 @@ export const statsTimeOptions = {
   day: 'Un día',
   range: 'Rango',
 };
-
 export const statsRadioButtons = [
   statsTimeOptions.today,
   statsTimeOptions.day,

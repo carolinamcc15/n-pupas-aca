@@ -18,16 +18,19 @@ const LoginForm = ({ onSubmitHandler }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col gap-5 items-center justify-center w-full sm:px-4'>
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      className='flex flex-col gap-5 items-center justify-center w-full sm:px-4'
+    >
       <Input
         id='username'
-        label='USUARIO'
-        placeholder='Ej. janedoe'
+        label='EMAIL'
+        placeholder='Ej. janedoe@mail.com'
         icon={<UserCircleIcon className='text-primary-500 w-5' />}
         error={errors?.username?.message}
         register={{
           ...register('username', {
-            required: 'Nombre de usuario requerido',
+            required: 'Email requerido',
           }),
         }}
       />

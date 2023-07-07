@@ -26,6 +26,10 @@ public class AddBranchDTO {
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date openingDate;
 
+	private Double latitude;
+	private Double longitude;
+	private String openingTime;
+	private String closingTime;
 
 	public AddBranchDTO(
 			@NotBlank(message = "Name cannot be blank!") @Size(min = 8, message = "Name has to be 8 characters minimum") String nameBranch,
@@ -37,3 +41,4 @@ public class AddBranchDTO {
 		this.openingDate = openingDate;
 	}
 }
+

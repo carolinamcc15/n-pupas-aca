@@ -5,6 +5,7 @@ import PrimaryButton from 'components/buttons/primary';
 import Input from './inputs/text-input';
 import { CurrencyDollarIcon, LockClosedIcon, UserCircleIcon } from '@heroicons/react/24/solid';
 import { SolidCalendarIcon } from 'components/icons/SolidCalendarIcon';
+import { formatDate } from 'utils/utils';
 
 const AddEmployeeForm = ({ onSubmitHandler, employee = false }) => {
   const {
@@ -52,7 +53,7 @@ const AddEmployeeForm = ({ onSubmitHandler, employee = false }) => {
           <Input
             type='date'
             id='hiringDate'
-            defaultValue={employee ? employee.hiringDate : ''}
+            defaultValue={employee ? formatDate(employee.hiringDate) : ''}
             label='Contratación'
             placeholder='12/10/2020'
             icon={<SolidCalendarIcon />}
@@ -78,26 +79,22 @@ const AddEmployeeForm = ({ onSubmitHandler, employee = false }) => {
       <div className='w-full h-[1px] bg-primary-300 mb-2'></div>
       <section className='flex flex-col gap-5 mb-5 px-0 sm:px-3'>
         <Input
-          id='username'
-          label='Nombre de usuario'
+          id='userName'
+          label='Email'
           defaultValue={employee ? employee.user.username : ''}
-          placeholder='Ej. jmartinez'
+          placeholder='Ej. jmartinez@mail.com'
           icon={<UserCircleIcon className='text-primary-500 w-5' />}
           error={errors?.username?.message}
           register={{
-            ...register('username', {
-              required: 'Nombre de usuario requerido',
+            ...register('userName', {
+              required: 'Email requerido',
               minLength: {
                 value: 8,
                 message: 'El mínimo de caracteres es 10',
               },
               maxLength: {
-                value: 20,
+                value: 50,
                 message: 'El máximo de caracteres es 20',
-              },
-              pattern: {
-                value: /^[A-Za-z0-9_-]{8,20}$/,
-                message: 'Algunos caracteres son inválidos',
               },
             }),
           }}

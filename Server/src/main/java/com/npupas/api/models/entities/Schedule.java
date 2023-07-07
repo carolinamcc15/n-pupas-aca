@@ -19,12 +19,13 @@ public class Schedule {
     private Long ID;
 
     @Column
-    private Date openingTime;
+    private String openingTime;
 
     @Column
-    private Date closingTime;
+    private String closingTime;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "branch_id")
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "branch_id", referencedColumnName = "id")
     private Branch branch;
 }
+

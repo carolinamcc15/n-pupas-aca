@@ -10,7 +10,7 @@ const ProfileCardEmployee = ({ employee, logout }) => {
           <p className='text-primary-500 text-xl'>Información relevante</p>
           <hr className='border-t-2 border-black'/>
           <div className='grid grid-cols-5 gap-3'>
-          <p className='mt-4 w-4 col-span-1 text-primary-300'> Usuario </p>
+          <p className='mt-4 w-4 col-span-1 text-primary-300'> Email </p>
           <p className='ml-12 mt-4 col-span-4'> {employee.user.username} </p>
           <p className='col-span-1 text-primary-300'> Desde </p>
           <p className='ml-12 col-span-4 mb-12'> {employee.hiringDate} </p>

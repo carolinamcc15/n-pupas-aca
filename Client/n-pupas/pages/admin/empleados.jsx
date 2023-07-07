@@ -68,21 +68,25 @@ const EmployeesPage = ({ allEmployees }) => {
         route={adminRoutes.newEmployee}
         text='Agregar empleado'
       />
-      <div className='grid grid-cols-4'>
-        {allEmployees.length > 0 ? (
-          employees.map(employee => {
-            return (
-              <EmployeeCard
-                employee={employee}
-                key={employee.id}
-                onDeleteHandler={() => onDeleteHandler(employee.id, employee.name)}
-              />
-            );
-          })
-        ) : (
-          <p>Aún no se han registrado empleados</p>
-        )}
-      </div>
+      <PageHeading
+          route={adminRoutes.newTask}
+          text='Nueva Tarea'
+        />
+      <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5'>
+          {allEmployees.length > 0 ? (
+            employees.map(employee => {
+              return (
+                <EmployeeCard
+                  employee={employee}
+                  key={employee.id}
+                  onDeleteHandler={() => onDeleteHandler(employee.id, employee.name)}
+                />
+              );
+            })
+          ) : (
+            <p>Aún no se han registrado empleados</p>
+          )}
+        </div>
     </main>
   );
 };

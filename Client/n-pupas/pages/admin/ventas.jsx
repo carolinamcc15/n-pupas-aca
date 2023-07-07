@@ -20,6 +20,7 @@ import { adminRoutes } from 'routes/routes';
 const pupuseriaApi = new PupuseriaApi();
 
 const SalesPage = ({ products, allSales }) => {
+  console.log(allSales);
   const [deleteToggle, setDeleteToggle] = useState(false);
   const [sales, setSales] = useState(allSales);
   const [salesByProduct, setSalesByProduct] = useState([]);

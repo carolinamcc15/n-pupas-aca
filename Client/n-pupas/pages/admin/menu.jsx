@@ -62,17 +62,16 @@ const MenuPage = ({ productTypes, allProducts }) => {
         <title>{adminPages.menu}</title>
       </Head>
       <PageHeading title={adminPages.menu} route={adminRoutes.newProduct} text='Agregar producto' />
-      {productTypes.length > 0 &&
-        productTypes?.map(type => {
-          return (
-            <MenuProductsSection
-              key={type.id}
-              products={products}
-              type={type}
-              onDeleteHandler={onDeleteHandler}
-            />
-          );
-        })}
+      {productTypes.length > 0 && productTypes?.map(type => {
+        return (
+          <MenuProductsSection
+            key={type.id}
+            products={products}
+            type={type}
+            onDeleteHandler={onDeleteHandler}
+          />
+        );
+      })}
     </main>
   );
 };

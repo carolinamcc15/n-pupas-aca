@@ -12,9 +12,9 @@ import {
 
 import { SolidCalendarIcon } from 'components/icons/SolidCalendarIcon';
 import SectionTitle from 'components/information/section-title';
-import { LocationIcon } from 'components/icons/LocationIcon';
 import PrimaryButton from 'components/buttons/primary';
 import { titles } from 'constants/strings';
+import { LocationIcon } from 'components/icons/LocationIcon';
 import Input from './inputs/text-input';
 
 const RegisterForm = ({ onSubmitHandler }) => {
@@ -134,24 +134,16 @@ const RegisterForm = ({ onSubmitHandler }) => {
             <div className='col-span-2'>
               <Input
                 id='username'
-                label='Nombre de usuario'
-                placeholder='Ej. jmartinez'
+                label='Correo Electrónico'
+                placeholder='Ej. jmartinez@example.com'
                 icon={<UserCircleIcon className='text-primary-500 w-5' />}
                 error={errors?.username?.message}
                 register={{
                   ...register('username', {
-                    required: 'Nombre de usuario requerido',
-                    minLength: {
-                      value: 8,
-                      message: 'El mínimo de caracteres es 10',
-                    },
-                    maxLength: {
-                      value: 20,
-                      message: 'El máximo de caracteres es 20',
-                    },
+                    required: 'Correo electrónico requerido',
                     pattern: {
-                      value: /^[A-Za-z0-9_-]{8,20}$/,
-                      message: 'Algunos caracteres son inválidos',
+                      value: /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}$/,
+                      message: 'Correo electrónico inválido',
                     },
                   }),
                 }}
@@ -255,6 +247,7 @@ const RegisterForm = ({ onSubmitHandler }) => {
                   }),
                 }}
               />
+              
               <Input
                 type='date'
                 id='openingDate'

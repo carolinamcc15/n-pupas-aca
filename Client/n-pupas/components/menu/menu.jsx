@@ -15,7 +15,7 @@ const HomeMenu = ({ isAdmin = false }) => {
           })}
           {isAdmin ? (
             <div className='flex flex-col gap-5'>
-              {adminMenuStatsOptions?.map(option => {
+              {adminMenuStatsOptions.map(option => {
                 return <MenuOption key={option.route} option={option} horizontal={true} />;
               })}
             </div>
