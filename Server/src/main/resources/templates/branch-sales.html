@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Informe de Ventas</title>
+
+    <link href='http://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'/>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts@3.26.0/dist/apexcharts.min.js"></script>
+
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 16px;
+            line-height: 1.5;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        h1 {
+            font-size: 24px;
+            margin: 0;
+            padding: 0;
+        }
+
+        p {
+            margin: 10px 0;
+            padding: 0;
+        }
+
+        b {
+            font-weight: bold;
+        }
+
+        .chart-container {
+            margin-top: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <p>Estimado <span id="name" th:text="${name}"></span>,</p>
+    <p>A continuación, te presentamos un resumen de las ventas de tu pupuseria: <b><span th:text="${pupuseria}"></span></b></p>
+    <ul>
+        <li><b>Total de ventas:</b> $<span th:text="${totalSales}"></span></li>
+        <li><b>Venta promedio por día:</b> $<span th:text="${averageSalesPerDay}"></span></li>
+        <li><b>Venta promedio por mes:</b> $<span th:text="${averageSalesPerMonth}"></span></li>
+    </ul>
+    <p>Este informe refleja los totales en ventas y puede ayudarte a evaluar el progreso para tomar decisiones informadas.</p>
+    <p>Aquí tienes una gràfica de las ventas por sucursal:</p>
+
+    <div id="chart" th:if="${chartImage}">
+        <img th:src="@{'data:image/png;base64,' + ${chartImage}}" alt="Sales Chart">
+    </div>
+
+    <p>La gráfica refleja las siguientes estadísticas por sucursal:</p>
+
+    <ul>
+        <li th:each="branch : ${salesBranches}">
+            <span th:each="entry : ${branch}">
+              <span th:text="${entry.key}"></span>
+              <b>-</b>
+              <span th:text="${entry.value}"></span>
+            </span>
+        </li>
+    </ul>
+
+    <p>Si necesitas información más detallada o tienes alguna pregunta, no dudes en ponerte en contacto con nosotros. Estaremos encantados de ayudarte en lo que necesites.</p>
+    <br />
+    <p>Atentamente,</p>
+    <p>Tu Equipo de Soporte</p>
+</div>
+</body>
+</html>

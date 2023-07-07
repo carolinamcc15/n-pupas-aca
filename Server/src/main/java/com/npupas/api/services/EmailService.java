@@ -6,4 +6,7 @@ import java.io.IOException;
 
 public interface EmailService {
     void sendWelcomeEmail(MailMessageDTO mail) throws MessagingException, IOException;
+    void sendSalesBranchesEmail(MailMessageDTO mail,
+                                String name_pupuseria,
+                                SalesBranchesDTO salesChartsDTO) throws MessagingException, IOException;
 }
