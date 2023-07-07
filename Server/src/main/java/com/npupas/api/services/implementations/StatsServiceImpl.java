@@ -145,4 +145,14 @@ public class StatsServiceImpl implements StatsService {
 
         return timeSaleMap.entrySet().stream().map(entry -> new DailyStatDTO(entry.getKey(), entry.getValue())).toList();
     }
+
+    @Override
+    public SalesBranchesDTO getSalesChartsBranches(Long adminId) {
+        List<PairStat> chart = repository.getBranchesMonthSalesStats(adminId);
+
+        SalesBranchesDTO salesChartsDTO = new SalesBranchesDTO(chart);
+        salesChartsDTO.calculateSalesStatistics();
+
+        return salesChartsDTO;
+    }
 }

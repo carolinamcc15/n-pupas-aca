@@ -10,5 +10,4 @@ public interface EmailService {
     void sendSalesBranchesEmail(MailMessageDTO mail,
                                 String name_pupuseria,
                                 SalesBranchesDTO salesChartsDTO) throws MessagingException, IOException;
-
 }

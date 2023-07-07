@@ -86,5 +86,11 @@ public interface StatsService {
      */
     LineChartGroupDTO getLinechartMonthStats(Long branchId);
 
+      /**
+     * Retrieves the sales branches statistics for a specific admin, representing monthly data.
+     *
+     * @param adminId the ID of the admin
+     * @return a SalesBranchesDTO object representing the sales branches statistics for the specific branch
+     */
     SalesBranchesDTO getSalesChartsBranches(Long adminId);
 }
